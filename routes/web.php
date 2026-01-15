@@ -18,14 +18,12 @@ Route::get('/', function () {
 
 Route::get('/xander',function(){
     return Inertia::render('InvoiceBuilder');
+});
 
 Route::prefix('pro')->name('pro.')->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
         Route::get(null, 'index')->name('index');
     });
-});
-
-
 });
 
 Route::get('/dashboard', function () {
