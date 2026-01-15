@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pro\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,11 @@ Route::get('/', function () {
     ]);
 });
 
+Route::prefix('pro')->name('pro.')->group(function () {
+    Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
+        Route::get(null, 'index')->name('index');
+    });
+});
 
 
 Route::get('/dashboard', function () {
