@@ -1,19 +1,11 @@
 import { AppSidebar } from "@/Components/Sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/Components/ui/sidebar";
-import { FileText } from "lucide-react";
+import { SidebarProvider, SidebarInset } from "@/Components/ui/sidebar";
 
-export default function ProLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function ProLayout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
             <AppSidebar />
-            <main>
-                <SidebarTrigger />
-                {children}
-            </main>
+            <SidebarInset className="p-4">{children}</SidebarInset>
         </SidebarProvider>
     );
 }
