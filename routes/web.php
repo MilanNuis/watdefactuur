@@ -14,7 +14,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/xander',function(){
+    return Inertia::render('InvoiceBuilder');
 
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
