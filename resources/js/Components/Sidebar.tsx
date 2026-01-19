@@ -34,7 +34,8 @@ const mainItems = [
 const adminItems = [
     {
         title: "Klanten",
-        url: "/klanten",
+        url: route("pro.dashboard.customers.index"),
+        routeName: "pro.dashboard.customers.index",
         icon: Users,
     },
     {
@@ -58,14 +59,11 @@ const settingsItems = [
 ];
 
 export function AppSidebar({ isAuthenticated = false }) {
-    // Helper function to check if an item is active
     const isActive = (item: { url: string; routeName?: string }) => {
         const currentPath = window.location.pathname;
-        // If item has a route name, use route().current()
         if (item.routeName) {
             return route().current(item.routeName);
         }
-        // For string URLs, check if current path matches
         return currentPath === item.url || currentPath.startsWith(item.url + '/');
     };
 
