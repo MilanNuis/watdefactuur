@@ -1,5 +1,5 @@
 import { Download, Mail, Check, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/Input";
 import { InvoiceData } from "../types/InvoiceTypes";

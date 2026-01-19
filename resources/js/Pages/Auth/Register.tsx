@@ -2,7 +2,7 @@ import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import { Input } from "@/Components/ui/Input";
 import { Label } from "@/Components/ui/Label";
 import AuthenticationLayout from "@/Layouts/AuthenticationLayout";

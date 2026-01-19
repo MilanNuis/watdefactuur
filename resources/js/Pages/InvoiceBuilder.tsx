@@ -4,7 +4,7 @@ import { FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { StepIndicator } from "@/Components/InvoiceBuilder/Components/StepIndicator";
 import { InvoiceData } from "@/Components/InvoiceBuilder/types/InvoiceTypes";
 import KlantInfoformulier from "@/Components/InvoiceBuilder/Components/KlantInfoformulier";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
@@ -43,6 +43,7 @@ const steps = [
 export default function InvoiceBuilder() {
     const [currentStep, setCurrentStep] = useState(1);
     const [invoiceData, setInvoiceData] = useState<InvoiceData>(initialInvoiceData);
+    const [Preview, setPreview] = useState<string | null>(null);
 
     const nextStep = () => {
         if (currentStep < steps.length) {
@@ -61,8 +62,10 @@ export default function InvoiceBuilder() {
             case 1:
                 return (
                     <Bedrijfsgegevens
-                    // company={invoiceData.company}
-                    // onChange={(company) => setInvoiceData({ ...invoiceData, company })}
+                        Preview={Preview}
+                        setPreview={setPreview}
+                        // company={invoiceData.company}
+                        // onChange={(company) => setInvoiceData({ ...invoiceData, company })}
                     />
                 );
             case 2:
@@ -91,8 +94,8 @@ export default function InvoiceBuilder() {
             <header className="bg-card border-b border-border sticky top-0 z-10">
                 <div className="container py-4">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center bg-[#74EE8C]">
-                            <FileText className="w-5 h-5 text-black " />
+                        <div className="w-10 h-10 rounded-lg  flex items-center justify-center bg-[#74EE8C]">
+                            <FileText className="w-5 h-5  " />
                         </div>
                         <div>
                             <h1 className="text-xl font-bold text-foreground">FactuurMaker</h1>
@@ -140,7 +143,7 @@ export default function InvoiceBuilder() {
                                 </h2>
                             </div>
                             <div className="transform scale-[0.85] origin-top-left lg:scale-100">
-                                <Factuurvoorbeeld data={invoiceData} />
+                                <Factuurvoorbeeld data={invoiceData} Preview={Preview} />
                             </div>
                         </div>
                     </div>
