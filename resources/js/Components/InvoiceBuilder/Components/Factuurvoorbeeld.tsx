@@ -9,20 +9,22 @@ interface Props {
 export default function Factuurvoorbeeld({ data, Preview }: Props) {
     return (
         <div
-            className="bg-card border-2 border-[#74EE8C]  rounded-xl invoice-shadow p-6 md:p-8 min-h-[600px]"
+            className="bg-card border-2 border-[#74EE8C]  rounded-xl invoice-shadow p-6 md:p-8 w-auto"
             id="invoice-preview"
         >
             {/* Header */}
-            <div className="flex justify-between items-start mb-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-8">
                 <div>
                     {Preview ? (
-                        <img src={Preview} alt="Logo" className="w-24 h-24 object-contain mb-4" />
+                        <img src={Preview} alt="Logo" className="w-20 h-20 md:w-24 md:h-24 object-contain mb-4" />
                     ) : (
-                        <div className="w-24 h-24 bg-muted rounded-lg flex items-center justify-center mb-4">
+                        <div className="w-20 h-20 md:w-24 md:h-24 bg-muted rounded-lg flex items-center justify-center mb-4">
                             <span className="text-muted-foreground text-xs">Logo</span>
                         </div>
                     )}
-                    <h1 className="text-2xl font-bold text-foreground">{data.company.name || "Jouw Bedrijf"}</h1>
+                    <h1 className="text-xl md:text-2xl font-bold text-foreground">
+                        {data.company.name || "Jouw Bedrijf"}
+                    </h1>
                     {data.company.address && <p className="text-sm text-muted-foreground">{data.company.address}</p>}
                     {(data.company.postalCode || data.company.city) && (
                         <p className="text-sm text-muted-foreground">
@@ -30,19 +32,19 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                         </p>
                     )}
                 </div>
-                <div className="text-right">
-                    <h2 className="text-3xl font-bold text-primary mb-2">FACTUUR</h2>
-                    <p className="text-sm text-muted-foreground">
-                        Nr: <span className="font-medium text-foreground">{data.invoiceNumber || "-"}</span>
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                        Datum:{" "}
-                        <span className="font-medium text-foreground">{/* {formatDate(data.invoiceDate)} */}</span>
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                        Vervaldatum:{" "}
-                        <span className="font-medium text-foreground">{/* {formatDate(data.dueDate)} */}</span>
-                    </p>
+                <div className="sm:text-right w-full sm:w-auto">
+                    <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">FACTUUR</h2>
+                    <div className="space-y-1">
+                        <p className="text-sm text-muted-foreground">
+                            Nr: <span className="font-medium text-foreground">{data.invoiceNumber || "-"}</span>
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Datum: <span className="font-medium text-foreground">{data.invoiceDate}</span>
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                            Vervaldatum: <span className="font-medium text-foreground">{data.dueDate}</span>
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -60,8 +62,8 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
             </div>
 
             {/* Products Table */}
-            <div className="mb-8">
-                <table className="w-full">
+            <div className="mb-8 overflow-x-auto">
+                <table className="w-full min-w-[500px]">
                     <thead>
                         <tr className="border-b-2 border-[#1D1D1B]">
                             <th className="text-left py-3 text-sm font-semibold text-foreground">Omschrijving</th>

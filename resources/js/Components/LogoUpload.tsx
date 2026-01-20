@@ -23,23 +23,21 @@ export const LogoUpload = ({ Preview, setPreview }: Props) => {
         <div className="space-y-2 flex flex-col">
             <label className="text-sm font-medium text-foreground">Bedrijfslogo</label>
             {Preview ? (
-                <div className="relative">
-                    <div>
-                        <img
-                            src={Preview}
-                            alt="Bedrijfslogo"
-                            className="w-32 h-32 object-contain rounded-lg border border-border bg-card p-2"
-                        />
-                        <Button
-                            type="button"
-                            variant="destructive"
-                            size="icon"
-                            className=" w-6 h-6 relative bottom-36 left-28"
-                            onClick={() => setPreview(null)}
-                        >
-                            <X className="w-3 h-3 " />
-                        </Button>
-                    </div>
+                <div className="relative w-32 h-32">
+                    <img
+                        src={Preview}
+                        alt="Bedrijfslogo"
+                        className="w-full h-full object-contain rounded-lg border border-border bg-card p-2"
+                    />
+                    <Button
+                        type="button"
+                        variant="destructive"
+                        size="icon"
+                        className="absolute -top-2 -right-2 w-6 h-6 rounded-full"
+                        onClick={() => setPreview(null)}
+                    >
+                        <X className="w-3 h-3" />
+                    </Button>
                 </div>
             ) : (
                 <label className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-3 rounded-lg cursor-pointer hover:border-[#74EE8C] hover:bg-accent/50 transition-colors">

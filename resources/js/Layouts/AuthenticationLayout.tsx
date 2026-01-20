@@ -1,10 +1,6 @@
 import { FileText } from "lucide-react";
 
-export default function AuthenticationLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function AuthenticationLayout({ children }: { children: React.ReactNode }) {
     return (
         <main className="grid grid-cols-2 h-screen">
             {/* Left side */}
@@ -16,13 +12,10 @@ export default function AuthenticationLayout({
                         </div>
                     </div>
 
-                    <h1 className="text-4xl font-bold text-white mb-4">
-                        WatDeFactuur
-                    </h1>
+                    <h1 className="text-4xl font-bold text-white mb-4">WatDeFactuur</h1>
 
                     <p className="text-white/80 text-lg">
-                        Maak professionele facturen in enkele minuten.
-                        Eenvoudig, snel en overzichtelijk.
+                        Maak professionele facturen in enkele minuten. Eenvoudig, snel en overzichtelijk.
                     </p>
                 </div>
             </div>
