@@ -20,6 +20,12 @@ Route::get('/xander',function(){
     return Inertia::render('InvoiceBuilder');
 });
 
+Route::get('/Home',function(){
+    return Inertia::render('HomePage');
+});
+
+
+
 Route::prefix('pro')->name('pro.')->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
         Route::get(null, 'index')->name('index');
