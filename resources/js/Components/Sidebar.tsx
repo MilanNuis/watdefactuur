@@ -40,12 +40,14 @@ const adminItems = [
     },
     {
         title: "Producten",
-        url: "/producten",
+        url: route("pro.dashboard.products.index"),
+        routeName: "pro.dashboard.products.index",
         icon: Package,
     },
     {
         title: "Facturen",
-        url: "/facturen",
+        url: route("pro.dashboard.invoices.index"),
+        routeName: "pro.dashboard.invoices.index",
         icon: FileText,
     },
 ];

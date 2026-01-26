@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Pro\CustomerController;
 use App\Http\Controllers\Pro\DashboardController;
+use App\Http\Controllers\Pro\InvoiceController;
+use App\Http\Controllers\Pro\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,16 @@ Route::prefix('pro')->name('pro.')->group(function () {
             Route::get(null, 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::patch('/update/{customer}', 'update')->name('update');
+        });
+
+        Route::prefix('producten')->name('products.')->controller(ProductController::class)->group(function () {
+            Route::get(null, 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::patch('/update/{product}', 'update')->name('update');
+        });
+
+        Route::prefix('facturen')->name('invoices.')->controller(InvoiceController::class)->group(function () {
+            Route::get(null, 'index')->name('index');
         });
     });
 
