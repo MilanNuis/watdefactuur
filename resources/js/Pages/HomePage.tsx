@@ -21,7 +21,7 @@ import {
     Crown,
     ChevronRight,
 } from "lucide-react";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import { Link } from "@inertiajs/react";
 
 export default function HomePage() {

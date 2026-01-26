@@ -8,13 +8,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/Components/ui/dialog";
-import { Input } from "@/Components/ui/Input";
+import { Input } from "@/Components/ui/input";
 import { useForm } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { Eye } from "lucide-react";
-import { Label } from "@/Components/ui/Label";
+import { Label } from "@/Components/ui/label";
 import { Product } from "../types";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
 
 export default function EditProductDialog({ product} : {product: Product}) {

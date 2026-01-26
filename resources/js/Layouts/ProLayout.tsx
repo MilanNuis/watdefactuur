@@ -7,10 +7,12 @@ export default function ProLayout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
             <AppSidebar />
-            <SidebarInset className="p-4">
-                <Toaster position="top-center" richColors />
-                <FlashHandler />
-                {children}
+            <SidebarInset className="bg-gray-50">
+                <section className="p-4">
+                    <Toaster position="top-center" richColors />
+                    <FlashHandler />
+                    {children}
+                </section>
             </SidebarInset>
         </SidebarProvider>
     );
