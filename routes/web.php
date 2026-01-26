@@ -8,23 +8,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('HomePage');
 });
-
 
 Route::get('/xander',function(){
     return Inertia::render('InvoiceBuilder');
 });
-
-Route::get('/Home',function(){
-    return Inertia::render('HomePage');
-});
-
 
 
 Route::prefix('pro')->name('pro.')->group(function () {
