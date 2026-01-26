@@ -12,10 +12,10 @@ import { Input } from "@/Components/ui/Input";
 import { useForm } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { Eye } from "lucide-react";
-import { Label } from "@/Components/ui/Label";
 import { Product } from "../types";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { Label } from "@/Components/ui/label";
 
 export default function EditProductDialog({ product} : {product: Product}) {
 

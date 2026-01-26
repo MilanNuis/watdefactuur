@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { Upload, X } from "lucide-react";
-import { Button } from "./ui/Button";
 import { Dispatch, SetStateAction } from "react";
+import { Button } from "./ui/button";
 interface Props {
     Preview: string | null;
     setPreview: Dispatch<SetStateAction<string | null>>;

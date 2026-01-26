@@ -1,10 +1,10 @@
 import { Download, Mail, Check, FileText } from "lucide-react";
-import { Button } from "@/Components/ui/Button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/Input";
 import { InvoiceData } from "../types/InvoiceTypes";
 import { useState } from "react";
 import { useToast } from "@/hooks/useToast";
+import { Button } from "@/Components/ui/button";
 export default function GenereerStap({ data }: { data: InvoiceData }) {
     const [email, setEmail] = useState(data.company.email);
     const [isDownloading, setIsDownloading] = useState(false);
