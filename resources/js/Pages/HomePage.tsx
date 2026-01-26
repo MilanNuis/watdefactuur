@@ -296,16 +296,19 @@ export default function HomePage() {
                                     <ul className="space-y-4">
                                         {premiumFeatures.map((feature, index) => (
                                             <li key={index} className="flex items-center gap-4">
-                                                <div className="w-6 h-6 rounded-full bg-purple-600 dark:bg-purple-500 flex items-center justify-center flex-shrink-0">
+                                                <div className="w-6 h-6 rounded-full bg-[--main-purple] flex items-center justify-center flex-shrink-0">
                                                     <CheckCircle className="w-4 h-4 text-white" />
                                                 </div>
                                                 <span className="text-gray-900 dark:text-gray-50">{feature}</span>
                                             </li>
                                         ))}
                                     </ul>
-                                    <div className="block pt-4">
-                                        <Link href={route("mollie.start-checkout")} method="post">
-                                            <Button className="w-full py-7 text-base font-semibold bg-purple-600 text-white shadow-xl">
+                                    <div className="block pt-4 ">
+                                        <Link href={route("mollie.start-checkout")} className="w-full" method="post">
+                                            <Button
+                                                className="w-full py-7 text-base font-semibold bg-[--main-purple]  text-white "
+                                                variant="home"
+                                            >
                                                 Start Premium
                                                 <ArrowRight className="w-5 h-5 ml-2" />
                                             </Button>
