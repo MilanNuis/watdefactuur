@@ -1,4 +1,4 @@
-import InputError from "@/Components/InputError";
+import InputError from "@/components/InputError";
 import {
     Dialog,
     DialogClose,
@@ -7,15 +7,15 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/Components/ui/dialog";
-import { Input } from "@/Components/ui/Input";
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/Input";
 import { useForm } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 import { Eye } from "lucide-react";
-import { Label } from "@/Components/ui/Label";
+import { Label } from "@/components/ui/Label";
 import { Product } from "../types";
-import { Button } from "@/Components/ui/Button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+import { Button } from "@/components/ui/Button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function EditProductDialog({ product} : {product: Product}) {
 

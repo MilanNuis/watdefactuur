@@ -1,13 +1,13 @@
-import Bedrijfsgegevens from "@/Components/InvoiceBuilder/Components/Bedrijfsgegevens";
+import Bedrijfsgegevens from "@/components/InvoiceBuilder/Components/Bedrijfsgegevens";
 import { useState } from "react";
 import { FileText, ArrowLeft, ArrowRight } from "lucide-react";
-import { StepIndicator } from "@/Components/InvoiceBuilder/Components/StepIndicator";
-import { InvoiceData } from "@/Components/InvoiceBuilder/types/InvoiceTypes";
-import KlantInfoformulier from "@/Components/InvoiceBuilder/Components/KlantInfoformulier";
-import { Button } from "@/Components/ui/Button";
-import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
-import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
-import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
+import { StepIndicator } from "@/components/InvoiceBuilder/Components/StepIndicator";
+import { InvoiceData } from "@/components/InvoiceBuilder/types/InvoiceTypes";
+import KlantInfoformulier from "@/components/InvoiceBuilder/Components/KlantInfoformulier";
+import { Button } from "@/components/ui/Button";
+import ProductenFormulier from "@/components/InvoiceBuilder/Components/ProductenFormulier";
+import GenereerStap from "@/components/InvoiceBuilder/Components/GenereerStap";
+import Factuurvoorbeeld from "@/components/InvoiceBuilder/Components/Factuurvoorbeeld";
 const initialInvoiceData: InvoiceData = {
     invoiceNumber: `${new Date().getFullYear()}-001`,
     invoiceDate: new Date().toISOString().split("T")[0],

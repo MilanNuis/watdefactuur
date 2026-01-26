@@ -1,6 +1,6 @@
-import { AppSidebar } from "@/Components/Sidebar";
-import { SidebarProvider, SidebarInset } from "@/Components/ui/sidebar";
-import { Toaster } from "@/Components/ui/sonner";
+import { AppSidebar } from "@/components/Sidebar";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import FlashHandler from "@/Handlers/Toaster";
 
 export default function ProLayout({ children }: { children: React.ReactNode }) {

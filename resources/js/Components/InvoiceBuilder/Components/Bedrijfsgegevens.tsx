@@ -1,6 +1,6 @@
 import { LogoUpload } from "../../LogoUpload";
-import { Label } from "@/Components/ui/Label";
-import { Input } from "@/Components/ui/Input";
+import { Label } from "@/components/ui/Label";
+import { Input } from "@/components/ui/Input";
 import { Dispatch, SetStateAction } from "react";
 interface Props {
     Preview: string | null;

@@ -1,7 +1,7 @@
 import { Download, Mail, Check, FileText } from "lucide-react";
-import { Button } from "@/Components/ui/Button";
-import { Label } from "@/Components/ui/label";
-import { Input } from "@/Components/ui/Input";
+import { Button } from "@/components/ui/Button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/Input";
 import { InvoiceData } from "../types/InvoiceTypes";
 import { useState } from "react";
 import { useToast } from "@/hooks/useToast";
