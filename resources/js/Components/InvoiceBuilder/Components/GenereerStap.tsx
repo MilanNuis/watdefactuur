@@ -1,5 +1,5 @@
 import { Download, Mail, Check, FileText } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/Input";
 import { InvoiceData } from "../types/InvoiceTypes";
@@ -105,33 +105,36 @@ export default function GenereerStap({ data }: { data: InvoiceData }) {
             </div>
 
             {/* Summary Card */}
-            <div className="bg-accent/50 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <FileText className="w-5 h-5 text-primary" />
+            <div className="bg-accent/50 rounded-xl p-4 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+                    <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                            <FileText className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-foreground">
+                                Factuur {data.invoiceNumber || "Nieuw"}
+                            </h3>
+                            <p className="text-sm text-muted-foreground">
+                                {data.products.length} product{data.products.length !== 1 ? "en" : ""}
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="font-semibold text-foreground">
-                            Factuur
-                            {data.invoiceNumber || "Nieuw"}
-                        </h3>
-                        <p className="text-sm text-muted-foreground">
-                            {data.products.length} product{data.products.length !== 1 ? "en" : ""}
+                    <div className="sm:ml-auto text-left sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
+                        <p className="text-2xl font-bold text-primary">
+                            {/* {formatCurrency(total)} */}
                         </p>
-                    </div>
-                    <div className="ml-auto text-right">
-                        <p className="text-2xl font-bold text-primary">{/* {formatCurrency(total)} */}</p>
                         <p className="text-xs text-muted-foreground">incl. BTW</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                        <p className="text-muted-foreground">Van</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div className="p-3 bg-card/50 rounded-lg">
+                        <p className="text-xs text-muted-foreground uppercase mb-1">Van</p>
                         <p className="font-medium text-foreground">{data.company.name || "Jouw bedrijf"}</p>
                     </div>
-                    <div>
-                        <p className="text-muted-foreground">Aan</p>
+                    <div className="p-3 bg-card/50 rounded-lg">
+                        <p className="text-xs text-muted-foreground uppercase mb-1">Aan</p>
                         <p className="font-medium text-foreground">{data.client.name || "Klant"}</p>
                     </div>
                 </div>

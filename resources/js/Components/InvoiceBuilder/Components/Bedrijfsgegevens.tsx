@@ -1,14 +1,20 @@
 import { LogoUpload } from "../../LogoUpload";
-import { Label } from "@/Components/ui/label";
+import { Label } from "@/Components/ui/Label";
 import { Input } from "@/Components/ui/Input";
-export default function Bedrijfsgegevens() {
+import { Dispatch, SetStateAction } from "react";
+interface Props {
+    Preview: string | null;
+    setPreview: Dispatch<SetStateAction<string | null>>;
+}
+
+export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="space-y-6 animate-fade-in ">
             <div className="">
                 <h2 className="text-xl font-semibold text-foreground mb-1">Jouw Bedrijfsgegevens</h2>
 
                 <p className="text-sm text-muted-foreground">Vul je bedrijfsgegevens in voor op de factuur</p>
-                <LogoUpload logo={""} onLogoChange={(logo) => onChange({ ...company, logo })} />
+                <LogoUpload Preview={Preview} setPreview={setPreview} />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

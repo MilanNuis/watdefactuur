@@ -2,7 +2,7 @@ import { Input } from "@/Components/ui/Input";
 import { Label } from "@/Components/ui/label";
 import { Plus, Trash2 } from "lucide-react";
 import { Textarea } from "../../ui/Textarea";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/Button";
 export default function ProductenFormulier() {
     return (
         <div className="space-y-6 animate-fade-in">
@@ -52,16 +52,7 @@ export default function ProductenFormulier() {
                         Toevoegen
                     </Button>
                 </div>
-
                 {/* {invoiceData.products.length === 0 ? ( */}
-                <div className="text-center py-8 bg-muted/50 rounded-lg border border-dashed border-border">
-                    <p className="text-muted-foreground text-sm">Nog geen producten toegevoegd</p>
-                    <Button type="button" variant="outline" size="sm" className="mt-2">
-                        {/* onClick={addProduct} */}
-                        <Plus className="w-4 h-4 mr-1" />
-                        Eerste product toevoegen
-                    </Button>
-                </div>
                 {/* ) : ( */}
                 <div className="space-y-3">
                     {/* {invoiceData.products.map((product, index) => ( */}
