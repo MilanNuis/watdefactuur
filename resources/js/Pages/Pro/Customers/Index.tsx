@@ -3,7 +3,7 @@ import Customer from "./types";
 import { usePage } from "@inertiajs/react";
 import Paginator from "@/components/Paginator";
 import Header from "@/components/Pro/Header";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import CreateCustomerDialog from "./Components/CreateCustomerDialog";
 import EditCustomerDialog from "./Components/EditCustomerDialog";
