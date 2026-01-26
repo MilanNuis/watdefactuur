@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MollieController;
 use App\Http\Controllers\Pro\CustomerController;
 use App\Http\Controllers\Pro\DashboardController;
 use App\Http\Controllers\Pro\InvoiceController;
@@ -13,8 +14,9 @@ Route::get('/', function () {
     return Inertia::render('HomePage');
 });
 
-Route::get('/xander',function(){
-    return Inertia::render('InvoiceBuilder');
+Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->group(function () {
+    Route::post('/webhook', 'webhook')->name('webhook')->withoutMiddleware('auth');
+    Route::post('/start-checkout', 'startCheckout')->name('start-checkout');
 });
 
 
@@ -38,6 +40,8 @@ Route::prefix('pro')->name('pro.')->middleware('auth')->group(function () {
             Route::get(null, 'index')->name('index');
         });
     });
+
+
 
 });
 
