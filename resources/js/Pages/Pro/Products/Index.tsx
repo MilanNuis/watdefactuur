@@ -1,7 +1,7 @@
 import ProLayout from "@/Layouts/ProLayout";
 import { usePage } from "@inertiajs/react";
-import Paginator from "@/components/Paginator";
-import Header from "@/components/Pro/Header";
+import Paginator from "@/Components/Paginator";
+import Header from "@/Components/Pro/Header";
 import {
     Table,
     TableBody,
@@ -9,7 +9,7 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table";
+} from "@/Components/ui/table";
 import { Product } from "./types";
 import CreateProductDialog from "./Components/CreateProductDialog";
 import EditProductDialog from "./Components/EditProductDialog";

@@ -1,10 +1,10 @@
 import ProLayout from "@/Layouts/ProLayout";
 import Customer from "./types";
 import { usePage } from "@inertiajs/react";
-import Paginator from "@/components/Paginator";
-import Header from "@/components/Pro/Header";
-import { Button } from "@/components/ui/Button";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import Paginator from "@/Components/Paginator";
+import Header from "@/Components/Pro/Header";
+import { Button } from "@/Components/ui/Button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
 import CreateCustomerDialog from "./Components/CreateCustomerDialog";
 import EditCustomerDialog from "./Components/EditCustomerDialog";
 

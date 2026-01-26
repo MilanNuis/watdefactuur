@@ -1,5 +1,5 @@
-import Header from "@/components/Pro/Header";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Header from "@/Components/Pro/Header";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 import ProLayout from "@/Layouts/ProLayout";
 import { FileText, Package, TrendingUp, Users } from "lucide-react";
 

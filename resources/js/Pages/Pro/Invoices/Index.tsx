@@ -1,4 +1,4 @@
-import Header from "@/components/Pro/Header";
+import Header from "@/Components/Pro/Header";
 import ProLayout from "@/Layouts/ProLayout";
 
 export default function Index() {

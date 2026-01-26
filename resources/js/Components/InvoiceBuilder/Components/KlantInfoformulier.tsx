@@ -1,5 +1,5 @@
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/Input";
+import { Label } from "@/Components/ui/label";
+import { Input } from "@/Components/ui/Input";
 export default function KlantInfoformulier() {
     return (
         <div className="space-y-6 animate-fade-in">

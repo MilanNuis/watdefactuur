@@ -4,8 +4,8 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/Badge";
+} from "@/Components/ui/card";
+import { Badge } from "@/Components/ui/Badge";
 import {
     FileText,
     CheckCircle,
@@ -21,7 +21,7 @@ import {
     Crown,
     ChevronRight,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/Components/ui/Button";
 import { Link } from "@inertiajs/react";
 
 export default function HomePage() {
