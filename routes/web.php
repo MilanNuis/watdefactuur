@@ -18,7 +18,7 @@ Route::get('/xander',function(){
 });
 
 
-Route::prefix('pro')->name('pro.')->group(function () {
+Route::prefix('pro')->name('pro.')->middleware('auth')->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
         Route::get(null, 'index')->name('index');
 
