@@ -55,7 +55,8 @@ const adminItems = [
 const settingsItems = [
     {
         title: "Instellingen",
-        url: "/instellingen",
+        url: route("pro.dashboard.settings.index"),
+        routeName: "pro.dashboard.settings.index",
         icon: Settings,
     },
 ];

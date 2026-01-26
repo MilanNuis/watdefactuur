@@ -1,8 +1,8 @@
-import { Input } from "@/Components/ui/Input";
+import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Plus, Trash2 } from "lucide-react";
 import { Textarea } from "../../ui/Textarea";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 export default function ProductenFormulier() {
     return (
         <div className="space-y-6 animate-fade-in">

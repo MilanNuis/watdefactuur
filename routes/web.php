@@ -5,6 +5,7 @@ use App\Http\Controllers\Pro\CustomerController;
 use App\Http\Controllers\Pro\DashboardController;
 use App\Http\Controllers\Pro\InvoiceController;
 use App\Http\Controllers\Pro\ProductController;
+use App\Http\Controllers\Pro\SettingsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,11 @@ Route::prefix('pro')->name('pro.')->middleware('auth')->group(function () {
 
         Route::prefix('facturen')->name('invoices.')->controller(InvoiceController::class)->group(function () {
             Route::get(null, 'index')->name('index');
+        });
+
+        Route::prefix('settings')->name('settings.')->controller(SettingsController::class)->group(function () {
+            Route::get(null, 'index')->name('index');
+            Route::patch('/update', 'update')->name('update');
         });
     });
 

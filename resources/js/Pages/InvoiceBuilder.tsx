@@ -4,7 +4,7 @@ import { FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { StepIndicator } from "@/Components/InvoiceBuilder/Components/StepIndicator";
 import { InvoiceData } from "@/Components/InvoiceBuilder/types/InvoiceTypes";
 import KlantInfoformulier from "@/Components/InvoiceBuilder/Components/KlantInfoformulier";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";

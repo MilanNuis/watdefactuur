@@ -1,6 +1,6 @@
 import { LogoUpload } from "../../LogoUpload";
-import { Label } from "@/Components/ui/Label";
-import { Input } from "@/Components/ui/Input";
+import { Label } from "@/Components/ui/label";
+import { Input } from "@/Components/ui/input";
 import { Dispatch, SetStateAction } from "react";
 interface Props {
     Preview: string | null;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
-    return (
+    return (    
         <div className="space-y-6 animate-fade-in ">
             <div className="">
                 <h2 className="text-xl font-semibold text-foreground mb-1">Jouw Bedrijfsgegevens</h2>
