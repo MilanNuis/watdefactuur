@@ -1,5 +1,5 @@
-import InputError from "@/Components/InputError";
-import { Button } from "@/Components/ui/Button";
+import InputError from "@/components/InputError";
+import { Button } from "@/components/ui/Button";
 import {
     Dialog,
     DialogClose,
@@ -8,10 +8,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/Components/ui/dialog";
-import { Input } from "@/Components/ui/Input";
-import { Label } from "@/Components/ui/Label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/Input";
+import { Label } from "@/components/ui/Label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useForm } from "@inertiajs/react";
 import React, { useEffect, useState } from "react";
 
