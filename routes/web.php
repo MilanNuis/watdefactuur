@@ -17,8 +17,8 @@ Route::get('/', function () {
 });
 
 Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->group(function () {
-    Route::post('/webhook', 'handleWebhook')->name('webhook')->withoutMiddleware('web');
-    Route::post('/start-checkout', 'startCheckout')->name('start-checkout');
+    Route::post('/webhook', 'handleWebhook')->name('webhook')->withoutMiddleware(['auth', 'checkIfUserIsPro']);
+    Route::post('/start-checkout', 'startCheckout')->name('start-checkout')->middleware('auth');
 });
 
 Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBuilderController::class)->group(function () {
@@ -26,8 +26,7 @@ Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBu
     Route::post('/download', 'download')->name('download');
 });
 
-
-Route::prefix('pro')->name('pro.')->middleware('auth')->group(function () {
+Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
         Route::get(null, 'index')->name('index');
 
