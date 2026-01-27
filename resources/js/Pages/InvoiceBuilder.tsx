@@ -12,7 +12,9 @@ import { useForm } from "@inertiajs/react";
 const initialInvoiceData: InvoiceData = {
     invoiceNumber: `${new Date().getFullYear()}-001`,
     invoiceDate: new Date().toISOString().split("T")[0],
-    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0],
     company: {
         name: "",
         address: "",
@@ -43,7 +45,8 @@ const steps = [
 ];
 export default function InvoiceBuilder() {
     const [currentStep, setCurrentStep] = useState(1);
-    const { data, setData, post, processing } = useForm<InvoiceData>(initialInvoiceData);
+    const { data, setData, post, processing } =
+        useForm<InvoiceData>(initialInvoiceData);
     const [Preview, setPreview] = useState<string | null>(null);
 
     const nextStep = () => {
@@ -78,15 +81,10 @@ export default function InvoiceBuilder() {
                 );
             case 3:
                 return (
-                    <ProductenFormulier
-                        invoiceData={data}
-                        setData={setData}
-                    />
+                    <ProductenFormulier invoiceData={data} setData={setData} />
                 );
             case 4:
-                return (
-                    <GenereerStap data={data} isSubmitting={processing} />
-                );
+                return <GenereerStap data={data} isSubmitting={processing} />;
             default:
                 return null;
         }
@@ -98,13 +96,7 @@ export default function InvoiceBuilder() {
             <header className="bg-card border-b border-border sticky top-0 z-10">
                 <div className="container py-4">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg  flex items-center justify-center bg-[#74EE8C]">
-                            <FileText className="w-5 h-5  " />
-                        </div>
-                        <div>
-                            <h1 className="text-xl font-bold text-foreground">FactuurMaker</h1>
-                            <p className="text-xs text-muted-foreground">Maak professionele facturen in minuten</p>
-                        </div>
+                        <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
                     </div>
                 </div>
             </header>
@@ -135,7 +127,10 @@ export default function InvoiceBuilder() {
                                     Vorige
                                 </Button>
                                 {currentStep < steps.length && (
-                                    <Button onClick={nextStep} className="w-full sm:w-auto order-1 sm:order-2">
+                                    <Button
+                                        onClick={nextStep}
+                                        className="w-full sm:w-auto order-1 sm:order-2"
+                                    >
                                         Volgende
                                         <ArrowRight className="w-4 h-4 ml-2" />
                                     </Button>
@@ -155,7 +150,10 @@ export default function InvoiceBuilder() {
                             <div className="relative">
                                 <div className="overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 rounded-xl">
                                     <div className="w-auto lg:min-w-0 md:flex md:flex-col origin-top-left transition-transform duration-300">
-                                        <Factuurvoorbeeld data={data} Preview={Preview} />
+                                        <Factuurvoorbeeld
+                                            data={data}
+                                            Preview={Preview}
+                                        />
                                     </div>
                                 </div>
                                 {/* Gradient overlay to show it's scrollable/scaled */}

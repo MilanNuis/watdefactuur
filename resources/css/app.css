@@ -5,6 +5,7 @@
 @layer base {
     :root {
         --main-purple: #5238E9;
+        --main-green: #16a34a;
         --background: 0 0% 100%;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
