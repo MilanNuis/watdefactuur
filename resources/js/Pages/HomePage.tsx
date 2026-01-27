@@ -16,7 +16,7 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Button } from "@/Components/ui/button";
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function HomePage() {
     const features = [
@@ -54,6 +54,15 @@ export default function HomePage() {
 
     return (
         <div className="min-h-screen bg-white ">
+            <Head title="Home">
+                <meta name="description" content="De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor freelancers, ZZP'ers en kleine ondernemers." />
+                <meta name="keywords" content="facturen, freelancers, ZZP'ers, ondernemers, factuurmaker, factuur, facturen maken, facturen versturen, facturen beheren" />
+                <meta name="author" content="FactuurMaker" />
+                <meta name="robots" content="index, follow" />
+                <meta name="googlebot" content="index, follow" />
+                <meta name="google" content="notranslate" />
+                <meta name="google" content="notranslate" />
+            </Head>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Noise overlay */}
                 <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]" />
