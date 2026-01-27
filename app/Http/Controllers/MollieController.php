@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
 use Mollie\Laravel\Facades\Mollie;
 
 class MollieController extends Controller
@@ -52,6 +53,6 @@ class MollieController extends Controller
             'metadata' => ['user_id' => Auth::user()->id],
         ]);
 
-        return redirect($payment->getCheckoutUrl());
+        return Inertia::location($payment->getCheckoutUrl());
     }
 }
