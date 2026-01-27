@@ -121,7 +121,7 @@ export default function InvoiceBuilder() {
                                     variant="outline"
                                     onClick={prevStep}
                                     disabled={currentStep === 1}
-                                    className="w-full sm:w-auto order-2 sm:order-1"
+                                    className="w-full sm:w-auto order-2 sm:order-1 font-bold"
                                 >
                                     <ArrowLeft className="w-4 h-4 mr-2" />
                                     Vorige
@@ -129,7 +129,8 @@ export default function InvoiceBuilder() {
                                 {currentStep < steps.length && (
                                     <Button
                                         onClick={nextStep}
-                                        className="w-full sm:w-auto order-1 sm:order-2"
+                                        className="w-full sm:w-auto order-1 sm:order-2 bg-[--main-green] text-white font-bold"
+                                        variant="home"
                                     >
                                         Volgende
                                         <ArrowRight className="w-4 h-4 ml-2" />

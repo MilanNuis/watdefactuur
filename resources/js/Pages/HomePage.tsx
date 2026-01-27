@@ -64,8 +64,14 @@ export default function HomePage() {
     return (
         <div className="min-h-screen bg-white ">
             <Head title="Home">
-                <meta name="description" content="De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor freelancers, ZZP'ers en kleine ondernemers." />
-                <meta name="keywords" content="facturen, freelancers, ZZP'ers, ondernemers, factuurmaker, factuur, facturen maken, facturen versturen, facturen beheren" />
+                <meta
+                    name="description"
+                    content="De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor freelancers, ZZP'ers en kleine ondernemers."
+                />
+                <meta
+                    name="keywords"
+                    content="facturen, freelancers, ZZP'ers, ondernemers, factuurmaker, factuur, facturen maken, facturen versturen, facturen beheren"
+                />
                 <meta name="author" content="FactuurMaker" />
                 <meta name="robots" content="index, follow" />
                 <meta name="googlebot" content="index, follow" />

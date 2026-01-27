@@ -22,12 +22,16 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     const handleDownload = async () => {
         setIsDownloading(true);
         try {
-            const response = await axios.post(route("invoice-builder.download"), data, {
-                responseType: "blob",
-                headers: {
-                    Accept: "application/pdf",
+            const response = await axios.post(
+                route("invoice-builder.download"),
+                data,
+                {
+                    responseType: "blob",
+                    headers: {
+                        Accept: "application/pdf",
+                    },
                 },
-            });
+            );
             const blob = new Blob([response.data], { type: "application/pdf" });
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement("a");
@@ -41,7 +45,8 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
             setDownloadComplete(true);
             toast({
                 title: "Factuur gegenereerd!",
-                description: "Je factuur is klaar om te printen of op te slaan als PDF.",
+                description:
+                    "Je factuur is klaar om te printen of op te slaan als PDF.",
             });
         } catch {
             toast({
@@ -58,7 +63,8 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         if (!email) {
             toast({
                 title: "E-mailadres vereist",
-                description: "Vul een e-mailadres in om de factuur te versturen.",
+                description:
+                    "Vul een e-mailadres in om de factuur te versturen.",
                 variant: "destructive",
             });
             return;
@@ -77,8 +83,14 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         });
     };
 
-    const subtotal = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice, 0);
-    const btw = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100), 0);
+    const subtotal = data.products.reduce(
+        (sum, p) => sum + p.quantity * p.unitPrice,
+        0,
+    );
+    const btw = data.products.reduce(
+        (sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100),
+        0,
+    );
     const total = subtotal + btw;
 
     const formatCurrency = (amount: number) => {
@@ -91,8 +103,12 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     return (
         <div className="space-y-6 animate-fade-in">
             <div>
-                <h2 className="text-xl font-semibold text-foreground mb-1">Factuur Genereren</h2>
-                <p className="text-sm text-muted-foreground">Download of verstuur je factuur</p>
+                <h2 className="text-xl font-semibold text-foreground mb-1">
+                    Factuur Genereren
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                    Download of verstuur je factuur
+                </p>
             </div>
 
             {/* Summary Card */}
@@ -107,7 +123,8 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
                                 Factuur {data.invoiceNumber || "Nieuw"}
                             </h3>
                             <p className="text-sm text-muted-foreground">
-                                {data.products.length} product{data.products.length !== 1 ? "en" : ""}
+                                {data.products.length} product
+                                {data.products.length !== 1 ? "en" : ""}
                             </p>
                         </div>
                     </div>
@@ -115,30 +132,45 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
                         <p className="text-2xl font-bold text-primary">
                             {formatCurrency(total)}
                         </p>
-                        <p className="text-xs text-muted-foreground">incl. BTW</p>
+                        <p className="text-xs text-muted-foreground">
+                            incl. BTW
+                        </p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                     <div className="p-3 bg-card/50 rounded-lg">
-                        <p className="text-xs text-muted-foreground uppercase mb-1">Van</p>
-                        <p className="font-medium text-foreground">{data.company.name || "Jouw bedrijf"}</p>
+                        <p className="text-xs text-muted-foreground uppercase mb-1">
+                            Van
+                        </p>
+                        <p className="font-medium text-foreground">
+                            {data.company.name || "Jouw bedrijf"}
+                        </p>
                     </div>
                     <div className="p-3 bg-card/50 rounded-lg">
-                        <p className="text-xs text-muted-foreground uppercase mb-1">Aan</p>
-                        <p className="font-medium text-foreground">{data.client.name || "Klant"}</p>
+                        <p className="text-xs text-muted-foreground uppercase mb-1">
+                            Aan
+                        </p>
+                        <p className="font-medium text-foreground">
+                            {data.client.name || "Klant"}
+                        </p>
                     </div>
                 </div>
             </div>
 
             {/* Download Option */}
             <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-3">Download als PDF</h3>
-                <p className="text-sm text-muted-foreground mb-4">Download de factuur om te printen of op te slaan</p>
+                <h3 className="font-semibold text-foreground mb-3">
+                    Download als PDF
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                    Download de factuur om te printen of op te slaan
+                </p>
                 <Button
                     onClick={handleDownload}
                     disabled={isDownloading || downloadComplete || isSubmitting}
-                    className="w-full"
+                    className="w-full bg-[--main-green] text-white"
+                    variant="home"
                 >
                     {downloadComplete ? (
                         <>
@@ -158,8 +190,12 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
 
             {/* Email Option */}
             <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-3">Verstuur per e-mail</h3>
-                <p className="text-sm text-muted-foreground mb-4">Stuur de factuur direct naar jezelf of je klant</p>
+                <h3 className="font-semibold text-foreground mb-3">
+                    Verstuur per e-mail
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                    Stuur de factuur direct naar jezelf of je klant
+                </p>
                 <div className="space-y-3">
                     <div className="space-y-2">
                         <Label htmlFor="sendEmail">E-mailadres</Label>
