@@ -26,17 +26,15 @@ class InvoiceBuilderController extends Controller
 
         $filename = 'factuur-' . ($data['invoiceNumber'] ?? 'nieuw') . '.pdf';
 
-        // Inertia expects a file download to be returned as a StreamedResponse.
-        // We want to force-download the PDF via a streamed response so the browser handles it as a file, not a raw string or new tab.
-        return response()->streamDownload(function () use ($data, $products, $subtotal, $btwTotal, $total) {
-            echo Pdf::loadView('invoice-builder.pdf', [
-                'invoice' => $data,
-                'products' => $products,
-                'subtotal' => $subtotal,
-                'btwTotal' => $btwTotal,
-                'total' => $total,
-            ])->output();
-        }, $filename, [
+        $pdf = Pdf::loadView('invoice-builder.pdf', [
+            'invoice' => $data,
+            'products' => $products,
+            'subtotal' => $subtotal,
+            'btwTotal' => $btwTotal,
+            'total' => $total,
+        ]);
+
+        return response($pdf->output(), 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'attachment; filename="' . $filename . '"',
         ]);

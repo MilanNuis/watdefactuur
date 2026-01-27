@@ -85,19 +85,7 @@ export default function InvoiceBuilder() {
                 );
             case 4:
                 return (
-                    <GenereerStap
-                        data={data}
-                        isSubmitting={processing}
-                        onDownload={() =>
-                            new Promise<void>((resolve) => {
-                                post(route("invoice-builder.download"), {
-                                    preserveScroll: true,
-                                    preserveState: true,
-                                    onFinish: () => resolve(),
-                                });
-                            })
-                        }
-                    />
+                    <GenereerStap data={data} isSubmitting={processing} />
                 );
             default:
                 return null;
