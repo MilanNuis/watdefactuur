@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -16,18 +17,17 @@ class MollieController extends Controller
             $paymentId = $request->input('id');
 
             if (!$paymentId) {
-                Log::warning('Webhook received without payment ID', ['request' => $request->all()]);
                 return response('No payment ID', 200);
             }
 
-            Log::info('Webhook received', ['payment_id' => $paymentId, 'request' => $request->all()]);
 
             $payment = Mollie::api()->payments->get($paymentId);
 
             if ($payment->isPaid()) {
-                Log::info('Payment is paid', ['payment_id' => $paymentId]);
+                User::find(Auth::user()->id)->update(['is_pro' => true]);
+                return redirect()->route('pro.dashboard.index')->with('success', "Je bent nu pro!");
             } else {
-                Log::info('Payment not completed', ['payment_id' => $paymentId]);
+                return redirect()->route('pro.dashboard.index')->with('error', "Je betaling is niet voltooid.");
             }
 
             return response('Webhook processed', 200);
@@ -50,7 +50,7 @@ class MollieController extends Controller
             'description' => "WatDeFactuur Pro",
             'redirectUrl' => route('pro.dashboard.index'),
             'webhookUrl' => route('mollie.webhook'),
-            'metadata' => ['user_id' => Auth::user()->id],
+            'metadata' => ['user_id' => Auth::id()],
         ]);
 
         return Inertia::location($payment->getCheckoutUrl());
