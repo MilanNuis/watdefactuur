@@ -17,13 +17,14 @@ import {
     Sparkles,
     TrendingUp,
     Users,
-    Receipt,
+    Menu,
+    X,
     Crown,
     ChevronRight,
 } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { Head, Link } from "@inertiajs/react";
-
+import { useState } from "react";
 export default function HomePage() {
     const features = [
         {
@@ -61,6 +62,8 @@ export default function HomePage() {
         { value: "99%", label: "Uptime garantie", icon: TrendingUp },
     ];
 
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
     return (
         <div className="min-h-screen bg-white ">
             <Head title="Home">
@@ -83,22 +86,24 @@ export default function HomePage() {
                 <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]" />
 
                 {/* Navigation */}
-                <header className=" bg-white  sticky top-0 z-50  border-b border-border">
-                    <div className="container py-4 mx-auto">
+                <header className="bg-white sticky top-0 z-50 border-b border-border">
+                    <div className="container py-4 mx-auto px-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3 group cursor-pointer">
-                                <div className=" rounded-xl  flex items-center justify-center  ">
+                                <div className="rounded-xl flex items-center justify-center">
                                     <img
                                         src="/logos/LogoGreen.svg"
                                         alt="Watdefactuur"
                                     />
                                 </div>
                             </div>
-                            <div className="flex items-center gap-3">
+
+                            {/* Desktop navigatie */}
+                            <div className="hidden sm:flex items-center gap-3">
                                 <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="hidden sm:inline-flex text-gray-600  hover:text-gray-900 "
+                                    className="text-gray-600 hover:text-gray-900"
                                 >
                                     Inloggen
                                 </Button>
@@ -111,7 +116,43 @@ export default function HomePage() {
                                     Registreren
                                 </Button>
                             </div>
+
+                            {/* Mobile menu button */}
+                            <button
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                className="sm:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                                aria-label="Toggle menu"
+                            >
+                                {isMenuOpen ? (
+                                    <X className="w-6 h-6" />
+                                ) : (
+                                    <Menu className="w-6 h-6" />
+                                )}
+                            </button>
                         </div>
+
+                        {/* Mobile menu */}
+                        {isMenuOpen && (
+                            <div className="sm:hidden mt-4 pb-4 border-t border-border pt-4 space-y-3">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="w-full text-gray-600 hover:text-gray-900"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    Inloggen
+                                </Button>
+                                <Button
+                                    size="sm"
+                                    className="w-full bg-[--main-green] text-white"
+                                    variant="home"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    <Sparkles className="w-4 h-4 mr-2" />
+                                    Registreren
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 </header>
 
@@ -145,8 +186,8 @@ export default function HomePage() {
                                 </span>
                                 <span className="text-gray-900 dark:text-gray-50 font-semibold">
                                     ZZP'ers
-                                </span>{" "}
-                                en{" "}
+                                </span>
+                                en
                                 <span className="text-gray-900 dark:text-gray-50 font-semibold">
                                     kleine ondernemers
                                 </span>
@@ -399,32 +440,37 @@ export default function HomePage() {
 
                 {/* CTA Section */}
                 <section className="py-24 md:py-32">
-                    <div className="container mx-auto">
-                        <div className="relative overflow-hidden rounded-3xl bg-[--main-green]  p-14 md:p-20 text-center">
-                            <div className="absolute inset-0 overflow-hidden pointer-events-none"></div>
+                    <div className="container mx-auto px-4">
+                        <div className="relative overflow-hidden rounded-3xl bg-[--main-green] p-10 md:p-20 text-center">
+                            <div className="absolute inset-0 pointer-events-none" />
 
-                            <div className="relative z-10">
+                            <div>
                                 <h2 className="text-4xl md:text-6xl font-black text-white mb-8">
                                     Klaar om te beginnen?
                                 </h2>
+
                                 <p className="text-white text-lg md:text-xl mb-12 max-w-xl mx-auto leading-relaxed">
                                     Maak vandaag nog je eerste professionele
                                     factuur. Geen creditcard vereist.
                                 </p>
+
                                 <Button
                                     size="lg"
                                     variant="home"
-                                    className="text-base px-12 py-7  font-bold bg-white text-green-700 "
+                                    className="text-sm sm:text-base font-bold bg-white text-green-700 w-full px-4 py-9 md:py-6 sm:px-6 whitespace-normal"
                                 >
-                                    <div className="flex  flex-row gap-4 ">
-                                        <div className="h-5 w-5 mb-1 ">
+                                    <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 min-w-0">
+                                        <div className="h-4 w-4 sm:h-5 sm:w-5 md:flex-shrink-0">
                                             <img
                                                 src="/logos/ArrowLogo.svg"
                                                 alt="log klein"
+                                                className="w-full h-full"
                                             />
                                         </div>
-                                        Maak Je Eerste Factuur
-                                        <ArrowRight className="w-10 h-10 self-center" />
+                                        <span className="whitespace-normal truncate">
+                                            Maak Je Eerste Factuur
+                                        </span>
+                                        <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 md:flex-shrink-0" />
                                     </div>
                                 </Button>
                             </div>
