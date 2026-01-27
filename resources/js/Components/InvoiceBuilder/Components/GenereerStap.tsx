@@ -5,13 +5,13 @@ import { Input } from "@/Components/ui/input";
 import { InvoiceData } from "../types/InvoiceTypes";
 import { useState } from "react";
 import { useToast } from "@/hooks/useToast";
+import axios from "axios";
 interface Props {
     data: InvoiceData;
-    onDownload: () => Promise<void>;
     isSubmitting: boolean;
 }
 
-export default function GenereerStap({ data, onDownload, isSubmitting }: Props) {
+export default function GenereerStap({ data, isSubmitting }: Props) {
     const [email, setEmail] = useState(data.company.email);
     const [isDownloading, setIsDownloading] = useState(false);
     const [isSending, setIsSending] = useState(false);
@@ -21,14 +21,37 @@ export default function GenereerStap({ data, onDownload, isSubmitting }: Props) 
 
     const handleDownload = async () => {
         setIsDownloading(true);
-        await onDownload();
+        try {
+            const response = await axios.post(route("invoice-builder.download"), data, {
+                responseType: "blob",
+                headers: {
+                    Accept: "application/pdf",
+                },
+            });
+            const blob = new Blob([response.data], { type: "application/pdf" });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `factuur-${data.invoiceNumber || "nieuw"}.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
 
-        setIsDownloading(false);
-        setDownloadComplete(true);
-        toast({
-            title: "Factuur gegenereerd!",
-            description: "Je factuur is klaar om te printen of op te slaan als PDF.",
-        });
+            setDownloadComplete(true);
+            toast({
+                title: "Factuur gegenereerd!",
+                description: "Je factuur is klaar om te printen of op te slaan als PDF.",
+            });
+        } catch {
+            toast({
+                title: "Download mislukt",
+                description: "Er ging iets mis bij het genereren van de PDF.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsDownloading(false);
+        }
     };
 
     const handleEmail = async () => {
