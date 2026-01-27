@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +24,7 @@ class MollieController extends Controller
             $payment = Mollie::api()->payments->get($paymentId);
 
             if ($payment->isPaid()) {
-                Auth::user()->update(['is_pro' => true]);
+                User::find(Auth::user()->id)->update(['is_pro' => true]);
                 return redirect()->route('pro.dashboard.index')->with('success', "Je bent nu pro!");
             } else {
                 return redirect()->route('pro.dashboard.index')->with('error', "Je betaling is niet voltooid.");
@@ -49,7 +50,7 @@ class MollieController extends Controller
             'description' => "WatDeFactuur Pro",
             'redirectUrl' => route('pro.dashboard.index'),
             'webhookUrl' => route('mollie.webhook'),
-            'metadata' => ['user_id' => Auth::user()->id],
+            'metadata' => ['user_id' => Auth::id()],
         ]);
 
         return Inertia::location($payment->getCheckoutUrl());
