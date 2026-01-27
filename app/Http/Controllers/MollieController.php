@@ -11,14 +11,35 @@ class MollieController extends Controller
 {
     public function webhook(Request $request)
     {
-        $payment = Mollie::api()->payments->get($request->id);
-
-        if ($payment->isPaid()) {
-            Log::info('Payment is paid', ['payment' => $payment]);
+        if (!$request->has('id')) {
+            // Mollie test webhook of foute call
+            return response()->json(['status' => 'no id'], 200);
         }
 
-        return response()->json(['message' => 'Webhook received']);
+        try {
+            $payment = Mollie::api()->payments->get($request->id);
+        } catch (\Exception $e) {
+            Log::error('Mollie webhook error', [
+                'error' => $e->getMessage(),
+                'payload' => $request->all(),
+            ]);
+
+            // Altijd 200 teruggeven aan Mollie
+            return response()->json(['status' => 'error handled'], 200);
+        }
+
+        if ($payment->isPaid()) {
+            Log::info('Payment is paid', [
+                'id' => $payment->id,
+                'metadata' => $payment->metadata,
+            ]);
+
+            // hier straks: user upgraden naar pro, factuur maken, etc.
+        }
+
+        return response()->json(['status' => 'ok'], 200);
     }
+
 
     public function startCheckout(Request $request)
     {
