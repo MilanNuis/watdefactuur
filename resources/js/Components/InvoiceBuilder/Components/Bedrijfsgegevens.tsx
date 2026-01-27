@@ -2,19 +2,30 @@ import { LogoUpload } from "../../LogoUpload";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Dispatch, SetStateAction } from "react";
+import { CompanyInfo } from "../types/InvoiceTypes";
 interface Props {
     Preview: string | null;
     setPreview: Dispatch<SetStateAction<string | null>>;
+    company: CompanyInfo;
+    onChange: (value: CompanyInfo) => void;
 }
 
-export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
+export default function Bedrijfsgegevens({ Preview, setPreview, company, onChange }: Props) {
+    const handleChange = (field: keyof CompanyInfo, value: string) => {
+        onChange({ ...company, [field]: value });
+    };
+
     return (    
         <div className="space-y-6 animate-fade-in ">
             <div className="">
                 <h2 className="text-xl font-semibold text-foreground mb-1">Jouw Bedrijfsgegevens</h2>
 
                 <p className="text-sm text-muted-foreground">Vul je bedrijfsgegevens in voor op de factuur</p>
-                <LogoUpload Preview={Preview} setPreview={setPreview} />
+                <LogoUpload
+                    Preview={Preview}
+                    setPreview={setPreview}
+                    onChange={(value) => onChange({ ...company, logo: value })}
+                />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -22,8 +33,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="companyName">Bedrijfsnaam *</Label>
                     <Input
                         id="companyName"
-                        // value={company.name}
-                        // onChange={(e) => handleChange("name", e.target.value)}
+                        value={company.name}
+                        onChange={(e) => handleChange("name", e.target.value)}
                         placeholder="Jouw Bedrijf B.V."
                     />
                 </div>
@@ -33,8 +44,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Input
                         id="companyEmail"
                         type="email"
-                        // value={company.email}
-                        // onChange={(e) => handleChange("email", e.target.value)}
+                        value={company.email}
+                        onChange={(e) => handleChange("email", e.target.value)}
                         placeholder="info@jouwbedrijf.nl"
                     />
                 </div>
@@ -43,8 +54,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="companyAddress">Adres</Label>
                     <Input
                         id="companyAddress"
-                        // value={company.address}
-                        // onChange={(e) => handleChange("address", e.target.value)}
+                        value={company.address}
+                        onChange={(e) => handleChange("address", e.target.value)}
                         placeholder="Straatnaam 123"
                     />
                 </div>
@@ -53,8 +64,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="companyPhone">Telefoonnummer</Label>
                     <Input
                         id="companyPhone"
-                        // value={company.phone}
-                        // onChange={(e) => handleChange("phone", e.target.value)}
+                        value={company.phone}
+                        onChange={(e) => handleChange("phone", e.target.value)}
                         placeholder="+31 6 12345678"
                     />
                 </div>
@@ -63,8 +74,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="companyPostalCode">Postcode</Label>
                     <Input
                         id="companyPostalCode"
-                        // value={company.postalCode}
-                        // onChange={(e) => handleChange("postalCode", e.target.value)}
+                        value={company.postalCode}
+                        onChange={(e) => handleChange("postalCode", e.target.value)}
                         placeholder="1234 AB"
                     />
                 </div>
@@ -73,8 +84,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="companyCity">Plaats</Label>
                     <Input
                         id="companyCity"
-                        // value={company.city}
-                        // onChange={(e) => handleChange("city", e.target.value)}
+                        value={company.city}
+                        onChange={(e) => handleChange("city", e.target.value)}
                         placeholder="Amsterdam"
                     />
                 </div>
@@ -83,8 +94,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="kvkNumber">KVK-nummer</Label>
                     <Input
                         id="kvkNumber"
-                        // value={company.kvkNumber}
-                        // onChange={(e) => handleChange("kvkNumber", e.target.value)}
+                        value={company.kvkNumber}
+                        onChange={(e) => handleChange("kvkNumber", e.target.value)}
                         placeholder="12345678"
                     />
                 </div>
@@ -93,8 +104,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="btwNumber">BTW-nummer</Label>
                     <Input
                         id="btwNumber"
-                        // value={company.btwNumber}
-                        // onChange={(e) => handleChange("btwNumber", e.target.value)}
+                        value={company.btwNumber}
+                        onChange={(e) => handleChange("btwNumber", e.target.value)}
                         placeholder="NL123456789B01"
                     />
                 </div>
@@ -103,8 +114,8 @@ export default function Bedrijfsgegevens({ Preview, setPreview }: Props) {
                     <Label htmlFor="iban">IBAN</Label>
                     <Input
                         id="iban"
-                        // value={company.iban}
-                        // onChange={(e) => handleChange("iban", e.target.value)}
+                        value={company.iban}
+                        onChange={(e) => handleChange("iban", e.target.value)}
                         placeholder="NL91ABNA0417164300"
                     />
                 </div>

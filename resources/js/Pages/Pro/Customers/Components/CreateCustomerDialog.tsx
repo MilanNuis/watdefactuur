@@ -1,5 +1,5 @@
 import InputError from "@/Components/InputError";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import {
     Dialog,
     DialogClose,
@@ -9,8 +9,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/Components/ui/dialog";
-import { Input } from "@/Components/ui/Input";
-import { Label } from "@/Components/ui/Label";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
 import { useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Free\InvoiceBuilderController;
 use App\Http\Controllers\MollieController;
 use App\Http\Controllers\Pro\CustomerController;
 use App\Http\Controllers\Pro\DashboardController;
@@ -18,6 +19,11 @@ Route::get('/', function () {
 Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->group(function () {
     Route::post('/webhook', 'webhook')->name('webhook')->withoutMiddleware('auth');
     Route::post('/start-checkout', 'startCheckout')->name('start-checkout');
+});
+
+Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBuilderController::class)->group(function () {
+    Route::get(null, 'index')->name('index');
+    Route::post('/download', 'download')->name('download');
 });
 
 

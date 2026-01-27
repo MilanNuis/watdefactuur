@@ -3,6 +3,7 @@ export interface Product {
     description: string;
     quantity: number;
     unitPrice: number;
+    btw: number;
 }
 
 export interface CompanyInfo {

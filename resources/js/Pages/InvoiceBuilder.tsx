@@ -8,6 +8,7 @@ import { Button } from "@/Components/ui/button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
+import { useForm } from "@inertiajs/react";
 const initialInvoiceData: InvoiceData = {
     invoiceNumber: `${new Date().getFullYear()}-001`,
     invoiceDate: new Date().toISOString().split("T")[0],
@@ -42,7 +43,7 @@ const steps = [
 ];
 export default function InvoiceBuilder() {
     const [currentStep, setCurrentStep] = useState(1);
-    const [invoiceData, setInvoiceData] = useState<InvoiceData>(initialInvoiceData);
+    const { data, setData, post, processing } = useForm<InvoiceData>(initialInvoiceData);
     const [Preview, setPreview] = useState<string | null>(null);
 
     const nextStep = () => {
@@ -64,25 +65,40 @@ export default function InvoiceBuilder() {
                     <Bedrijfsgegevens
                         Preview={Preview}
                         setPreview={setPreview}
-                        // company={invoiceData.company}
-                        // onChange={(company) => setInvoiceData({ ...invoiceData, company })}
+                        company={data.company}
+                        onChange={(company) => setData("company", company)}
                     />
                 );
             case 2:
                 return (
                     <KlantInfoformulier
-                    // client={invoiceData.client}
-                    // onChange={(client) => setInvoiceData({ ...invoiceData, client })}
+                        client={data.client}
+                        onChange={(client) => setData("client", client)}
                     />
                 );
             case 3:
                 return (
                     <ProductenFormulier
-                    // invoiceData={invoiceData} onChange={setInvoiceData}
+                        invoiceData={data}
+                        setData={setData}
                     />
                 );
             case 4:
-                return <GenereerStap data={invoiceData} />;
+                return (
+                    <GenereerStap
+                        data={data}
+                        isSubmitting={processing}
+                        onDownload={() =>
+                            new Promise<void>((resolve) => {
+                                post(route("invoice-builder.download"), {
+                                    preserveScroll: true,
+                                    preserveState: true,
+                                    onFinish: () => resolve(),
+                                });
+                            })
+                        }
+                    />
+                );
             default:
                 return null;
         }
@@ -151,7 +167,7 @@ export default function InvoiceBuilder() {
                             <div className="relative">
                                 <div className="overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 rounded-xl">
                                     <div className="w-auto lg:min-w-0 md:flex md:flex-col origin-top-left transition-transform duration-300">
-                                        <Factuurvoorbeeld data={invoiceData} Preview={Preview} />
+                                        <Factuurvoorbeeld data={data} Preview={Preview} />
                                     </div>
                                 </div>
                                 {/* Gradient overlay to show it's scrollable/scaled */}
