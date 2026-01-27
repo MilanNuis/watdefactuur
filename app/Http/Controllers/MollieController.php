@@ -16,18 +16,17 @@ class MollieController extends Controller
             $paymentId = $request->input('id');
 
             if (!$paymentId) {
-                Log::warning('Webhook received without payment ID', ['request' => $request->all()]);
                 return response('No payment ID', 200);
             }
 
-            Log::info('Webhook received', ['payment_id' => $paymentId, 'request' => $request->all()]);
 
             $payment = Mollie::api()->payments->get($paymentId);
 
             if ($payment->isPaid()) {
-                Log::info('Payment is paid', ['payment_id' => $paymentId]);
+                Auth::user()->update(['is_pro' => true]);
+                return redirect()->route('pro.dashboard.index')->with('success', "Je bent nu pro!");
             } else {
-                Log::info('Payment not completed', ['payment_id' => $paymentId]);
+                return redirect()->route('pro.dashboard.index')->with('error', "Je betaling is niet voltooid.");
             }
 
             return response('Webhook processed', 200);
