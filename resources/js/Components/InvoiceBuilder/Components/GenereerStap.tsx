@@ -5,7 +5,13 @@ import { Input } from "@/Components/ui/input";
 import { InvoiceData } from "../types/InvoiceTypes";
 import { useState } from "react";
 import { useToast } from "@/hooks/useToast";
-export default function GenereerStap({ data }: { data: InvoiceData }) {
+interface Props {
+    data: InvoiceData;
+    onDownload: () => Promise<void>;
+    isSubmitting: boolean;
+}
+
+export default function GenereerStap({ data, onDownload, isSubmitting }: Props) {
     const [email, setEmail] = useState(data.company.email);
     const [isDownloading, setIsDownloading] = useState(false);
     const [isSending, setIsSending] = useState(false);
@@ -15,45 +21,7 @@ export default function GenereerStap({ data }: { data: InvoiceData }) {
 
     const handleDownload = async () => {
         setIsDownloading(true);
-
-        // Simulate download preparation
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // Create printable version
-        const invoiceElement = document.getElementById("invoice-preview");
-        if (invoiceElement) {
-            const printWindow = window.open("", "_blank");
-            if (printWindow) {
-                printWindow.document.write(`
-          <!DOCTYPE html>
-          <html>
-            <head>
-              <title>Factuur ${data.invoiceNumber}</title>
-              <style>
-                * { margin: 0; padding: 0; box-sizing: border-box; }
-                body { font-family: 'Inter', -apple-system, sans-serif; padding: 40px; color: #1a1a1a; }
-                table { width: 100%; border-collapse: collapse; }
-                th, td { padding: 12px; text-align: left; }
-                th { border-bottom: 2px solid #22c55e; }
-                td { border-bottom: 1px solid #e5e5e5; }
-                .text-right { text-align: right; }
-                .text-center { text-align: center; }
-                .text-muted { color: #6b7280; }
-                .font-bold { font-weight: 700; }
-                .text-primary { color: #22c55e; }
-                .bg-muted { background-color: #f5f5f5; padding: 16px; border-radius: 8px; margin-bottom: 24px; }
-                @media print { body { print-color-adjust: exact; -webkit-print-color-adjust: exact; } }
-              </style>
-            </head>
-            <body>
-              ${invoiceElement.innerHTML}
-            </body>
-          </html>
-        `);
-                printWindow.document.close();
-                printWindow.print();
-            }
-        }
+        await onDownload();
 
         setIsDownloading(false);
         setDownloadComplete(true);
@@ -87,7 +55,7 @@ export default function GenereerStap({ data }: { data: InvoiceData }) {
     };
 
     const subtotal = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice, 0);
-    const btw = subtotal * 0.21;
+    const btw = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100), 0);
     const total = subtotal + btw;
 
     const formatCurrency = (amount: number) => {
@@ -122,7 +90,7 @@ export default function GenereerStap({ data }: { data: InvoiceData }) {
                     </div>
                     <div className="sm:ml-auto text-left sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
                         <p className="text-2xl font-bold text-primary">
-                            {/* {formatCurrency(total)} */}
+                            {formatCurrency(total)}
                         </p>
                         <p className="text-xs text-muted-foreground">incl. BTW</p>
                     </div>
@@ -144,7 +112,11 @@ export default function GenereerStap({ data }: { data: InvoiceData }) {
             <div className="bg-card rounded-xl p-6 border border-border">
                 <h3 className="font-semibold text-foreground mb-3">Download als PDF</h3>
                 <p className="text-sm text-muted-foreground mb-4">Download de factuur om te printen of op te slaan</p>
-                <Button onClick={handleDownload} disabled={isDownloading || downloadComplete} className="w-full">
+                <Button
+                    onClick={handleDownload}
+                    disabled={isDownloading || downloadComplete || isSubmitting}
+                    className="w-full"
+                >
                     {downloadComplete ? (
                         <>
                             <Check className="w-4 h-4 mr-2" />
@@ -171,15 +143,15 @@ export default function GenereerStap({ data }: { data: InvoiceData }) {
                         <Input
                             id="sendEmail"
                             type="email"
-                            // value={email}
-                            // onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder="email@voorbeeld.nl"
                         />
                     </div>
                     <Button
-                        // onClick={handleEmail}
+                        onClick={handleEmail}
                         variant="outline"
-                        // disabled={isSending || emailSent}
+                        disabled={isSending || emailSent}
                         className="w-full"
                     >
                         {emailSent ? (

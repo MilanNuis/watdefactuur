@@ -7,6 +7,13 @@ interface Props {
 }
 
 export default function Factuurvoorbeeld({ data, Preview }: Props) {
+    const subtotal = data.products.reduce((sum, product) => sum + product.quantity * product.unitPrice, 0);
+    const btwTotal = data.products.reduce(
+        (sum, product) => sum + product.quantity * product.unitPrice * (product.btw / 100),
+        0
+    );
+    const total = subtotal + btwTotal;
+
     return (
         <div
             className="bg-card border-2 border-[#74EE8C]  rounded-xl invoice-shadow p-6 md:p-8 w-auto"
@@ -69,7 +76,8 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                             <th className="text-left py-3 text-sm font-semibold text-foreground">Omschrijving</th>
                             <th className="text-center py-3 text-sm font-semibold text-foreground w-20">Aantal</th>
                             <th className="text-right py-3 text-sm font-semibold text-foreground w-28">Prijs</th>
-                            <th className="text-right py-3 text-sm font-semibold text-foreground w-28">Totaal</th>
+                            <th className="text-right py-3 text-sm font-semibold text-foreground w-28">BTW</th>
+                            <th className="text-right py-3 text-sm font-semibold text-foreground w-28">Totaal excl. BTW</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,10 +97,13 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                                         {product.quantity}
                                     </td>
                                     <td className="py-3 text-sm text-right text-muted-foreground">
-                                        {/* {formatCurrency(product.unitPrice)} */}
+                                        {product.unitPrice.toFixed(2)}
+                                    </td>
+                                    <td className="py-3 text-sm text-right text-muted-foreground">
+                                        {product.btw.toFixed(2)}%
                                     </td>
                                     <td className="py-3 text-sm text-right font-medium text-foreground">
-                                        {/* {formatCurrency(product.quantity * product.unitPrice)} */}
+                                        {(product.quantity * product.unitPrice).toFixed(2)}
                                     </td>
                                 </tr>
                             ))
@@ -106,15 +117,15 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                 <div className="w-64">
                     <div className="flex justify-between py-2 text-sm">
                         <span className="text-muted-foreground">Subtotaal</span>
-                        <span className="text-foreground">{/* {formatCurrency(subtotal)} */}</span>
+                        <span className="text-foreground">{subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between py-2 text-sm border-b border-border">
-                        <span className="text-muted-foreground">BTW (21%)</span>
-                        <span className="text-foreground">{/* {formatCurrency(btw)} */}</span>
+                        <span className="text-muted-foreground">BTW</span>
+                        <span className="text-foreground">{btwTotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between py-3">
                         <span className="font-semibold text-foreground">Totaal</span>
-                        <span className="font-bold text-lg text-primary">{/* {formatCurrency(total)} */}</span>
+                        <span className="font-bold text-lg text-primary">{total.toFixed(2)}</span>
                     </div>
                 </div>
             </div>

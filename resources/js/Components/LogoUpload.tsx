@@ -1,22 +1,28 @@
-import { useCallback, useState } from "react";
 import { Upload, X } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { Dispatch, SetStateAction } from "react";
 interface Props {
     Preview: string | null;
     setPreview: Dispatch<SetStateAction<string | null>>;
+    onChange?: (value: string | null) => void;
 }
 
-export const LogoUpload = ({ Preview, setPreview }: Props) => {
+export const LogoUpload = ({ Preview, setPreview, onChange }: Props) => {
     const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
 
-        const url = URL.createObjectURL(file);
-        setPreview(url);
+        const reader = new FileReader();
+        reader.onload = () => {
+            const result = typeof reader.result === "string" ? reader.result : null;
+            if (!result) return;
+            setPreview(result);
+            onChange?.(result);
 
-        // opslaan zodat het overal beschikbaar is
-        localStorage.setItem("logo", url);
+            // opslaan zodat het overal beschikbaar is
+            localStorage.setItem("logo", result);
+        };
+        reader.readAsDataURL(file);
     };
 
     return (
@@ -34,7 +40,10 @@ export const LogoUpload = ({ Preview, setPreview }: Props) => {
                         variant="destructive"
                         size="icon"
                         className="absolute -top-2 -right-2 w-6 h-6 rounded-full"
-                        onClick={() => setPreview(null)}
+                        onClick={() => {
+                            setPreview(null);
+                            onChange?.(null);
+                        }}
                     >
                         <X className="w-3 h-3" />
                     </Button>
