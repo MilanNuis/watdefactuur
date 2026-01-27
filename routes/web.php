@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->group(function () {
-    Route::post('/webhook', 'webhook')->name('webhook')->withoutMiddleware('auth');
+    Route::post('/webhook', 'webhook')->name('webhook')->withoutMiddleware('web');
     Route::post('/start-checkout', 'startCheckout')->name('start-checkout');
 });
 
