@@ -9,37 +9,35 @@ use Mollie\Laravel\Facades\Mollie;
 
 class MollieController extends Controller
 {
-    public function webhook(Request $request)
+    public function handleWebhook(Request $request)
     {
-        if (!$request->has('id')) {
-            // Mollie test webhook of foute call
-            return response()->json(['status' => 'no id'], 200);
-        }
-
         try {
-            $payment = Mollie::api()->payments->get($request->id);
+            $paymentId = $request->input('id');
+
+            if (!$paymentId) {
+                Log::warning('Webhook received without payment ID', ['request' => $request->all()]);
+                return response('No payment ID', 200);
+            }
+
+            Log::info('Webhook received', ['payment_id' => $paymentId, 'request' => $request->all()]);
+
+            $payment = Mollie::api()->payments->get($paymentId);
+
+            if ($payment->isPaid()) {
+                Log::info('Payment is paid', ['payment_id' => $paymentId]);
+            } else {
+                Log::info('Payment not completed', ['payment_id' => $paymentId]);
+            }
+
+            return response('Webhook processed', 200);
         } catch (\Exception $e) {
-            Log::error('Mollie webhook error', [
-                'error' => $e->getMessage(),
-                'payload' => $request->all(),
+            Log::error('Error in webhook', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
             ]);
-
-            // Altijd 200 teruggeven aan Mollie
-            return response()->json(['status' => 'error handled'], 200);
+            return response('Webhook error', 500);
         }
-
-        if ($payment->isPaid()) {
-            Log::info('Payment is paid', [
-                'id' => $payment->id,
-                'metadata' => $payment->metadata,
-            ]);
-
-            // hier straks: user upgraden naar pro, factuur maken, etc.
-        }
-
-        return response()->json(['status' => 'ok'], 200);
     }
-
 
     public function startCheckout(Request $request)
     {
