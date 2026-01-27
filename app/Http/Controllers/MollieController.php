@@ -20,17 +20,25 @@ class MollieController extends Controller
                 return response('No payment ID', 200);
             }
 
-
             $payment = Mollie::api()->payments->get($paymentId);
 
-            if ($payment->isPaid()) {
-                User::find(Auth::user()->id)->update(['is_pro' => true]);
-                return redirect()->route('pro.dashboard.index')->with('success', "Je bent nu pro!");
-            } else {
-                return redirect()->route('pro.dashboard.index')->with('error', "Je betaling is niet voltooid.");
+            $userId = null;
+            if (isset($payment->metadata) && isset($payment->metadata->user_id)) {
+                $userId = $payment->metadata->user_id;
             }
 
-            return response('Webhook processed', 200);
+            if ($payment->isPaid()) {
+                if ($userId) {
+                    $user = User::find($userId);
+                    if ($user) {
+                        $user->is_pro = true;
+                        $user->save();
+                    }
+                }
+                return response('Payment processed: user is now pro', 200);
+            } else {
+                return response('Betaling niet voltooid.', 200);
+            }
         } catch (\Exception $e) {
             Log::error('Error in webhook', [
                 'message' => $e->getMessage(),
