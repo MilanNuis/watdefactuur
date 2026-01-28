@@ -18,7 +18,8 @@ class CheckIfUserIsPro
     {
         if (!Auth::user()->isPro()) {
             return redirect()->route('pro.dashboard.index')->with('error', "Je bent nog niet pro!");
+        } else {
+            return $next($request);
         }
-        return $next($request);
     }
 }
