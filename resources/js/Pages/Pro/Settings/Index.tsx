@@ -32,7 +32,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
             />
             <Card className="my-4">
                 <CardHeader>
-                    <CardTitle>Algemene Instellingen</CardTitle>
+                    <CardTitle className="montserrat-main">Algemene Instellingen</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -122,7 +122,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
 
             <Card className="my-4">
                 <CardHeader>
-                    <CardTitle>Factuur Instellingen</CardTitle>
+                    <CardTitle className="montserrat-main">Factuur Instellingen</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

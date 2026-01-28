@@ -188,7 +188,7 @@ export default function HomePage() {
                                 </Badge>
                             </div>
 
-                            <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.2s_forwards] text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 dark:text-gray-50 mb-8 leading-[1.05] tracking-tight">
+                            <h1 className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.2s_forwards] text-5xl md:text-7xl lg:text-8xl  text-gray-900 dark:text-gray-50 mb-8 leading-[1.05] tracking-tight montserrat-main font-bold">
                                 Maak Facturen
                                 <br />
                                 <span className="bg-[linear-gradient(to_right,hsl(134_70%_45%),hsl(134_70%_45%),hsl(134_80%_80%))] dark:bg-[linear-gradient(to_right,hsl(134_70%_50%),hsl(134_70%_50%),hsl(134_80%_80%))] bg-clip-text text-transparent">
@@ -273,7 +273,7 @@ export default function HomePage() {
                                 <Sparkles className="w-3 h-3 mr-1" />
                                 Features
                             </Badge>
-                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900  mb-6">
+                            <h2 className="text-4xl md:text-6xl  text-gray-900  mb-6 montserrat-main font-bold">
                                 Waarom WatDeFactuur?
                             </h2>
                             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
@@ -288,12 +288,11 @@ export default function HomePage() {
                                     key={index}
                                     className="bg-white/60 relative"
                                 >
-                                    <div className="absolute inset-0 pointer-events-none" />
                                     <CardHeader className="relative pb-4 ">
                                         <div className="w-16 h-16 rounded-2xl bg-green-600/10   flex items-center justify-center mb-6 ">
                                             <feature.icon className="w-8 h-8 text-[--main-green]" />
                                         </div>
-                                        <CardTitle className="text-2xl font-bold text-gray-900 ">
+                                        <CardTitle className="text-2xl font-bold text-gray-900 montserrat-main ">
                                             {feature.title}
                                         </CardTitle>
                                     </CardHeader>
@@ -321,7 +320,7 @@ export default function HomePage() {
                                 <Crown className="w-3 h-3 mr-1" />
                                 Pricing
                             </Badge>
-                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 ">
+                            <h2 className="text-4xl md:text-6xl montserrat-main font-bold text-gray-900 ">
                                 Eenvoudige Prijzen
                             </h2>
                             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
@@ -334,11 +333,11 @@ export default function HomePage() {
                             {/* Free Plan */}
                             <Card className="bg-white/60 border border-green-600">
                                 <CardHeader className="text-center pb-8 pt-10">
-                                    <CardTitle className="text-2xl font-bold text-gray-900 ">
+                                    <CardTitle className="text-2xl font-bold text-gray-900 montserrat-main">
                                         Gratis
                                     </CardTitle>
                                     <div className="mt-6">
-                                        <span className="text-6xl font-black text-gray-900 ">
+                                        <span className="text-6xl  text-gray-900 montserrat-main font-bold ">
                                             €0
                                         </span>
                                         <span className="text-gray-600  ml-2">
@@ -350,7 +349,7 @@ export default function HomePage() {
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-6 pb-10 ">
-                                    <ul className="space-y-4 ">
+                                    <ul className="space-y-4 montserrat-main">
                                         <li className="flex items-center gap-4">
                                             <div className="w-6 h-6 rounded-full bg-green-600/10  flex items-center justify-center flex-shrink-0">
                                                 <CheckCircle className="w-4 h-4 text-[--main-green]" />
@@ -409,17 +408,17 @@ export default function HomePage() {
                                     </Badge>
                                 </div>
                                 <CardHeader className="text-center pb-8 pt-12">
-                                    <CardTitle className="text-2xl font-bold flex items-center justify-center gap-3">
+                                    <CardTitle className="text-2xl font-bold flex items-center justify-center gap-3 montserrat-main">
                                         <Crown className="w-7 h-7 text-[--main-purple] " />
-                                        <span className=" bg-clip-text text-transparent">
+                                        <span className="bg-clip-text text-transparent">
                                             Premium
                                         </span>
                                     </CardTitle>
-                                    <div className="mt-6">
-                                        <span className="text-6xl font-black text-gray-900 dark:text-gray-50">
+                                    <div className="mt-6 montserrat-main">
+                                        <span className="text-6xl font-bold montserrat-main text-gray-900 dark:text-gray-50">
                                             €10
                                         </span>
-                                        <span className="text-gray-600 dark:text-gray-400 ml-2">
+                                        <span className="text-gray-600 dark:text-gray-400 ml-2 ">
                                             /maand
                                         </span>
                                     </div>
@@ -428,7 +427,7 @@ export default function HomePage() {
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-6 pb-10">
-                                    <ul className="space-y-4">
+                                    <ul className="space-y-4 montserrat-main ">
                                         {premiumFeatures.map(
                                             (feature, index) => (
                                                 <li
@@ -475,7 +474,7 @@ export default function HomePage() {
                             <div className="absolute inset-0 pointer-events-none" />
 
                             <div>
-                                <h2 className="text-4xl md:text-6xl font-black text-white mb-8">
+                                <h2 className="text-4xl md:text-6xl  text-white mb-8 montserrat-main font-bold">
                                     Klaar om te beginnen?
                                 </h2>
 
@@ -497,7 +496,7 @@ export default function HomePage() {
                                                     className="w-full h-full"
                                                 />
                                             </div>
-                                            <span className="whitespace-normal truncate">
+                                            <span className="whitespace-normal truncate montserrat-main font-semibold">
                                                 Maak Je Eerste Factuur
                                             </span>
                                             <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 md:flex-shrink-0" />

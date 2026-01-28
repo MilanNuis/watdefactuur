@@ -17,7 +17,11 @@ export default {
     			sans: [
     				'Figtree',
                     ...defaultTheme.fontFamily.sans
-                ]
+                ],
+    			montserrat: [
+    				'Montserrat',
+    				...defaultTheme.fontFamily.sans
+    			]
     		},
     		borderRadius: {
     			lg: 'var(--radius)',
