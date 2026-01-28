@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/Components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/Badge";
 import {
     FileText,
@@ -11,29 +17,33 @@ import {
     Sparkles,
     TrendingUp,
     Users,
-    Receipt,
+    Menu,
+    X,
     Crown,
     ChevronRight,
 } from "lucide-react";
 import { Button } from "@/Components/ui/button";
 import { Head, Link } from "@inertiajs/react";
-
+import { useState } from "react";
 export default function HomePage() {
     const features = [
         {
             icon: FileText,
             title: "Professionele Facturen",
-            description: "Maak binnen minuten mooie, professionele facturen met je eigen logo en branding.",
+            description:
+                "Maak binnen minuten mooie, professionele facturen met je eigen logo en branding.",
         },
         {
             icon: Clock,
             title: "Bespaar Tijd",
-            description: "Automatisch berekenen van totalen, BTW en meer. Geen handmatig werk meer.",
+            description:
+                "Automatisch berekenen van totalen, BTW en meer. Geen handmatig werk meer.",
         },
         {
             icon: Shield,
             title: "Veilig & Betrouwbaar",
-            description: "Al je gegevens worden veilig opgeslagen en zijn altijd beschikbaar.",
+            description:
+                "Al je gegevens worden veilig opgeslagen en zijn altijd beschikbaar.",
         },
     ];
 
@@ -52,11 +62,19 @@ export default function HomePage() {
         { value: "99%", label: "Uptime garantie", icon: TrendingUp },
     ];
 
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
     return (
         <div className="min-h-screen bg-white ">
             <Head title="Home">
-                <meta name="description" content="De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor freelancers, ZZP'ers en kleine ondernemers." />
-                <meta name="keywords" content="facturen, freelancers, ZZP'ers, ondernemers, factuurmaker, factuur, facturen maken, facturen versturen, facturen beheren" />
+                <meta
+                    name="description"
+                    content="De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor freelancers, ZZP'ers en kleine ondernemers."
+                />
+                <meta
+                    name="keywords"
+                    content="facturen, freelancers, ZZP'ers, ondernemers, factuurmaker, factuur, facturen maken, facturen versturen, facturen beheren"
+                />
                 <meta name="author" content="FactuurMaker" />
                 <meta name="robots" content="index, follow" />
                 <meta name="googlebot" content="index, follow" />
@@ -68,28 +86,73 @@ export default function HomePage() {
                 <div className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]" />
 
                 {/* Navigation */}
-                <header className=" bg-white  sticky top-0 z-50  border-b border-border">
-                    <div className="container py-4 mx-auto">
+                <header className="bg-white sticky top-0 z-50 border-b border-border">
+                    <div className="container py-4 mx-auto px-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3 group cursor-pointer">
-                                <div className=" rounded-xl  flex items-center justify-center  ">
-                                    <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                                <div className="rounded-xl flex items-center justify-center">
+                                    <img
+                                        src="/logos/LogoGreen.svg"
+                                        alt="Watdefactuur"
+                                    />
                                 </div>
                             </div>
-                            <div className="flex items-center gap-3">
+
+                            {/* Desktop navigatie */}
+                            <div className="hidden sm:flex items-center gap-3">
                                 <Button
                                     variant="ghost"
                                     size="sm"
-                                    className="hidden sm:inline-flex text-gray-600  hover:text-gray-900 "
+                                    className="text-gray-600 hover:text-gray-900"
                                 >
                                     Inloggen
                                 </Button>
-                                <Button size="sm" className="bg-green-600 text-white" variant="home">
+                                <Button
+                                    size="sm"
+                                    className="bg-[--main-green] text-white"
+                                    variant="home"
+                                >
                                     <Sparkles className="w-4 h-4 mr-2" />
                                     Registreren
                                 </Button>
                             </div>
+
+                            {/* Mobile menu button */}
+                            <button
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                className="sm:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                                aria-label="Toggle menu"
+                            >
+                                {isMenuOpen ? (
+                                    <X className="w-6 h-6" />
+                                ) : (
+                                    <Menu className="w-6 h-6" />
+                                )}
+                            </button>
                         </div>
+
+                        {/* Mobile menu */}
+                        {isMenuOpen && (
+                            <div className="sm:hidden mt-4 pb-4 border-t border-border pt-4 space-y-3">
+                                <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    className="w-full text-gray-600 hover:text-gray-900"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    Inloggen
+                                </Button>
+                                <Button
+                                    size="sm"
+                                    className="w-full bg-[--main-green] text-white"
+                                    variant="home"
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    <Sparkles className="w-4 h-4 mr-2" />
+                                    Registreren
+                                </Button>
+                            </div>
+                        )}
                     </div>
                 </header>
 
@@ -116,9 +179,17 @@ export default function HomePage() {
                             </h1>
 
                             <p className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.3s_forwards] text-lg md:text-xl text-gray-600  mb-12 max-w-2xl mx-auto leading-relaxed">
-                                De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor
-                                <span className="text-gray-900 dark:text-gray-50 font-semibold">freelancers</span>
-                                <span className="text-gray-900 dark:text-gray-50 font-semibold">ZZP'ers</span> en{" "}
+                                De eenvoudigste manier om facturen te maken,
+                                versturen en beheren. Perfect voor
+                                <span className="text-gray-900 dark:text-gray-50 font-semibold">
+                                    {" "}
+                                    freelancers
+                                </span>
+                                <span className="text-gray-900 dark:text-gray-50 font-semibold">
+                                    {" "}
+                                    ZZP'ers
+                                </span>{" "}
+                                en{" "}
                                 <span className="text-gray-900 dark:text-gray-50 font-semibold">
                                     kleine ondernemers
                                 </span>
@@ -128,7 +199,7 @@ export default function HomePage() {
                             <div className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.4s_forwards] flex flex-col sm:flex-row gap-4 justify-center">
                                 <Button
                                     size="lg"
-                                    className="w-full sm:w-auto text-base px-10 py-7 bg-green-600  text-white  font-semibold"
+                                    className="w-full sm:w-auto text-base px-10 py-7 bg-[--main-green]  text-white  font-semibold"
                                     variant="home"
                                 >
                                     Gratis Factuur Maken
@@ -154,12 +225,14 @@ export default function HomePage() {
                                         className="text-center p-6 rounded-2xl bg-gray-200/30  border border-gray-300/30  backdrop-blur-sm"
                                     >
                                         <div className="flex items-center justify-center gap-2 mb-2">
-                                            <stat.icon className="w-5 h-5 text-green-600 " />
+                                            <stat.icon className="w-5 h-5 text-[--main-green]" />
                                             <span className="text-3xl md:text-4xl font-bold text-gray-900 ">
                                                 {stat.value}
                                             </span>
                                         </div>
-                                        <span className="text-sm text-gray-600 ">{stat.label}</span>
+                                        <span className="text-sm text-gray-600 ">
+                                            {stat.label}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -178,19 +251,25 @@ export default function HomePage() {
                                 <Sparkles className="w-3 h-3 mr-1" />
                                 Features
                             </Badge>
-                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900  mb-6">Waarom FactuurMaker?</h2>
+                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900  mb-6">
+                                Waarom WatDeFactuur?
+                            </h2>
                             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-                                Alles wat je nodig hebt om professioneel te factureren, zonder de complexiteit.
+                                Alles wat je nodig hebt om professioneel te
+                                factureren, zonder de complexiteit.
                             </p>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
                             {features.map((feature, index) => (
-                                <Card key={index} className="bg-white/60 relative">
+                                <Card
+                                    key={index}
+                                    className="bg-white/60 relative"
+                                >
                                     <div className="absolute inset-0 pointer-events-none" />
                                     <CardHeader className="relative pb-4 ">
                                         <div className="w-16 h-16 rounded-2xl bg-green-600/10   flex items-center justify-center mb-6 ">
-                                            <feature.icon className="w-8 h-8 text-green-600 " />
+                                            <feature.icon className="w-8 h-8 text-[--main-green]" />
                                         </div>
                                         <CardTitle className="text-2xl font-bold text-gray-900 ">
                                             {feature.title}
@@ -215,16 +294,17 @@ export default function HomePage() {
                         <div className="text-center mb-20">
                             <Badge
                                 variant="outline"
-                                className="mb-6 border-purple-600/30  bg-purple-600/ text-purple-700 dark:text-purple-400"
+                                className="mb-6 border-purple-600/30  bg-purple-600/ text-purple-700 "
                             >
                                 <Crown className="w-3 h-3 mr-1" />
                                 Pricing
                             </Badge>
-                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 ">
                                 Eenvoudige Prijzen
                             </h2>
                             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-                                Begin gratis of upgrade naar Premium voor alle functionaliteiten.
+                                Begin gratis of upgrade naar Premium voor alle
+                                functionaliteiten.
                             </p>
                         </div>
 
@@ -232,10 +312,16 @@ export default function HomePage() {
                             {/* Free Plan */}
                             <Card className="bg-white/60 border border-green-600">
                                 <CardHeader className="text-center pb-8 pt-10">
-                                    <CardTitle className="text-2xl font-bold text-gray-900 ">Gratis</CardTitle>
+                                    <CardTitle className="text-2xl font-bold text-gray-900 ">
+                                        Gratis
+                                    </CardTitle>
                                     <div className="mt-6">
-                                        <span className="text-6xl font-black text-gray-900 ">€0</span>
-                                        <span className="text-gray-600  ml-2">/maand</span>
+                                        <span className="text-6xl font-black text-gray-900 ">
+                                            €0
+                                        </span>
+                                        <span className="text-gray-600  ml-2">
+                                            /maand
+                                        </span>
                                     </div>
                                     <CardDescription className="mt-4 text-base text-gray-600 ">
                                         Perfect om te beginnen
@@ -245,27 +331,33 @@ export default function HomePage() {
                                     <ul className="space-y-4 ">
                                         <li className="flex items-center gap-4">
                                             <div className="w-6 h-6 rounded-full bg-green-600/10  flex items-center justify-center flex-shrink-0">
-                                                <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-500" />
+                                                <CheckCircle className="w-4 h-4 text-[--main-green]" />
                                             </div>
-                                            <span className="text-gray-900">5 facturen per maand</span>
+                                            <span className="text-gray-900">
+                                                5 facturen per maand
+                                            </span>
                                         </li>
                                         <li className="flex items-center gap-4">
                                             <div className="w-6 h-6 rounded-full bg-green-600/10  flex items-center justify-center flex-shrink-0">
-                                                <CheckCircle className="w-4 h-4 text-green-600 " />
+                                                <CheckCircle className="w-4 h-4 text-[--main-green]" />
                                             </div>
-                                            <span className="text-gray-900 ">Basis templates</span>
+                                            <span className="text-gray-900 ">
+                                                Basis templates
+                                            </span>
                                         </li>
                                         <li className="flex items-center gap-4">
                                             <div className="w-6 h-6 rounded-full bg-green-600/10  flex items-center justify-center flex-shrink-0">
-                                                <CheckCircle className="w-4 h-4 text-green-600 " />
+                                                <CheckCircle className="w-4 h-4 text-[--main-green]" />
                                             </div>
-                                            <span className="text-gray-900 ">PDF export</span>
+                                            <span className="text-gray-900 ">
+                                                PDF export
+                                            </span>
                                         </li>
                                     </ul>
                                     <div className="block pt-4">
                                         <Button
                                             variant="home"
-                                            className="w-full py-7 text-base font-semibold bg-green-600 text-white "
+                                            className="w-full py-7 text-base font-semibold bg-[--main-green] text-white "
                                         >
                                             Gratis Beginnen
                                             <ChevronRight className="w-5 h-5 ml-2" />
@@ -291,11 +383,17 @@ export default function HomePage() {
                                 <CardHeader className="text-center pb-8 pt-12">
                                     <CardTitle className="text-2xl font-bold flex items-center justify-center gap-3">
                                         <Crown className="w-7 h-7 text-[--main-purple] " />
-                                        <span className=" bg-clip-text text-transparent">Premium</span>
+                                        <span className=" bg-clip-text text-transparent">
+                                            Premium
+                                        </span>
                                     </CardTitle>
                                     <div className="mt-6">
-                                        <span className="text-6xl font-black text-gray-900 dark:text-gray-50">€10</span>
-                                        <span className="text-gray-600 dark:text-gray-400 ml-2">/maand</span>
+                                        <span className="text-6xl font-black text-gray-900 dark:text-gray-50">
+                                            €10
+                                        </span>
+                                        <span className="text-gray-600 dark:text-gray-400 ml-2">
+                                            /maand
+                                        </span>
                                     </div>
                                     <CardDescription className="mt-4 text-base text-gray-600 dark:text-gray-400">
                                         Alles wat je nodig hebt
@@ -303,17 +401,30 @@ export default function HomePage() {
                                 </CardHeader>
                                 <CardContent className="space-y-6 pb-10">
                                     <ul className="space-y-4">
-                                        {premiumFeatures.map((feature, index) => (
-                                            <li key={index} className="flex items-center gap-4">
-                                                <div className="w-6 h-6 rounded-full bg-[--main-purple] flex items-center justify-center flex-shrink-0">
-                                                    <CheckCircle className="w-4 h-4 text-white" />
-                                                </div>
-                                                <span className="text-gray-900 dark:text-gray-50">{feature}</span>
-                                            </li>
-                                        ))}
+                                        {premiumFeatures.map(
+                                            (feature, index) => (
+                                                <li
+                                                    key={index}
+                                                    className="flex items-center gap-4"
+                                                >
+                                                    <div className="w-6 h-6 rounded-full bg-[--main-purple] flex items-center justify-center flex-shrink-0">
+                                                        <CheckCircle className="w-4 h-4 text-white" />
+                                                    </div>
+                                                    <span className="text-gray-900 dark:text-gray-50">
+                                                        {feature}
+                                                    </span>
+                                                </li>
+                                            ),
+                                        )}
                                     </ul>
                                     <div className="block pt-4 ">
-                                        <Link href={route("mollie.start-checkout")} className="w-full" method="post">
+                                        <Link
+                                            href={route(
+                                                "mollie.start-checkout",
+                                            )}
+                                            className="w-full"
+                                            method="post"
+                                        >
                                             <Button
                                                 className="w-full py-7 text-base font-semibold bg-[--main-purple]  text-white "
                                                 variant="home"
@@ -331,28 +442,37 @@ export default function HomePage() {
 
                 {/* CTA Section */}
                 <section className="py-24 md:py-32">
-                    <div className="container mx-auto">
-                        <div className="relative overflow-hidden rounded-3xl bg-green-600  p-14 md:p-20 text-center">
-                            <div className="absolute inset-0 overflow-hidden pointer-events-none"></div>
+                    <div className="container mx-auto px-4">
+                        <div className="relative overflow-hidden rounded-3xl bg-[--main-green] p-10 md:p-20 text-center">
+                            <div className="absolute inset-0 pointer-events-none" />
 
-                            <div className="relative z-10">
+                            <div>
                                 <h2 className="text-4xl md:text-6xl font-black text-white mb-8">
                                     Klaar om te beginnen?
                                 </h2>
+
                                 <p className="text-white text-lg md:text-xl mb-12 max-w-xl mx-auto leading-relaxed">
-                                    Maak vandaag nog je eerste professionele factuur. Geen creditcard vereist.
+                                    Maak vandaag nog je eerste professionele
+                                    factuur. Geen creditcard vereist.
                                 </p>
+
                                 <Button
                                     size="lg"
                                     variant="home"
-                                    className="text-base px-12 py-7  font-bold bg-white text-green-700 "
+                                    className="text-sm sm:text-base font-bold bg-white text-green-700 w-full px-4 py-9 md:py-6 sm:px-6 whitespace-normal"
                                 >
-                                    <div className="flex  flex-row gap-4 ">
-                                        <div className="h-5 w-5 mb-1 ">
-                                            <img src="/logos/ArrowLogo.svg" alt="log klein" />
+                                    <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 min-w-0">
+                                        <div className="h-4 w-4 sm:h-5 sm:w-5 md:flex-shrink-0">
+                                            <img
+                                                src="/logos/ArrowLogo.svg"
+                                                alt="log klein"
+                                                className="w-full h-full"
+                                            />
                                         </div>
-                                        Maak Je Eerste Factuur
-                                        <ArrowRight className="w-10 h-10 self-center" />
+                                        <span className="whitespace-normal truncate">
+                                            Maak Je Eerste Factuur
+                                        </span>
+                                        <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 md:flex-shrink-0" />
                                     </div>
                                 </Button>
                             </div>
@@ -366,11 +486,17 @@ export default function HomePage() {
                         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="flex items-center gap-4">
                                 <div>
-                                    <img src="/logos/LogoGreen.svg" alt="Watdefactuur" height={300} width={300} />
+                                    <img
+                                        src="/logos/LogoGreen.svg"
+                                        alt="Watdefactuur"
+                                        height={300}
+                                        width={300}
+                                    />
                                 </div>
                             </div>
                             <p className="text-sm text-gray-600 dark:text-gray-400 text-[--main-purple]">
-                                © {new Date().getFullYear()} FactuurMaker. Alle rechten voorbehouden.
+                                © {new Date().getFullYear()} FactuurMaker. Alle
+                                rechten voorbehouden.
                             </p>
                         </div>
                     </div>

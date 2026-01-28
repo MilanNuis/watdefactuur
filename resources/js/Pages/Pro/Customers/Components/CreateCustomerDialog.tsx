@@ -15,7 +15,6 @@ import { useForm } from "@inertiajs/react";
 import React, { useState } from "react";
 
 export default function CreateCustomerDialog() {
-
     const [open, setOpen] = useState(false);
 
     const { data, setData, errors, post, reset } = useForm({
@@ -35,17 +34,21 @@ export default function CreateCustomerDialog() {
         post(route("pro.dashboard.customers.store"), {
             onSuccess: () => {
                 setOpen(false);
-                reset()
+                reset();
             },
         });
     };
-    
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Button variant={"secondary"}>Nieuwe klant</Button>
+                    <Button
+                        variant={"home"}
+                        className="bg-[--main-purple] text-white"
+                    >
+                        Nieuwe klant
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="max-w-2xl w-full">
                     <DialogHeader>

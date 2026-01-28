@@ -1,5 +1,5 @@
 import { Upload, X } from "lucide-react";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import { Dispatch, SetStateAction } from "react";
 interface Props {
     Preview: string | null;
@@ -14,7 +14,8 @@ export const LogoUpload = ({ Preview, setPreview, onChange }: Props) => {
 
         const reader = new FileReader();
         reader.onload = () => {
-            const result = typeof reader.result === "string" ? reader.result : null;
+            const result =
+                typeof reader.result === "string" ? reader.result : null;
             if (!result) return;
             setPreview(result);
             onChange?.(result);
@@ -27,7 +28,9 @@ export const LogoUpload = ({ Preview, setPreview, onChange }: Props) => {
 
     return (
         <div className="space-y-2 flex flex-col">
-            <label className="text-sm font-medium text-foreground">Bedrijfslogo</label>
+            <label className="text-sm font-medium text-foreground">
+                Bedrijfslogo
+            </label>
             {Preview ? (
                 <div className="relative w-32 h-32">
                     <img
@@ -49,10 +52,17 @@ export const LogoUpload = ({ Preview, setPreview, onChange }: Props) => {
                     </Button>
                 </div>
             ) : (
-                <label className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-3 rounded-lg cursor-pointer hover:border-[#74EE8C] hover:bg-accent/50 transition-colors">
+                <label className="flex flex-col items-center justify-center w-32 h-32 border-2 border-dashed border-3 rounded-lg cursor-pointer hover:border-[--main-green] hover:bg-accent/50 transition-colors">
                     <Upload className="w-8 h-8 text-muted-foreground mb-2" />
-                    <span className="text-xs text-muted-foreground">Upload logo</span>
-                    <input type="file" accept="image/*" className="hidden" onChange={handleFile} />
+                    <span className="text-xs text-muted-foreground ">
+                        Upload logo
+                    </span>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleFile}
+                    />
                 </label>
             )}
         </div>
