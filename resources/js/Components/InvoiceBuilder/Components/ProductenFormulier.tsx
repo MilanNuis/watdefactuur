@@ -3,7 +3,7 @@ import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
 import { Plus, Trash2, Search } from "lucide-react";
 import { Textarea } from "../../ui/Textarea";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import { InvoiceData, Product } from "../types/InvoiceTypes";
 import {
     Select,

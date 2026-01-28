@@ -1,5 +1,5 @@
 import { Upload, X } from "lucide-react";
-import { Button } from "@/Components/ui/Button";
+import { Button } from "@/Components/ui/button";
 import { Dispatch, SetStateAction } from "react";
 interface Props {
     Preview: string | null;
