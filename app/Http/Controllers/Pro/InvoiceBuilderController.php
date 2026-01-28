@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 class InvoiceBuilderController extends Controller
 {
     public function index()
@@ -15,7 +16,21 @@ class InvoiceBuilderController extends Controller
         $products = Auth::user()->products;
         $customers = Auth::user()->customers;
 
-        return Inertia::render('Pro/InvoiceBuilder/Index', compact('settings', 'products', 'customers'));
+        $currentYear = date('Y');
+        $lastInvoice = Auth::user()->invoices()
+            ->where('invoice_number', 'like', $currentYear . '-%')
+            ->orderBy('invoice_number', 'desc')
+            ->first();
+
+        if ($lastInvoice) {
+            $parts = explode('-', $lastInvoice->invoice_number);
+            $sequence = intval(end($parts)) + 1;
+            $nextInvoiceNumber = $currentYear . '-' . str_pad($sequence, 3, '0', STR_PAD_LEFT);
+        } else {
+            $nextInvoiceNumber = $currentYear . '-001';
+        }
+
+        return Inertia::render('Pro/InvoiceBuilder/Index', compact('settings', 'products', 'customers', 'nextInvoiceNumber'));
     }
 
     public function download(Request $request)
@@ -31,23 +46,18 @@ class InvoiceBuilderController extends Controller
 
         $filename = 'factuur-' . ($data['invoiceNumber'] ?? 'nieuw') . '.pdf';
 
-        // Transform client data from frontend structure to database structure
         $client = $data['client'] ?? [];
         $clientName = $client['name'] ?? '';
         $clientAddress = $client['address'] ?? '';
         
-        // Split name into first and last name
         $nameParts = explode(' ', $clientName, 2);
         $clientFirstName = $nameParts[0] ?? '';
         $clientLastName = $nameParts[1] ?? '';
         
-        // Split address into street and house number
-        // Try to extract house number from end of address string (e.g., "Julianalaan 6" or "Straatnaam 123A")
         if (preg_match('/^(.+?)\s+(\d+[\w\-\/]*)$/', trim($clientAddress), $matches)) {
             $clientStreet = trim($matches[1]);
             $clientHouseNumber = trim($matches[2]);
         } else {
-            // If no house number found, use entire address as street
             $clientStreet = trim($clientAddress);
             $clientHouseNumber = '';
         }

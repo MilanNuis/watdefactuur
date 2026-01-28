@@ -15,7 +15,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('HomePage');
-});
+})->name('home');
 
 Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->group(function () {
     Route::post('/webhook', 'handleWebhook')->name('webhook')->withoutMiddleware(['auth', 'checkIfUserIsPro']);
@@ -59,10 +59,6 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->gr
         });
     });
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
