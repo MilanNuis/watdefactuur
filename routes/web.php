@@ -4,6 +4,7 @@ use App\Http\Controllers\Free\InvoiceBuilderController;
 use App\Http\Controllers\MollieController;
 use App\Http\Controllers\Pro\CustomerController;
 use App\Http\Controllers\Pro\DashboardController;
+use App\Http\Controllers\Pro\InvoiceBuilderController as ProInvoiceBuilderController;
 use App\Http\Controllers\Pro\InvoiceController;
 use App\Http\Controllers\Pro\ProductController;
 use App\Http\Controllers\Pro\SettingsController;
@@ -27,6 +28,12 @@ Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBu
 });
 
 Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->group(function () {
+
+    Route::prefix('invoice-builder')->name('invoice-builder.')->controller(ProInvoiceBuilderController::class)->group(function () {
+        Route::get(null, 'index')->name('index');
+        Route::post('/download', 'download')->name('download');
+    });
+
     Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
         Route::get(null, 'index')->name('index');
 
@@ -51,9 +58,6 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->gr
             Route::patch('/update', 'update')->name('update');
         });
     });
-
-
-
 });
 
 Route::get('/dashboard', function () {

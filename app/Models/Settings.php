@@ -12,6 +12,7 @@ class Settings extends Model
         'phone',
         'address',
         'city',
+        'postal_code',
         'iban',
         'kvk_number',
         'btw_number',

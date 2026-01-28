@@ -103,6 +103,11 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                         {data.client.email}
                     </p>
                 )}
+                {data.client.phone && (
+                    <p className="text-sm text-muted-foreground">
+                        {data.client.phone}
+                    </p>
+                )}
             </div>
 
             {/* Products Table */}

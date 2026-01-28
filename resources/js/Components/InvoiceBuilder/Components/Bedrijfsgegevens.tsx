@@ -3,6 +3,7 @@ import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { Dispatch, SetStateAction } from "react";
 import { CompanyInfo } from "../types/InvoiceTypes";
+import { Settings } from "@/Pages/Pro/Settings/types";
 interface Props {
     Preview: string | null;
     setPreview: Dispatch<SetStateAction<string | null>>;

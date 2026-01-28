@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return Auth::user()->is_pro;
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
