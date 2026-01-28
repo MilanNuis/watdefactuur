@@ -100,21 +100,25 @@ export default function HomePage() {
 
                             {/* Desktop navigatie */}
                             <div className="hidden sm:flex items-center gap-3">
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="text-gray-600 hover:text-gray-900"
-                                >
-                                    Inloggen
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    className="bg-[--main-green] text-white"
-                                    variant="home"
-                                >
-                                    <Sparkles className="w-4 h-4 mr-2" />
-                                    Registreren
-                                </Button>
+                                <Link href={route("login")}>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        className="text-gray-600 hover:text-gray-900"
+                                    >
+                                        Inloggen
+                                    </Button>
+                                </Link>
+                                <Link href={route("register")}>
+                                    <Button
+                                        size="sm"
+                                        className="bg-[--main-green] text-white"
+                                        variant="home"
+                                    >
+                                        <Sparkles className="w-4 h-4 mr-2" />
+                                        Registreren
+                                    </Button>
+                                </Link>
                             </div>
 
                             {/* Mobile menu button */}
@@ -197,14 +201,18 @@ export default function HomePage() {
                             </p>
 
                             <div className="opacity-0 animate-[fade-in-up_0.8s_ease-out_0.4s_forwards] flex flex-col sm:flex-row gap-4 justify-center">
-                                <Button
-                                    size="lg"
-                                    className="w-full sm:w-auto text-base px-10 py-7 bg-[--main-green]  text-white  font-semibold"
-                                    variant="home"
-                                >
-                                    Gratis Factuur Maken
-                                    <ArrowRight className="w-5 h-5 ml-2" />
-                                </Button>
+                                <Link href={route("invoice-builder.index")}>
+                                    {" "}
+                                    <Button
+                                        size="lg"
+                                        className="w-full sm:w-auto text-base px-10 py-7 bg-[--main-green]  text-white  font-semibold"
+                                        variant="home"
+                                    >
+                                        Gratis Factuur Maken
+                                        <ArrowRight className="w-5 h-5 ml-2" />
+                                    </Button>
+                                </Link>
+
                                 <a href="#pricing">
                                     <Button
                                         variant="home"
@@ -355,13 +363,19 @@ export default function HomePage() {
                                         </li>
                                     </ul>
                                     <div className="block pt-4">
-                                        <Button
-                                            variant="home"
-                                            className="w-full py-7 text-base font-semibold bg-[--main-green] text-white "
+                                        <Link
+                                            href={route(
+                                                "invoice-builder.index",
+                                            )}
                                         >
-                                            Gratis Beginnen
-                                            <ChevronRight className="w-5 h-5 ml-2" />
-                                        </Button>
+                                            <Button
+                                                variant="home"
+                                                className="w-full py-7 text-base font-semibold bg-[--main-green] text-white "
+                                            >
+                                                Gratis Beginnen
+                                                <ChevronRight className="w-5 h-5 ml-2" />
+                                            </Button>
+                                        </Link>
                                     </div>
                                 </CardContent>
                             </Card>
@@ -455,26 +469,27 @@ export default function HomePage() {
                                     Maak vandaag nog je eerste professionele
                                     factuur. Geen creditcard vereist.
                                 </p>
-
-                                <Button
-                                    size="lg"
-                                    variant="home"
-                                    className="text-sm sm:text-base font-bold bg-white text-green-700 w-full px-4 py-9 md:py-6 sm:px-6 whitespace-normal"
-                                >
-                                    <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 min-w-0">
-                                        <div className="h-4 w-4 sm:h-5 sm:w-5 md:flex-shrink-0">
-                                            <img
-                                                src="/logos/ArrowLogo.svg"
-                                                alt="log klein"
-                                                className="w-full h-full"
-                                            />
+                                <Link href={route("invoice-builder.index")}>
+                                    <Button
+                                        size="lg"
+                                        variant="home"
+                                        className="text-sm sm:text-base font-bold bg-white text-green-700 w-full px-4 py-9 md:py-6 sm:px-6 whitespace-normal"
+                                    >
+                                        <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 min-w-0">
+                                            <div className="h-4 w-4 sm:h-5 sm:w-5 md:flex-shrink-0">
+                                                <img
+                                                    src="/logos/ArrowLogo.svg"
+                                                    alt="log klein"
+                                                    className="w-full h-full"
+                                                />
+                                            </div>
+                                            <span className="whitespace-normal truncate">
+                                                Maak Je Eerste Factuur
+                                            </span>
+                                            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 md:flex-shrink-0" />
                                         </div>
-                                        <span className="whitespace-normal truncate">
-                                            Maak Je Eerste Factuur
-                                        </span>
-                                        <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 md:flex-shrink-0" />
-                                    </div>
-                                </Button>
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
