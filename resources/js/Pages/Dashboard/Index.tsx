@@ -70,7 +70,7 @@ export default function Index() {
             <div className="flex gap-4 mt-4">
                 <Card className="flex-1">
                     <CardHeader>
-                        <CardTitle>Recente Facturen</CardTitle>
+                        <CardTitle className="montserrat-main">Recente Facturen</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
@@ -98,7 +98,7 @@ export default function Index() {
                 </Card>
                 <Card className="flex-1">
                     <CardHeader>
-                        <CardTitle>Recente Klanten</CardTitle>
+                        <CardTitle className="montserrat-main">Recente Klanten</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
