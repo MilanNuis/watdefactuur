@@ -11,7 +11,13 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
-export default function Login({ status, canResetPassword }: { status?: string; canResetPassword: boolean }) {
+export default function Login({
+    status,
+    canResetPassword,
+}: {
+    status?: string;
+    canResetPassword: boolean;
+}) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
@@ -30,7 +36,11 @@ export default function Login({ status, canResetPassword }: { status?: string; c
         <AuthenticationLayout>
             <Head title="Log in" />
 
-            {status && <div className="mb-4 text-sm font-medium text-green-600">{status}</div>}
+            {status && (
+                <div className="mb-4 text-sm font-medium text-green-600">
+                    {status}
+                </div>
+            )}
 
             <form onSubmit={submit}>
                 <div>
@@ -70,9 +80,13 @@ export default function Login({ status, canResetPassword }: { status?: string; c
                         <Checkbox
                             name="remember"
                             checked={data.remember}
-                            onCheckedChange={(checked) => setData("remember", Boolean(checked))}
+                            onCheckedChange={(checked) =>
+                                setData("remember", Boolean(checked))
+                            }
                         />
-                        <span className="ms-2 text-sm text-gray-600">Onthoud mij</span>
+                        <span className="ms-2 text-sm text-gray-600">
+                            Onthoud mij
+                        </span>
                     </label>
                 </div>
 
@@ -86,7 +100,11 @@ export default function Login({ status, canResetPassword }: { status?: string; c
                         </Link>
                     )}
 
-                    <Button variant={"secondary"} className="ms-4" disabled={processing}>
+                    <Button
+                        variant={"home"}
+                        className="bg-[--main-green] ms-4 text-white"
+                        disabled={processing}
+                    >
                         Log in
                     </Button>
                 </div>
