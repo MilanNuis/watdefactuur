@@ -17,7 +17,7 @@ export default function AuthenticationLayout({
                             width={450}
                             alt="watdefactuur"
                         />
-                        <p className="text-white/80 text-lg">
+                        <p className="text-white/80 text-xl font-medium">
                             Maak professionele facturen in enkele minuten.
                             Eenvoudig, snel en overzichtelijk.
                         </p>
