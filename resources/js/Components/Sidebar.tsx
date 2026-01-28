@@ -26,8 +26,8 @@ import { Link, usePage } from "@inertiajs/react";
 const mainItems = [
     {
         title: "Dashboard",
-        url: route('pro.dashboard.index'),
-        routeName: 'pro.dashboard.index',
+        url: route("pro.dashboard.index"),
+        routeName: "pro.dashboard.index",
         icon: LayoutDashboard,
     },
 ];
@@ -68,7 +68,9 @@ export function AppSidebar() {
         if (item.routeName) {
             return route().current(item.routeName);
         }
-        return currentPath === item.url || currentPath.startsWith(item.url + '/');
+        return (
+            currentPath === item.url || currentPath.startsWith(item.url + "/")
+        );
     };
 
     const isAuthenticated = usePage().props.auth.user;
@@ -81,15 +83,14 @@ export function AppSidebar() {
                 {/* Header with logo */}
                 <SidebarHeader className="border-b px-4 py-3">
                     <div className="flex items-center gap-3">
-                        {/* Logo */}
-                        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
+                        {/* <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
                             W
                         </div>
 
-                        {/* App name */}
                         <span className="text-lg font-semibold tracking-tight">
                             WatDeFactuur
-                        </span>
+                        </span> */}
+                        <img src="/logos/LogoGreen.svg" alt="" />
                     </div>
                 </SidebarHeader>
 
@@ -99,7 +100,10 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {mainItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild isActive={isActive(item)}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={isActive(item)}
+                                    >
                                         <a
                                             href={item.url}
                                             className="flex items-center gap-3"
@@ -121,7 +125,10 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {adminItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild isActive={isActive(item)}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={isActive(item)}
+                                    >
                                         <a
                                             href={item.url}
                                             className="flex items-center gap-3"
@@ -142,7 +149,10 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {settingsItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild isActive={isActive(item)}>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={isActive(item)}
+                                    >
                                         <a
                                             href={item.url}
                                             className="flex items-center gap-3"

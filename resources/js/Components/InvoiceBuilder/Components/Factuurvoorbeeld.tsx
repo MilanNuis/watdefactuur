@@ -214,6 +214,9 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                 {data.company.btwNumber && <p>BTW: {data.company.btwNumber}</p>}
                 {data.company.iban && <p>IBAN: {data.company.iban}</p>}
             </div>
+            <div className=" flex justify-center">
+                <img src="logos/LogoGreen.svg" alt="watdefactuur" />
+            </div>
         </div>
     );
 }

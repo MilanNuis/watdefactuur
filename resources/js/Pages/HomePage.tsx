@@ -182,12 +182,14 @@ export default function HomePage() {
                                 De eenvoudigste manier om facturen te maken,
                                 versturen en beheren. Perfect voor
                                 <span className="text-gray-900 dark:text-gray-50 font-semibold">
+                                    {" "}
                                     freelancers
                                 </span>
                                 <span className="text-gray-900 dark:text-gray-50 font-semibold">
+                                    {" "}
                                     ZZP'ers
-                                </span>
-                                en
+                                </span>{" "}
+                                en{" "}
                                 <span className="text-gray-900 dark:text-gray-50 font-semibold">
                                     kleine ondernemers
                                 </span>
@@ -250,7 +252,7 @@ export default function HomePage() {
                                 Features
                             </Badge>
                             <h2 className="text-4xl md:text-6xl font-bold text-gray-900  mb-6">
-                                Waarom FactuurMaker?
+                                Waarom WatDeFactuur?
                             </h2>
                             <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
                                 Alles wat je nodig hebt om professioneel te
@@ -292,12 +294,12 @@ export default function HomePage() {
                         <div className="text-center mb-20">
                             <Badge
                                 variant="outline"
-                                className="mb-6 border-purple-600/30  bg-purple-600/ text-purple-700 dark:text-purple-400"
+                                className="mb-6 border-purple-600/30  bg-purple-600/ text-purple-700 "
                             >
                                 <Crown className="w-3 h-3 mr-1" />
                                 Pricing
                             </Badge>
-                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-gray-50 mb-6">
+                            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 ">
                                 Eenvoudige Prijzen
                             </h2>
                             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
@@ -329,7 +331,7 @@ export default function HomePage() {
                                     <ul className="space-y-4 ">
                                         <li className="flex items-center gap-4">
                                             <div className="w-6 h-6 rounded-full bg-green-600/10  flex items-center justify-center flex-shrink-0">
-                                                <CheckCircle className="w-4 h-4 text-[--main-green]dark:text-green-500" />
+                                                <CheckCircle className="w-4 h-4 text-[--main-green]" />
                                             </div>
                                             <span className="text-gray-900">
                                                 5 facturen per maand
