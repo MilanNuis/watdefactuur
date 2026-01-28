@@ -114,7 +114,7 @@ export default function Register() {
                     </Link>
 
                     <Button
-                        variant={"secondary"}
+                        variant={"home"}
                         className="ms-4 bg-[--main-green] text-white "
                         disabled={processing}
                     >
