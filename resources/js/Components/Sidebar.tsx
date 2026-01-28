@@ -21,6 +21,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/Components/ui/sidebar";
+import { Link, usePage } from "@inertiajs/react";
 
 const mainItems = [
     {
@@ -61,7 +62,7 @@ const settingsItems = [
     },
 ];
 
-export function AppSidebar({ isAuthenticated = false }) {
+export function AppSidebar() {
     const isActive = (item: { url: string; routeName?: string }) => {
         const currentPath = window.location.pathname;
         if (item.routeName) {
@@ -69,6 +70,10 @@ export function AppSidebar({ isAuthenticated = false }) {
         }
         return currentPath === item.url || currentPath.startsWith(item.url + '/');
     };
+
+    const isAuthenticated = usePage().props.auth.user;
+
+    console.log(isAuthenticated);
 
     return (
         <Sidebar>
@@ -173,21 +178,23 @@ export function AppSidebar({ isAuthenticated = false }) {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild>
                             {isAuthenticated ? (
-                                <a
-                                    href="/logout"
+                                <Link
+                                    href={route('logout')}
+                                    as="button"
+                                    method="post"
                                     className="flex items-center gap-3 text-red-500"
                                 >
                                     <LogOut className="h-4 w-4" />
                                     <span>Uitloggen</span>
-                                </a>
+                                </Link>
                             ) : (
-                                <a
-                                    href="/login"
+                                <Link
+                                    href={route('login')}
                                     className="flex items-center gap-3"
                                 >
                                     <LogIn className="h-4 w-4" />
                                     <span>Inloggen</span>
-                                </a>
+                                </Link>
                             )}
                         </SidebarMenuButton>
                     </SidebarMenuItem>

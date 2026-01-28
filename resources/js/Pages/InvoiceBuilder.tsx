@@ -8,7 +8,7 @@ import { Button } from "@/Components/ui/button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 const initialInvoiceData: InvoiceData = {
     invoiceNumber: `${new Date().getFullYear()}-001`,
     invoiceDate: new Date().toISOString().split("T")[0],
@@ -93,6 +93,19 @@ export default function InvoiceBuilder() {
     return (
         <div className="min-h-screen bg-background max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Header */}
+            <Head title="Factuur maken & versturen">
+                <meta
+                    name="description"
+                    content="Maak professionele facturen in minuten. Perfect voor freelancers, ZZP'ers en kleine ondernemers."
+                />
+                <meta
+                    name="keywords"
+                    content="facturen, freelancers, ZZP'ers, ondernemers, factuur, facturen maken, facturen versturen, facturen beheren"
+                />
+                <meta name="author" content="WatDeFactuur" />
+                <meta name="robots" content="index, follow" />
+                <meta name="googlebot" content="index, follow" />
+            </Head>
             <header className="bg-card border-b border-border sticky top-0 z-10">
                 <div className="container py-4">
                     <div className="flex items-center gap-3">
