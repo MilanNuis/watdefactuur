@@ -18,9 +18,9 @@ const steps = [
     { id: 3, title: "Producten" },
     { id: 4, title: "Genereer" },
 ];
-export default function ProInvoiceBuilder({ settings, products, customers }: { settings: Settings, products: Product[], customers: Customer[] }) {
+export default function ProInvoiceBuilder({ settings, products, customers, nextInvoiceNumber }: { settings: Settings, products: Product[], customers: Customer[], nextInvoiceNumber: string }) {
     const initialInvoiceData: InvoiceData = {
-        invoiceNumber: `${new Date().getFullYear()}-001`,
+        invoiceNumber: nextInvoiceNumber,
         invoiceDate: new Date().toISOString().split("T")[0],
         dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
             .toISOString()

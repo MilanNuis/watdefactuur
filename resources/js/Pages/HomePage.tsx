@@ -23,9 +23,11 @@ import {
     ChevronRight,
 } from "lucide-react";
 import { Button } from "@/Components/ui/button";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
 export default function HomePage() {
+    const user = usePage().props.auth.user;
+    console.log(user);
     const features = [
         {
             icon: FileText,
@@ -100,15 +102,27 @@ export default function HomePage() {
 
                             {/* Desktop navigatie */}
                             <div className="hidden sm:flex items-center gap-3">
-                                <Link href={route("login")}>
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        className="text-gray-600 hover:text-gray-900"
-                                    >
-                                        Inloggen
-                                    </Button>
-                                </Link>
+                                {user ? (
+                                    <Link href={route("pro.dashboard.index")}>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-gray-600 hover:text-gray-900"
+                                        >
+                                            Dashboard
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Link href={route("login")}>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-gray-600 hover:text-gray-900"
+                                        >
+                                            Inloggen
+                                        </Button>
+                                    </Link>
+                                )}
                                 <Link href={route("register")}>
                                     <Button
                                         size="sm"

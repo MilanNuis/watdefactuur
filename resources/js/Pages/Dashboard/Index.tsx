@@ -1,9 +1,23 @@
 import Header from "@/Components/Pro/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 import ProLayout from "@/Layouts/ProLayout";
+import { usePage } from "@inertiajs/react";
 import { FileText, Package, TrendingUp, Users } from "lucide-react";
+import { InvoiceType } from "@/types/invoice";
+import Customer from "@/Pages/Pro/Customers/types";
+import { NumberTicker } from "@/Components/ui/number-ticker";
+
+interface DashboardProps {
+    recentInvoices: InvoiceType[];
+    recentCustomers: Customer[];
+    customerCount: number;
+    productCount: number;
+    invoiceCount: number;
+    totalRevenue: number;
+}
 
 export default function Index() {
+    const { recentInvoices, recentCustomers, customerCount, productCount, invoiceCount, totalRevenue } = usePage().props as unknown as DashboardProps;
     return (
         <ProLayout>
             <Header title="Overzicht" description="Overzicht van je bedrijf" />
@@ -14,7 +28,7 @@ export default function Index() {
                         <Users className="h-4 w-4 text-primary" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">0</div>
+                        <NumberTicker value={customerCount} className="text-2xl font-bold" />
                         <p className="text-xs text-muted-foreground">Totaal aantal klanten</p>
                     </CardContent>
                 </Card>
@@ -25,7 +39,7 @@ export default function Index() {
                         <Package className="h-4 w-4 text-primary" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">0</div>
+                        <NumberTicker value={productCount} className="text-2xl font-bold" />
                         <p className="text-xs text-muted-foreground">Actieve producten</p>
                     </CardContent>
                 </Card>
@@ -36,8 +50,8 @@ export default function Index() {
                         <FileText className="h-4 w-4 text-primary" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">0</div>
-                        <p className="text-xs text-muted-foreground">0 openstaand, 1 verlopen</p>
+                        <NumberTicker value={invoiceCount} className="text-2xl font-bold" />
+                        <p className="text-xs text-muted-foreground">Totaal aantal facturen</p>
                     </CardContent>
                 </Card>
 
@@ -47,8 +61,8 @@ export default function Index() {
                         <TrendingUp className="h-4 w-4 text-primary" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">€100,00</div>
-                        <p className="text-xs text-muted-foreground">Betaalde facturen</p>
+                        <NumberTicker value={totalRevenue} decimalPlaces={2} className="text-2xl font-bold" />
+                        <p className="text-xs text-muted-foreground">Totaal omzet</p>
                     </CardContent>
                 </Card>
             </div>
@@ -60,7 +74,25 @@ export default function Index() {
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
-                            <div className="text-sm text-muted-foreground">Geen recente facturen</div>
+                            {recentInvoices.length === 0 ? (
+                                <p className="text-muted-foreground text-sm">Nog geen facturen aangemaakt.</p>
+                            ) : (
+                                <div className="space-y-3">
+                                    {recentInvoices.slice(0, 5).map((invoice) => (
+                                        <div key={invoice.id} className="flex items-center justify-between py-2 border-b last:border-0">
+                                            <div>
+                                                <p className="font-medium">{invoice.invoice_number}</p>
+                                                <p className="text-sm text-muted-foreground">
+                                                    {invoice.client_first_name} {invoice.client_last_name}
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="font-medium">€{Number(invoice.total).toFixed(2)}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </CardContent>
                 </Card>
@@ -70,7 +102,21 @@ export default function Index() {
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
-                            <div className="text-sm text-muted-foreground">Geen recente klanten</div>
+                            {recentCustomers.length === 0 ? (
+                                <p className="text-muted-foreground text-sm">Nog geen klanten toegevoegd.</p>
+                            ) : (
+                                <div className="space-y-3">
+                                    {recentCustomers.slice(0, 5).map((customer) => (
+                                        <div key={customer.id} className="flex items-center justify-between py-2 border-b last:border-0">
+                                            <div>
+                                                <p className="font-medium">{customer.first_name} {customer.last_name}</p>
+                                                <p className="text-sm text-muted-foreground">{customer.email}</p>
+                                            </div>
+                                            <p className="text-sm text-muted-foreground">{customer.city}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </CardContent>
                 </Card>

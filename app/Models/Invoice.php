@@ -27,6 +27,13 @@ class Invoice extends Model
         'status',
     ];
 
+    protected $casts = [
+        'products' => 'array',
+        'subtotal' => 'float',
+        'btw_total' => 'float',
+        'total' => 'float',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
