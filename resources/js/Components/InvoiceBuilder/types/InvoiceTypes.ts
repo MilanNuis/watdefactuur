@@ -25,6 +25,10 @@ export interface ClientInfo {
     postalCode: string;
     city: string;
     email: string;
+    phone: string;
+    houseNumber: string;
+    street: string;
+    country: string;
 }
 
 export interface InvoiceData {

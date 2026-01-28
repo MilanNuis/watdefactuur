@@ -28,6 +28,7 @@ class StoreValidation extends FormRequest
             'phone' => ['nullable', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
+            'postal_code' => ['required', 'string', 'max:255'],
             'iban' => ['nullable', 'string', 'max:255'],
             'kvk_number' => ['nullable', 'string', 'max:255'],
             'btw_number' => ['nullable', 'string', 'max:255'],

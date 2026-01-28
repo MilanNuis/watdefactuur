@@ -1,5 +1,5 @@
 import { Download, Mail, Check, FileText } from "lucide-react";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import { Label } from "@/Components/ui/label";
 import { Input } from "@/Components/ui/input";
 import { InvoiceData } from "../types/InvoiceTypes";
@@ -23,7 +23,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         setIsDownloading(true);
         try {
             const response = await axios.post(
-                route("invoice-builder.download"),
+                route("pro.invoice-builder.download"),
                 data,
                 {
                     responseType: "blob",

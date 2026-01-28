@@ -5,6 +5,7 @@ export interface Settings {
     phone: string;
     address: string;
     city: string;
+    postal_code: string;
     iban: string;
     kvk_number: string;
     btw_number: string;

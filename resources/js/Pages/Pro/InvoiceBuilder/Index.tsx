@@ -4,46 +4,53 @@ import { FileText, ArrowLeft, ArrowRight } from "lucide-react";
 import { StepIndicator } from "@/Components/InvoiceBuilder/Components/StepIndicator";
 import { InvoiceData } from "@/Components/InvoiceBuilder/types/InvoiceTypes";
 import KlantInfoformulier from "@/Components/InvoiceBuilder/Components/KlantInfoformulier";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/Components/ui/Button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
 import { useForm } from "@inertiajs/react";
-const initialInvoiceData: InvoiceData = {
-    invoiceNumber: `${new Date().getFullYear()}-001`,
-    invoiceDate: new Date().toISOString().split("T")[0],
-    dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-        .toISOString()
-        .split("T")[0],
-    company: {
-        name: "",
-        address: "",
-        postalCode: "",
-        city: "",
-        email: "",
-        phone: "",
-        kvkNumber: "",
-        btwNumber: "",
-        iban: "",
-        logo: null,
-    },
-    client: {
-        name: "",
-        address: "",
-        postalCode: "",
-        city: "",
-        email: "",
-    },
-    products: [],
-    notes: "Betaling binnen 30 dagen na factuurdatum.",
-};
+import { Settings } from "../Settings/types";
+import { Product } from "@/Components/InvoiceBuilder/types/InvoiceTypes";
+import Customer from "../Customers/types";
 const steps = [
     { id: 1, title: "Bedrijf" },
     { id: 2, title: "Klant" },
     { id: 3, title: "Producten" },
     { id: 4, title: "Genereer" },
 ];
-export default function ProInvoiceBuilder() {
+export default function ProInvoiceBuilder({ settings, products, customers }: { settings: Settings, products: Product[], customers: Customer[] }) {
+    const initialInvoiceData: InvoiceData = {
+        invoiceNumber: `${new Date().getFullYear()}-001`,
+        invoiceDate: new Date().toISOString().split("T")[0],
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+            .toISOString()
+            .split("T")[0],
+        company: {
+            name: settings.name,
+            address: settings.address,    
+            postalCode: settings.postal_code,
+            city: settings.city,
+            email: settings.email,
+            phone: settings.phone,
+            kvkNumber: settings.kvk_number,
+            btwNumber: settings.btw_number,
+            iban: settings.iban,
+            logo: null,
+        },
+        client: {
+            name: "",
+            address: "",
+            postalCode: "",
+            city: "",
+            email: "",
+            phone: "",
+            houseNumber: "",
+            street: "",
+            country: "",
+        },
+        products: [],
+        notes: "Betaling binnen 30 dagen na factuurdatum.",
+    };
     const [currentStep, setCurrentStep] = useState(1);
     const { data, setData, post, processing } =
         useForm<InvoiceData>(initialInvoiceData);
@@ -75,13 +82,14 @@ export default function ProInvoiceBuilder() {
             case 2:
                 return (
                     <KlantInfoformulier
+                        customers={customers}
                         client={data.client}
                         onChange={(client) => setData("client", client)}
                     />
                 );
             case 3:
                 return (
-                    <ProductenFormulier invoiceData={data} setData={setData} />
+                    <ProductenFormulier invoiceData={data} setData={setData} products={products} />
                 );
             case 4:
                 return <GenereerStap data={data} isSubmitting={processing} />;
