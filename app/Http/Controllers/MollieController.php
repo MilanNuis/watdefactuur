@@ -56,7 +56,7 @@ class MollieController extends Controller
                 'value' => '10.00',
             ],
             'description' => "WatDeFactuur Pro",
-            'redirectUrl' => route('pro.dashboard.index'),
+            'redirectUrl' => route('home'),
             'webhookUrl' => route('mollie.webhook'),
             'metadata' => ['user_id' => Auth::id()],
         ]);
