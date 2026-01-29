@@ -123,16 +123,32 @@ export default function HomePage() {
                                         </Button>
                                     </Link>
                                 )}
-                                <Link href={route("register")}>
-                                    <Button
-                                        size="sm"
-                                        className="bg-[--main-green] text-white"
-                                        variant="home"
+                                {user ? (
+                                    <Link
+                                        href={route("logout")}
+                                        method="post"
+                                        as="button"
                                     >
-                                        <Sparkles className="w-4 h-4 mr-2" />
-                                        Registreren
-                                    </Button>
-                                </Link>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-gray-600 hover:text-gray-900"
+                                        >
+                                            Uitloggen
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Link href={route("register")}>
+                                        <Button
+                                            size="sm"
+                                            className="bg-[--main-green] text-white"
+                                            variant="home"
+                                        >
+                                            <Sparkles className="w-4 h-4 mr-2" />
+                                            Registreren
+                                        </Button>
+                                    </Link>
+                                )}
                             </div>
 
                             {/* Mobile menu button */}
