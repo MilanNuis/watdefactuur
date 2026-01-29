@@ -161,7 +161,7 @@ export default function InvoiceBuilder() {
                     <div className="order-1 lg:order-2">
                         <div className="lg:sticky lg:top-24">
                             <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide montserrat-main">
                                     Live Preview
                                 </h2>
                             </div>
@@ -174,8 +174,6 @@ export default function InvoiceBuilder() {
                                         />
                                     </div>
                                 </div>
-                                {/* Gradient overlay to show it's scrollable/scaled */}
-                                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background/50 to-transparent pointer-events-none lg:hidden" />
                             </div>
                         </div>
                     </div>
