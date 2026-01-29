@@ -103,7 +103,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     return (
         <div className="space-y-6 animate-fade-in">
             <div>
-                <h2 className="text-xl font-semibold text-foreground mb-1">
+                <h2 className="text-xl font-semibold text-foreground mb-1 montserrat-main">
                     Factuur Genereren
                 </h2>
                 <p className="text-sm text-muted-foreground">
@@ -160,7 +160,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
 
             {/* Download Option */}
             <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-3">
+                <h3 className="font-semibold text-foreground mb-3 montserrat-main">
                     Download als PDF
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
@@ -190,7 +190,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
 
             {/* Email Option */}
             <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-3">
+                <h3 className="font-semibold text-foreground mb-3 montserrat-main">
                     Verstuur per e-mail
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">

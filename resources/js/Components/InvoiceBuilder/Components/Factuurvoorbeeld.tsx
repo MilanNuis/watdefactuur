@@ -20,7 +20,7 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
 
     return (
         <div
-            className="bg-card border-2 border-[--main-green]  rounded-xl invoice-shadow p-6 md:p-8 w-auto"
+            className="bg-card border-2 border-[--main-green]  rounded-xl invoice-shadow p-6 md:p-8 w-auto montserrat-main font-montserrat"
             id="invoice-preview"
         >
             {/* Header */}
@@ -39,7 +39,7 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                             </span>
                         </div>
                     )}
-                    <h1 className="text-xl md:text-2xl font-bold text-foreground">
+                    <h1 className="text-xl md:text-2xl font-bold text-foreground montserrat-main">
                         {data.company.name || "Jouw Bedrijf"}
                     </h1>
                     {data.company.address && (
@@ -54,7 +54,7 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                     )}
                 </div>
                 <div className="sm:text-right w-full sm:w-auto">
-                    <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">
+                    <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2 montserrat-main">
                         FACTUUR
                     </h2>
                     <div className="space-y-1">
@@ -82,10 +82,10 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
 
             {/* Client Info */}
             <div className="mb-8 p-4  rounded-lg">
-                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2">
+                <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2 montserrat-main font-bold">
                     Factuur aan
                 </p>
-                <p className="font-semibold text-foreground">
+                <p className="font-semibold text-foreground montserrat-main">
                     {data.client.name || "Klantnaam"}
                 </p>
                 {data.client.address && (
@@ -115,10 +115,10 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
                 <table className="w-full min-w-[500px]">
                     <thead>
                         <tr className="border-b-2 border-[#1D1D1B]">
-                            <th className="text-left py-3 text-sm font-semibold text-foreground">
+                            <th className="text-left py-3 text-sm font-semibold text-foreground montserrat-main">
                                 Omschrijving
                             </th>
-                            <th className="text-center py-3 text-sm font-semibold text-foreground w-20">
+                            <th className="text-center py-3 text-sm font-semibold text-foreground w-20 montserrat-main">
                                 Aantal
                             </th>
                             <th className="text-right py-3 text-sm font-semibold text-foreground w-28">
@@ -176,20 +176,20 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
             {/* Totals */}
             <div className="flex justify-end mb-8">
                 <div className="w-64">
-                    <div className="flex justify-between py-2 text-sm">
+                    <div className="flex justify-between py-2 text-sm font-montserrat font-medium">
                         <span className="text-muted-foreground">Subtotaal</span>
-                        <span className="text-foreground">
+                        <span className="text-foreground ">
                             {subtotal.toFixed(2)}
                         </span>
                     </div>
-                    <div className="flex justify-between py-2 text-sm border-b border-border">
+                    <div className="flex justify-between py-2 text-sm border-b border-border font-montserrat font-medium">
                         <span className="text-muted-foreground">BTW</span>
                         <span className="text-foreground">
                             {btwTotal.toFixed(2)}
                         </span>
                     </div>
-                    <div className="flex justify-between py-3">
-                        <span className="font-semibold text-foreground">
+                    <div className="flex justify-between py-3 font-montserrat">
+                        <span className="font-bold text-foreground   ">
                             Totaal
                         </span>
                         <span className="font-bold text-lg text-primary">
@@ -202,10 +202,10 @@ export default function Factuurvoorbeeld({ data, Preview }: Props) {
             {/* Notes */}
             {data.notes && (
                 <div className="mb-8 p-4  rounded-lg">
-                    <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2">
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide mb-2 montserrat-main font-bold">
                         Opmerkingen
                     </p>
-                    <p className="text-sm text-foreground whitespace-pre-wrap">
+                    <p className="text-sm text-foreground whitespace-pre-wrap montserrat-main">
                         {data.notes}
                     </p>
                 </div>

@@ -33,7 +33,11 @@ const createEmptyProduct = (): Product => ({
     btw: 21,
 });
 
-export default function ProductenFormulier({ invoiceData, setData, products }: Props) {
+export default function ProductenFormulier({
+    invoiceData,
+    setData,
+    products,
+}: Props) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const addProduct = () => {
@@ -41,7 +45,9 @@ export default function ProductenFormulier({ invoiceData, setData, products }: P
     };
 
     const addExistingProduct = (productId: string) => {
-        const product = products?.find((p: any) => p.id.toString() === productId) as any;
+        const product = products?.find(
+            (p: any) => p.id.toString() === productId,
+        ) as any;
         if (product) {
             setData("products", [
                 ...invoiceData.products,
@@ -51,7 +57,13 @@ export default function ProductenFormulier({ invoiceData, setData, products }: P
                             ? crypto.randomUUID()
                             : `${Date.now()}-${Math.random()}`,
                     description: product.name || product.description,
-                    unitPrice: parseFloat((product.price_without_btw || product.unitPrice || 0).toString()),
+                    unitPrice: parseFloat(
+                        (
+                            product.price_without_btw ||
+                            product.unitPrice ||
+                            0
+                        ).toString(),
+                    ),
                     btw: parseFloat((product.btw || 0).toString()),
                     quantity: 1,
                 },
@@ -59,9 +71,12 @@ export default function ProductenFormulier({ invoiceData, setData, products }: P
         }
     };
 
-    const filteredProducts = products?.filter((p: any) =>
-        (p.name || p.description || "").toLowerCase().includes(searchTerm.toLowerCase())
-    ) || [];
+    const filteredProducts =
+        products?.filter((p: any) =>
+            (p.name || p.description || "")
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()),
+        ) || [];
 
     const updateProduct = (id: string, updates: Partial<Product>) => {
         setData(
@@ -82,10 +97,10 @@ export default function ProductenFormulier({ invoiceData, setData, products }: P
     return (
         <div className="space-y-6 animate-fade-in">
             <div>
-                <h2 className="text-xl font-semibold text-foreground mb-1">
+                <h2 className="text-xl font-semibold text-foreground mb-1 montserrat-main">
                     Factuurgegevens
                 </h2>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground montserrat-main">
                     Voeg producten of diensten toe
                 </p>
             </div>
