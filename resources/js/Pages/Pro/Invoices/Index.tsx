@@ -1,6 +1,6 @@
 import Header from "@/Components/Pro/Header";
 import ProLayout from "@/Layouts/ProLayout";
-import { usePage } from "@inertiajs/react";
+import { usePage, Link } from "@inertiajs/react";
 import { useState } from "react";
 import {
     Table,
@@ -20,7 +20,17 @@ import {
 import { Badge } from "@/Components/ui/Badge";
 import { Button } from "@/Components/ui/button";
 import Paginator from "@/Components/Paginator";
-import { Eye, Calendar, User, Mail, Phone, MapPin, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import {
+    Eye,
+    Calendar,
+    User,
+    Mail,
+    Phone,
+    MapPin,
+    CheckCircle2,
+    Clock,
+    AlertCircle,
+} from "lucide-react";
 import { InvoiceType } from "@/types/invoice";
 import {
     Select,
@@ -56,7 +66,9 @@ export default function Index() {
 
     const handleStatusChange = (invoiceId: string, newStatus: string) => {
         router.patch(
-            route("pro.dashboard.invoices.update-status", { invoice: invoiceId }),
+            route("pro.dashboard.invoices.update-status", {
+                invoice: invoiceId,
+            }),
             { status: newStatus },
             {
                 preserveScroll: true,
@@ -64,7 +76,7 @@ export default function Index() {
                     if (selectedInvoice && selectedInvoice.id === invoiceId) {
                         setSelectedInvoice({
                             ...selectedInvoice,
-                            status: newStatus
+                            status: newStatus,
                         });
                     }
                 },
@@ -99,7 +111,21 @@ export default function Index() {
 
     return (
         <ProLayout>
-            <Header title="Facturen" description="Beheer hier je facturen" />
+            <div className="flex align-middle flex-row justify-between ">
+                <Header
+                    title="Facturen"
+                    description="Beheer hier je facturen"
+                />
+                <Link href={route("pro.invoice-builder.index")}>
+                    <Button
+                        size="lg"
+                        variant="home"
+                        className="bg-[--main-green] text-white"
+                    >
+                        New factuur
+                    </Button>
+                </Link>
+            </div>
 
             <div className="mt-8 bg-card rounded-xl border border-border overflow-hidden">
                 <Table>
@@ -133,7 +159,9 @@ export default function Index() {
                                         {invoice.client_first_name}{" "}
                                         {invoice.client_last_name}
                                     </TableCell>
-                                    <TableCell>{invoice.invoice_date}</TableCell>
+                                    <TableCell>
+                                        {invoice.invoice_date}
+                                    </TableCell>
                                     <TableCell>
                                         {formatCurrency(invoice.total)}
                                     </TableCell>
