@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pro\AccountController;
 use App\Http\Controllers\Free\InvoiceBuilderController;
 use App\Http\Controllers\MollieController;
 use App\Http\Controllers\Pro\CustomerController;
@@ -51,11 +52,19 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->gr
 
         Route::prefix('facturen')->name('invoices.')->controller(InvoiceController::class)->group(function () {
             Route::get(null, 'index')->name('index');
+            Route::patch('/update-status/{invoice}', 'updateStatus')->name('update-status');
         });
 
         Route::prefix('settings')->name('settings.')->controller(SettingsController::class)->group(function () {
             Route::get(null, 'index')->name('index');
             Route::patch('/update', 'update')->name('update');
+        });
+
+        Route::prefix('account')->name('account.')->controller(AccountController::class)->group(function () {
+            Route::get(null, 'index')->name('index');
+            Route::put('/password', 'updatePassword')->name('password.update');
+            Route::patch('/email', 'updateEmail')->name('email.update');
+            Route::post('/subscription/cancel', 'cancelSubscription')->name('subscription.cancel');
         });
     });
 });
