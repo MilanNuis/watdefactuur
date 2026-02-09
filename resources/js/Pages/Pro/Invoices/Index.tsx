@@ -20,8 +20,17 @@ import {
 import { Badge } from "@/Components/ui/Badge";
 import { Button } from "@/Components/ui/button";
 import Paginator from "@/Components/Paginator";
-import { Eye, Calendar, User, Mail, Phone, MapPin } from "lucide-react";
+import { Eye, Calendar, User, Mail, Phone, MapPin, CheckCircle2, Clock, AlertCircle } from "lucide-react";
 import { InvoiceType } from "@/types/invoice";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/Components/ui/select";
+import { router } from "@inertiajs/react";
+import { toast } from "sonner";
 
 interface invoicesProps {
     invoices: {
@@ -43,6 +52,24 @@ export default function Index() {
             style: "currency",
             currency: "EUR",
         }).format(amount);
+    };
+
+    const handleStatusChange = (invoiceId: string, newStatus: string) => {
+        router.patch(
+            route("pro.dashboard.invoices.update-status", { invoice: invoiceId }),
+            { status: newStatus },
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    if (selectedInvoice && selectedInvoice.id === invoiceId) {
+                        setSelectedInvoice({
+                            ...selectedInvoice,
+                            status: newStatus
+                        });
+                    }
+                },
+            },
+        );
     };
 
     const getStatusBadge = (status: string) => {
@@ -111,7 +138,39 @@ export default function Index() {
                                         {formatCurrency(invoice.total)}
                                     </TableCell>
                                     <TableCell>
-                                        {getStatusBadge(invoice.status)}
+                                        <Select
+                                            defaultValue={invoice.status.toLowerCase()}
+                                            onValueChange={(value) =>
+                                                handleStatusChange(
+                                                    invoice.id,
+                                                    value,
+                                                )
+                                            }
+                                        >
+                                            <SelectTrigger className="w-[140px] h-8">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="openstaand">
+                                                    <div className="flex items-center gap-2">
+                                                        <Clock className="w-4 h-4 text-blue-500" />
+                                                        <span>Openstaand</span>
+                                                    </div>
+                                                </SelectItem>
+                                                <SelectItem value="betaald">
+                                                    <div className="flex items-center gap-2">
+                                                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                                        <span>Betaald</span>
+                                                    </div>
+                                                </SelectItem>
+                                                <SelectItem value="overtijd">
+                                                    <div className="flex items-center gap-2">
+                                                        <AlertCircle className="w-4 h-4 text-red-500" />
+                                                        <span>Overtijd</span>
+                                                    </div>
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select>
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <Button
@@ -152,7 +211,39 @@ export default function Index() {
                                         </DialogDescription>
                                     </div>
                                     <div className="text-right">
-                                        {getStatusBadge(selectedInvoice.status)}
+                                        <Select
+                                            defaultValue={selectedInvoice.status.toLowerCase()}
+                                            onValueChange={(value) =>
+                                                handleStatusChange(
+                                                    selectedInvoice.id,
+                                                    value,
+                                                )
+                                            }
+                                        >
+                                            <SelectTrigger className="w-[140px] h-8">
+                                                <SelectValue />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="openstaand">
+                                                    <div className="flex items-center gap-2">
+                                                        <Clock className="w-4 h-4 text-blue-500" />
+                                                        <span>Openstaand</span>
+                                                    </div>
+                                                </SelectItem>
+                                                <SelectItem value="betaald">
+                                                    <div className="flex items-center gap-2">
+                                                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                                        <span>Betaald</span>
+                                                    </div>
+                                                </SelectItem>
+                                                <SelectItem value="overtijd">
+                                                    <div className="flex items-center gap-2">
+                                                        <AlertCircle className="w-4 h-4 text-red-500" />
+                                                        <span>Overtijd</span>
+                                                    </div>
+                                                </SelectItem>
+                                            </SelectContent>
+                                        </Select>
                                     </div>
                                 </div>
                             </DialogHeader>

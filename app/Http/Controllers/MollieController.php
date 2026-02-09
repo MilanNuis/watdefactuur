@@ -32,6 +32,8 @@ class MollieController extends Controller
                     $user = User::find($userId);
                     if ($user) {
                         $user->is_pro = true;
+                        $user->mollie_subscription_id = $payment->id;
+                        $user->mollie_customer_id = $payment->customerId;
                         $user->save();
                     }
                 }

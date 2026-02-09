@@ -173,14 +173,14 @@ export function AppSidebar() {
                 <SidebarMenu>
                     {/* Account */}
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <a
-                                href="/account"
+                        <SidebarMenuButton asChild isActive={route().current('pro.dashboard.account.index')}>
+                            <Link
+                                href={route('pro.dashboard.account.index')}
                                 className="flex items-center gap-3"
                             >
                                 <User className="h-4 w-4" />
                                 <span>Account</span>
-                            </a>
+                            </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
 

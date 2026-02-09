@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'is_pro',
+        'mollie_subscription_id',
+        'mollie_customer_id',
     ];
 
     /**

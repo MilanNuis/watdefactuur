@@ -19,6 +19,7 @@ const steps = [
     { id: 4, title: "Genereer" },
 ];
 export default function ProInvoiceBuilder({ settings, products, customers, nextInvoiceNumber }: { settings: Settings, products: Product[], customers: Customer[], nextInvoiceNumber: string }) {
+    console.log(settings);
     const initialInvoiceData: InvoiceData = {
         invoiceNumber: nextInvoiceNumber,
         invoiceDate: new Date().toISOString().split("T")[0],
