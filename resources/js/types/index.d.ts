@@ -4,6 +4,8 @@ export interface User {
     email: string;
     email_verified_at?: string;
     is_pro: boolean;
+    is_admin: boolean;
+    created_at: string;
 }
 
 export type PageProps<

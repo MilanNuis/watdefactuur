@@ -1,7 +1,7 @@
 import Header from "@/Components/Pro/Header";
 import ProLayout from "@/Layouts/ProLayout";
 import { usePage, Link } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
     Table,
