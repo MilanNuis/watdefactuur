@@ -10,7 +10,7 @@ use App\Http\Controllers\Pro\InvoiceController;
 use App\Http\Controllers\Pro\ProductController;
 use App\Http\Controllers\Pro\SettingsController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\TaxController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -65,6 +65,10 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->gr
             Route::put('/password', 'updatePassword')->name('password.update');
             Route::patch('/email', 'updateEmail')->name('email.update');
             Route::post('/subscription/cancel', 'cancelSubscription')->name('subscription.cancel');
+        });
+
+        Route::prefix('belastingen')->name('taxes.')->controller(TaxController::class)->group(function () {
+            Route::get(null, 'index')->name('index');
         });
     });
 });
