@@ -7,6 +7,7 @@ import {
     LogIn,
     LogOut,
     User,
+    Percent,
 } from "lucide-react";
 
 import {
@@ -50,6 +51,12 @@ const adminItems = [
         url: route("pro.dashboard.invoices.index"),
         routeName: "pro.dashboard.invoices.index",
         icon: FileText,
+    },
+    {
+        title: "Belastingen",
+        url: route("pro.dashboard.taxes.index"),
+        routeName: "pro.dashboard.taxes.index",
+        icon: Percent,
     },
 ];
 
