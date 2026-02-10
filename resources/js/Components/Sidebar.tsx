@@ -173,9 +173,14 @@ export function AppSidebar() {
                 <SidebarMenu>
                     {/* Account */}
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild isActive={route().current('pro.dashboard.account.index')}>
+                        <SidebarMenuButton
+                            asChild
+                            isActive={route().current(
+                                "pro.dashboard.account.index",
+                            )}
+                        >
                             <Link
-                                href={route('pro.dashboard.account.index')}
+                                href={route("pro.dashboard.account.index")}
                                 className="flex items-center gap-3"
                             >
                                 <User className="h-4 w-4" />
@@ -189,7 +194,7 @@ export function AppSidebar() {
                         <SidebarMenuButton asChild>
                             {isAuthenticated ? (
                                 <Link
-                                    href={route('logout')}
+                                    href={route("logout")}
                                     as="button"
                                     method="post"
                                     className="flex items-center gap-3 text-red-500"
@@ -199,7 +204,7 @@ export function AppSidebar() {
                                 </Link>
                             ) : (
                                 <Link
-                                    href={route('login')}
+                                    href={route("login")}
                                     className="flex items-center gap-3"
                                 >
                                     <LogIn className="h-4 w-4" />
