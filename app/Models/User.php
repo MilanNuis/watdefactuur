@@ -25,6 +25,7 @@ class User extends Authenticatable
         'is_pro',
         'mollie_subscription_id',
         'mollie_customer_id',
+        'is_admin',
     ];
 
     /**
@@ -68,6 +69,11 @@ class User extends Authenticatable
     public function isPro()
     {
         return Auth::user()->is_pro;
+    }
+
+    public function isAdmin()
+    {
+        return Auth::user()->is_admin;
     }
 
     public function invoices()

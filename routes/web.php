@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Pro\AccountController;
 use App\Http\Controllers\Free\InvoiceBuilderController;
 use App\Http\Controllers\MollieController;
 use App\Http\Controllers\Pro\CustomerController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Pro\DashboardController;
 use App\Http\Controllers\Pro\InvoiceBuilderController as ProInvoiceBuilderController;
 use App\Http\Controllers\Pro\InvoiceController;
@@ -68,6 +70,18 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->gr
         });
     });
 });
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'checkIfIsAdmin'])->group(function () {
+    Route::prefix('dashboard')->name('dashboard.')->controller(AdminDashboardController::class)->group(function () {
+        Route::get(null, 'index')->name('index');
+    });
+    Route::prefix('gebruikers')->name('users.')->controller(UserController::class)->group(function () {
+        Route::get(null, 'index')->name('index');
+        Route::post(null, 'store')->name('store');
+        Route::patch('{user}', 'update')->name('update');
+        Route::patch('{user}/toggle-pro', 'togglePro')->name('toggle-pro');
+        Route::delete('{user}', 'destroy')->name('destroy');
+    });
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -75,4 +89,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
