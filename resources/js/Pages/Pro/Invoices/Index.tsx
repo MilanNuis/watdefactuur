@@ -2,6 +2,7 @@ import Header from "@/Components/Pro/Header";
 import ProLayout from "@/Layouts/ProLayout";
 import { usePage, Link } from "@inertiajs/react";
 import { useState } from "react";
+
 import {
     Table,
     TableBody,
@@ -49,10 +50,13 @@ interface invoicesProps {
         current_page: number;
         last_page: number;
     };
+    filters: {
+        filter: string;
+    };
 }
 
 export default function Index() {
-    const { invoices } = usePage().props as unknown as invoicesProps;
+    const { invoices, filters } = usePage().props as unknown as invoicesProps;
     const [selectedInvoice, setSelectedInvoice] = useState<InvoiceType | null>(
         null,
     );
@@ -109,6 +113,23 @@ export default function Index() {
         }
     };
 
+    const [filter, setFilter] = useState(filters.filter || "1 maand");
+
+    useEffect(() => {
+        setFilter(filters.filter || "1 maand");
+    }, [filters.filter]);
+
+    const handleFilter = (newFilter: string) => {
+        setFilter(newFilter);
+        router.get(
+            route("pro.dashboard.invoices.index"),
+            { filter: newFilter },
+            {
+                preserveScroll: true,
+            },
+        );
+    };
+
     return (
         <ProLayout>
             <div className="flex align-middle flex-row justify-between ">
@@ -125,6 +146,21 @@ export default function Index() {
                         New factuur
                     </Button>
                 </Link>
+            </div>
+
+            {/* Filter buttons */}
+            <div className="mt-6 flex">
+                <Select value={filter} onValueChange={handleFilter}>
+                    <SelectTrigger className="w-[160px]">
+                        <SelectValue placeholder="Filter op periode" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="1 maand">1 maand</SelectItem>
+                        <SelectItem value="3 maanden">3 maanden</SelectItem>
+                        <SelectItem value="6 maanden">6 maanden</SelectItem>
+                        <SelectItem value="1 jaar">1 jaar</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
 
             <div className="mt-8 bg-card rounded-xl border border-border overflow-hidden">
