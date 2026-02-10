@@ -82,9 +82,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <Label htmlFor="password_confirmation">
-                        Bevestig wachtwoord
-                    </Label>
+                    <Label htmlFor="password_confirmation">Bevestig wachtwoord</Label>
 
                     <Input
                         id="password_confirmation"
@@ -93,16 +91,11 @@ export default function Register() {
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) =>
-                            setData("password_confirmation", e.target.value)
-                        }
+                        onChange={(e) => setData("password_confirmation", e.target.value)}
                         required
                     />
 
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
+                    <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
                 <div className="mt-4 flex items-center justify-end">
@@ -113,11 +106,7 @@ export default function Register() {
                         Ik heb al een account
                     </Link>
 
-                    <Button
-                        variant={"home"}
-                        className="ms-4 bg-[--main-green] text-white "
-                        disabled={processing}
-                    >
+                    <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
                         Register
                     </Button>
                 </div>

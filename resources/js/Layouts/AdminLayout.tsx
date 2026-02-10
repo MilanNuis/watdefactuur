@@ -3,11 +3,7 @@ import { SidebarProvider, SidebarInset } from "@/Components/ui/sidebar";
 import { Toaster } from "@/Components/ui/sonner";
 import FlashHandler from "@/Handlers/Toaster";
 
-export default function Adminlayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+export default function Adminlayout({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
             <AdminSidebar />

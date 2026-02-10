@@ -21,9 +21,7 @@ export default function UpdateEmailForm({ user }: { user: User }) {
         <Card>
             <CardHeader>
                 <CardTitle className="montserrat-main">Email Adres</CardTitle>
-                <CardDescription>
-                    Wijzig het email adres van je account.
-                </CardDescription>
+                <CardDescription>Wijzig het email adres van je account.</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={submit} className="space-y-4">
@@ -41,17 +39,12 @@ export default function UpdateEmailForm({ user }: { user: User }) {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Button 
-                            disabled={processing} 
-                            className="bg-[--main-green] text-white hover:bg-[#74ee8c]/90"
-                        >
+                        <Button disabled={processing} className="bg-[--main-green] text-white" variant={"home"}>
                             {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                             Opslaan
                         </Button>
 
-                        {recentlySuccessful && (
-                            <p className="text-sm text-gray-600">Opgeslagen.</p>
-                        )}
+                        {recentlySuccessful && <p className="text-sm text-gray-600">Opgeslagen.</p>}
                     </div>
                 </form>
             </CardContent>

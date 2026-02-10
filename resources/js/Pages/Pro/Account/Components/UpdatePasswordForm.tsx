@@ -81,21 +81,18 @@ export default function UpdatePasswordForm() {
                             type="password"
                             autoComplete="new-password"
                         />
-                        {errors.password_confirmation && <p className="text-sm text-red-500">{errors.password_confirmation}</p>}
+                        {errors.password_confirmation && (
+                            <p className="text-sm text-red-500">{errors.password_confirmation}</p>
+                        )}
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Button 
-                            disabled={processing} 
-                            className="bg-[--main-green] text-white hover:bg-[#74ee8c]/90"
-                        >
+                        <Button disabled={processing} className="bg-[--main-green] text-white" variant={"home"}>
                             {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                             Opslaan
                         </Button>
 
-                        {recentlySuccessful && (
-                            <p className="text-sm text-gray-600">Opgeslagen.</p>
-                        )}
+                        {recentlySuccessful && <p className="text-sm text-gray-600">Opgeslagen.</p>}
                     </div>
                 </form>
             </CardContent>

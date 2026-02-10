@@ -1,12 +1,6 @@
 import { Head } from "@inertiajs/react";
 
-export default function Header({
-    title,
-    description,
-}: {
-    title: string;
-    description?: string;
-}) {
+export default function Header({ title, description }: { title: string; description?: string }) {
     return (
         <div>
             <Head title={title}>
@@ -20,12 +14,8 @@ export default function Header({
                 <meta name="googlebot" content="index, follow" />
                 <meta name="google" content="notranslate" />
             </Head>
-            <h1 className="text-2xl font-semibold text-gray-900 montserrat-main">
-                {title}
-            </h1>
-            {description && (
-                <p className="mt-1 text-sm text-gray-600">{description}</p>
-            )}
+            <h1 className="montserrat-main text-2xl font-semibold text-gray-900">{title}</h1>
+            {description && <p className="mt-1 text-sm text-gray-600">{description}</p>}
         </div>
     );
 }

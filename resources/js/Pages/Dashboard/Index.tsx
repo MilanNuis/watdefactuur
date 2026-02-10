@@ -17,11 +17,12 @@ interface DashboardProps {
 }
 
 export default function Index() {
-    const { recentInvoices, recentCustomers, customerCount, productCount, invoiceCount, totalRevenue } = usePage().props as unknown as DashboardProps;
+    const { recentInvoices, recentCustomers, customerCount, productCount, invoiceCount, totalRevenue } = usePage()
+        .props as unknown as DashboardProps;
     return (
         <ProLayout>
             <Header title="Overzicht" description="Overzicht van je bedrijf" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Klanten</CardTitle>
@@ -67,7 +68,7 @@ export default function Index() {
                 </Card>
             </div>
 
-            <div className="flex gap-4 mt-4">
+            <div className="mt-4 flex gap-4">
                 <Card className="flex-1">
                     <CardHeader>
                         <CardTitle className="montserrat-main">Recente Facturen</CardTitle>
@@ -75,11 +76,14 @@ export default function Index() {
                     <CardContent>
                         <div className="space-y-4">
                             {recentInvoices.length === 0 ? (
-                                <p className="text-muted-foreground text-sm">Nog geen facturen aangemaakt.</p>
+                                <p className="text-sm text-muted-foreground">Nog geen facturen aangemaakt.</p>
                             ) : (
                                 <div className="space-y-3">
                                     {recentInvoices.slice(0, 5).map((invoice) => (
-                                        <div key={invoice.id} className="flex items-center justify-between py-2 border-b last:border-0">
+                                        <div
+                                            key={invoice.id}
+                                            className="flex items-center justify-between border-b py-2 last:border-0"
+                                        >
                                             <div>
                                                 <p className="font-medium">{invoice.invoice_number}</p>
                                                 <p className="text-sm text-muted-foreground">
@@ -103,13 +107,18 @@ export default function Index() {
                     <CardContent>
                         <div className="space-y-4">
                             {recentCustomers.length === 0 ? (
-                                <p className="text-muted-foreground text-sm">Nog geen klanten toegevoegd.</p>
+                                <p className="text-sm text-muted-foreground">Nog geen klanten toegevoegd.</p>
                             ) : (
                                 <div className="space-y-3">
                                     {recentCustomers.slice(0, 5).map((customer) => (
-                                        <div key={customer.id} className="flex items-center justify-between py-2 border-b last:border-0">
+                                        <div
+                                            key={customer.id}
+                                            className="flex items-center justify-between border-b py-2 last:border-0"
+                                        >
                                             <div>
-                                                <p className="font-medium">{customer.first_name} {customer.last_name}</p>
+                                                <p className="font-medium">
+                                                    {customer.first_name} {customer.last_name}
+                                                </p>
                                                 <p className="text-sm text-muted-foreground">{customer.email}</p>
                                             </div>
                                             <p className="text-sm text-muted-foreground">{customer.city}</p>

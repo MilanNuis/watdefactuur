@@ -1,13 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
 import { Input } from "@/Components/ui/input";
 import { Label } from "@/Components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/Components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
 import { InvoiceType } from "@/types/invoice";
 import { useState, useMemo } from "react";
 
@@ -39,20 +33,12 @@ export default function VatTax({ invoices }: VatTaxProps) {
 
         const quarterInvoices = invoices.filter((inv) => {
             return (
-                inv.invoice_date >= dates.start &&
-                inv.invoice_date <= dates.end &&
-                inv.status.toLowerCase() !== "draft"
+                inv.invoice_date >= dates.start && inv.invoice_date <= dates.end && inv.status.toLowerCase() !== "draft"
             );
         });
 
-        const invoiceRevenue = quarterInvoices.reduce(
-            (sum, inv) => sum + inv.subtotal,
-            0,
-        );
-        const invoiceBtw = quarterInvoices.reduce(
-            (sum, inv) => sum + inv.btw_total,
-            0,
-        );
+        const invoiceRevenue = quarterInvoices.reduce((sum, inv) => sum + inv.subtotal, 0);
+        const invoiceBtw = quarterInvoices.reduce((sum, inv) => sum + inv.btw_total, 0);
 
         const revenue = (parseFloat(manualRevenue) || 0) + invoiceRevenue;
         const expenses = parseFloat(manualExpenses) || 0;
@@ -73,7 +59,7 @@ export default function VatTax({ invoices }: VatTaxProps) {
     }, [selectedQuarter, invoices, manualRevenue, manualExpenses, currentYear]);
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Card>
                 <CardHeader>
                     <CardTitle className="text-lg">Kwartaal selecteren</CardTitle>
@@ -81,34 +67,21 @@ export default function VatTax({ invoices }: VatTaxProps) {
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
                         <Label>Kwartaal</Label>
-                        <Select
-                            value={selectedQuarter}
-                            onValueChange={setSelectedQuarter}
-                        >
+                        <Select value={selectedQuarter} onValueChange={setSelectedQuarter}>
                             <SelectTrigger>
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="Q1">
-                                    Q1 – Januari t/m Maart
-                                </SelectItem>
-                                <SelectItem value="Q2">
-                                    Q2 – April t/m Juni
-                                </SelectItem>
-                                <SelectItem value="Q3">
-                                    Q3 – Juli t/m September
-                                </SelectItem>
-                                <SelectItem value="Q4">
-                                    Q4 – Oktober t/m December
-                                </SelectItem>
+                                <SelectItem value="Q1">Q1 – Januari t/m Maart</SelectItem>
+                                <SelectItem value="Q2">Q2 – April t/m Juni</SelectItem>
+                                <SelectItem value="Q3">Q3 – Juli t/m September</SelectItem>
+                                <SelectItem value="Q4">Q4 – Oktober t/m December</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="manual-revenue">
-                            Extra omzet excl. BTW (€)
-                        </Label>
+                        <Label htmlFor="manual-revenue">Extra omzet excl. BTW (€)</Label>
                         <Input
                             id="manual-revenue"
                             type="number"
@@ -117,15 +90,11 @@ export default function VatTax({ invoices }: VatTaxProps) {
                             onChange={(e) => setManualRevenue(e.target.value)}
                             min="0"
                         />
-                        <p className="text-xs text-muted-foreground">
-                            Omzet die niet in je facturen staat
-                        </p>
+                        <p className="text-xs text-muted-foreground">Omzet die niet in je facturen staat</p>
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="expenses">
-                            Zakelijke kosten excl. BTW (€)
-                        </Label>
+                        <Label htmlFor="expenses">Zakelijke kosten excl. BTW (€)</Label>
                         <Input
                             id="expenses"
                             type="number"
@@ -146,17 +115,13 @@ export default function VatTax({ invoices }: VatTaxProps) {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-3">
-                        <div className="flex justify-between py-2 border-b text-sm">
-                            <span className="text-muted-foreground">
-                                Facturen in {selectedQuarter}
-                            </span>
+                        <div className="flex justify-between border-b py-2 text-sm">
+                            <span className="text-muted-foreground">Facturen in {selectedQuarter}</span>
                             <span>{vatResult.invoiceCount} facturen</span>
                         </div>
 
-                        <div className="flex justify-between py-2 border-b">
-                            <span className="text-muted-foreground">
-                                Totale omzet (excl. BTW)
-                            </span>
+                        <div className="flex justify-between border-b py-2">
+                            <span className="text-muted-foreground">Totale omzet (excl. BTW)</span>
                             <span className="font-medium">
                                 €
                                 {vatResult.revenue.toLocaleString("nl-NL", {
@@ -167,9 +132,7 @@ export default function VatTax({ invoices }: VatTaxProps) {
                         </div>
 
                         <div className="flex justify-between py-1 text-sm">
-                            <span className="text-muted-foreground">
-                                ↳ Uit facturen
-                            </span>
+                            <span className="text-muted-foreground">↳ Uit facturen</span>
                             <span>
                                 €
                                 {vatResult.invoiceRevenue.toLocaleString("nl-NL", {
@@ -179,10 +142,8 @@ export default function VatTax({ invoices }: VatTaxProps) {
                             </span>
                         </div>
 
-                        <div className="flex justify-between py-2 border-b">
-                            <span className="text-muted-foreground">
-                                BTW ontvangen
-                            </span>
+                        <div className="flex justify-between border-b py-2">
+                            <span className="text-muted-foreground">BTW ontvangen</span>
                             <span>
                                 €
                                 {vatResult.btwOntvangen.toLocaleString("nl-NL", {
@@ -192,10 +153,8 @@ export default function VatTax({ invoices }: VatTaxProps) {
                             </span>
                         </div>
 
-                        <div className="flex justify-between py-2 border-b">
-                            <span className="text-muted-foreground">
-                                Zakelijke kosten (excl. BTW)
-                            </span>
+                        <div className="flex justify-between border-b py-2">
+                            <span className="text-muted-foreground">Zakelijke kosten (excl. BTW)</span>
                             <span>
                                 €
                                 {vatResult.expenses.toLocaleString("nl-NL", {
@@ -205,10 +164,8 @@ export default function VatTax({ invoices }: VatTaxProps) {
                             </span>
                         </div>
 
-                        <div className="flex justify-between py-2 border-b">
-                            <span className="text-muted-foreground">
-                                BTW betaald (voorbelasting)
-                            </span>
+                        <div className="flex justify-between border-b py-2">
+                            <span className="text-muted-foreground">BTW betaald (voorbelasting)</span>
                             <span className="text-primary">
                                 €
                                 {vatResult.btwBetaald.toLocaleString("nl-NL", {
@@ -219,32 +176,24 @@ export default function VatTax({ invoices }: VatTaxProps) {
                         </div>
 
                         <div
-                            className={`flex justify-between py-2 border-t text-lg font-bold ${
+                            className={`flex justify-between border-t py-2 text-lg font-bold ${
                                 vatResult.btwAfdracht < 0 ? "text-primary" : ""
                             }`}
                         >
-                            <span>
-                                {vatResult.btwAfdracht >= 0
-                                    ? "Af te dragen BTW"
-                                    : "BTW teruggave"}
-                            </span>
+                            <span>{vatResult.btwAfdracht >= 0 ? "Af te dragen BTW" : "BTW teruggave"}</span>
                             <span>
                                 €
-                                {Math.abs(vatResult.btwAfdracht).toLocaleString(
-                                    "nl-NL",
-                                    {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                    },
-                                )}
+                                {Math.abs(vatResult.btwAfdracht).toLocaleString("nl-NL", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                })}
                             </span>
                         </div>
                     </div>
 
-                    <p className="text-xs text-muted-foreground mt-4">
-                        * Indicatieve berekening. Factuuromzet wordt automatisch
-                        meegenomen. Raadpleeg een belastingadviseur voor exacte
-                        aangiftes.
+                    <p className="mt-4 text-xs text-muted-foreground">
+                        * Indicatieve berekening. Factuuromzet wordt automatisch meegenomen. Raadpleeg een
+                        belastingadviseur voor exacte aangiftes.
                     </p>
                 </CardContent>
             </Card>

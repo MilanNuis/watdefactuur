@@ -11,11 +11,7 @@ interface Props {
     customers?: Customer[];
 }
 
-export default function KlantInfoformulier({
-    client,
-    onChange,
-    customers,
-}: Props) {
+export default function KlantInfoformulier({ client, onChange, customers }: Props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -46,9 +42,7 @@ export default function KlantInfoformulier({
 
     const filteredCustomers =
         customers?.filter((c) =>
-            `${c.first_name} ${c.last_name} ${c.email}`
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase()),
+            `${c.first_name} ${c.last_name} ${c.email}`.toLowerCase().includes(searchTerm.toLowerCase()),
         ) || [];
 
     // Close dropdown when clicking outside
@@ -79,9 +73,7 @@ export default function KlantInfoformulier({
             searchInputRef.current?.blur();
         } else if (e.key === "ArrowDown") {
             e.preventDefault();
-            setHighlightedIndex((prev) =>
-                prev < filteredCustomers.length - 1 ? prev + 1 : prev,
-            );
+            setHighlightedIndex((prev) => (prev < filteredCustomers.length - 1 ? prev + 1 : prev));
             setIsDropdownOpen(true);
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
@@ -117,21 +109,17 @@ export default function KlantInfoformulier({
     const hasCustomers = customers && customers.length > 0;
 
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="animate-fade-in space-y-6">
             <div>
-                <h2 className="text-xl font-semibold text-foreground mb-1 montserrat-main">
-                    Klantgegevens
-                </h2>
-                <p className="text-sm text-muted-foreground montserrat-main">
-                    Vul de gegevens van je klant in
-                </p>
+                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">Klantgegevens</h2>
+                <p className="montserrat-main text-sm text-muted-foreground">Vul de gegevens van je klant in</p>
             </div>
 
             {/* Customer Search - Only show for Pro users with customers */}
             {hasCustomers && (
                 <div className="relative">
                     <div className="relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                         <Input
                             ref={searchInputRef}
                             type="text"
@@ -146,7 +134,7 @@ export default function KlantInfoformulier({
                             <button
                                 type="button"
                                 onClick={clearSearch}
-                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
                             >
                                 <X className="h-4 w-4" />
                             </button>
@@ -157,43 +145,32 @@ export default function KlantInfoformulier({
                     {isDropdownOpen && (
                         <div
                             ref={dropdownRef}
-                            className="absolute z-50 w-full mt-1 bg-popover border border-border rounded-md shadow-lg max-h-[300px] overflow-auto"
+                            className="absolute z-50 mt-1 max-h-[300px] w-full overflow-auto rounded-md border border-border bg-popover shadow-lg"
                         >
                             {filteredCustomers.length === 0 ? (
-                                <div className="p-3 text-sm text-center text-muted-foreground">
+                                <div className="p-3 text-center text-sm text-muted-foreground">
                                     Geen klanten gevonden
                                 </div>
                             ) : (
                                 <div className="py-1">
-                                    {filteredCustomers.map(
-                                        (customer, index) => (
-                                            <button
-                                                key={customer.id}
-                                                type="button"
-                                                onClick={() =>
-                                                    handleSelectCustomer(
-                                                        customer,
-                                                    )
-                                                }
-                                                onMouseEnter={() =>
-                                                    setHighlightedIndex(index)
-                                                }
-                                                className={`w-full text-left px-3 py-2 text-sm transition-colors ${
-                                                    highlightedIndex === index
-                                                        ? "bg-accent text-accent-foreground"
-                                                        : "hover:bg-accent/50"
-                                                }`}
-                                            >
-                                                <div className="font-medium">
-                                                    {customer.first_name}{" "}
-                                                    {customer.last_name}
-                                                </div>
-                                                <div className="text-xs text-muted-foreground">
-                                                    {customer.email}
-                                                </div>
-                                            </button>
-                                        ),
-                                    )}
+                                    {filteredCustomers.map((customer, index) => (
+                                        <button
+                                            key={customer.id}
+                                            type="button"
+                                            onClick={() => handleSelectCustomer(customer)}
+                                            onMouseEnter={() => setHighlightedIndex(index)}
+                                            className={`w-full px-3 py-2 text-left text-sm transition-colors ${
+                                                highlightedIndex === index
+                                                    ? "bg-accent text-accent-foreground"
+                                                    : "hover:bg-accent/50"
+                                            }`}
+                                        >
+                                            <div className="font-medium">
+                                                {customer.first_name} {customer.last_name}
+                                            </div>
+                                            <div className="text-xs text-muted-foreground">{customer.email}</div>
+                                        </button>
+                                    ))}
                                 </div>
                             )}
                         </div>
@@ -201,7 +178,7 @@ export default function KlantInfoformulier({
                 </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2 md:col-span-2">
                     <Label htmlFor="clientName">Naam / Bedrijfsnaam *</Label>
                     <Input
@@ -239,9 +216,7 @@ export default function KlantInfoformulier({
                     <Input
                         id="clientAddress"
                         value={client.address}
-                        onChange={(e) =>
-                            handleChange("address", e.target.value)
-                        }
+                        onChange={(e) => handleChange("address", e.target.value)}
                         placeholder="Straatnaam 456"
                     />
                 </div>
@@ -251,9 +226,7 @@ export default function KlantInfoformulier({
                     <Input
                         id="clientPostalCode"
                         value={client.postalCode}
-                        onChange={(e) =>
-                            handleChange("postalCode", e.target.value)
-                        }
+                        onChange={(e) => handleChange("postalCode", e.target.value)}
                         placeholder="5678 CD"
                     />
                 </div>

@@ -15,15 +15,10 @@ export default function TaxesIndex() {
 
     return (
         <ProLayout>
-            <Header
-                title="Belastingen"
-                description="Beheer hier je belastingen"
-            />
+            <Header title="Belastingen" description="Beheer hier je belastingen" />
             <Tabs defaultValue="income-tax">
                 <TabsList defaultValue="income-tax">
-                    <TabsTrigger value="income-tax">
-                        Inkomstenbelasting
-                    </TabsTrigger>
+                    <TabsTrigger value="income-tax">Inkomstenbelasting</TabsTrigger>
                     <TabsTrigger value="vat">BTW</TabsTrigger>
                 </TabsList>
                 <TabsContent value="income-tax">
