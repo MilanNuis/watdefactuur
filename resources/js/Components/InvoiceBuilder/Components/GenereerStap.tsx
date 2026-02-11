@@ -9,9 +9,15 @@ import axios from "axios";
 interface Props {
     data: InvoiceData;
     isSubmitting: boolean;
+    /** Route name for PDF download - use "invoice-builder.download" for free, "pro.invoice-builder.download" for Pro */
+    downloadRoute?: string;
 }
 
-export default function GenereerStap({ data, isSubmitting }: Props) {
+export default function GenereerStap({
+    data,
+    isSubmitting,
+    downloadRoute = "pro.invoice-builder.download",
+}: Props) {
     const [email, setEmail] = useState(data.company.email);
     const [isDownloading, setIsDownloading] = useState(false);
     const [isSending, setIsSending] = useState(false);
@@ -22,7 +28,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     const handleDownload = async () => {
         setIsDownloading(true);
         try {
-            const response = await axios.post(route("pro.invoice-builder.download"), data, {
+            const response = await axios.post(route(downloadRoute), data, {
                 responseType: "blob",
                 headers: {
                     Accept: "application/pdf",
@@ -41,7 +47,8 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
             setDownloadComplete(true);
             toast({
                 title: "Factuur gegenereerd!",
-                description: "Je factuur is klaar om te printen of op te slaan als PDF.",
+                description:
+                    "Je factuur is klaar om te printen of op te slaan als PDF.",
             });
         } catch {
             toast({
@@ -58,7 +65,8 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         if (!email) {
             toast({
                 title: "E-mailadres vereist",
-                description: "Vul een e-mailadres in om de factuur te versturen.",
+                description:
+                    "Vul een e-mailadres in om de factuur te versturen.",
                 variant: "destructive",
             });
             return;
@@ -77,8 +85,14 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         });
     };
 
-    const subtotal = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice, 0);
-    const btw = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100), 0);
+    const subtotal = data.products.reduce(
+        (sum, p) => sum + p.quantity * p.unitPrice,
+        0,
+    );
+    const btw = data.products.reduce(
+        (sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100),
+        0,
+    );
     const total = subtotal + btw;
 
     const formatCurrency = (amount: number) => {
@@ -91,8 +105,12 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     return (
         <div className="animate-fade-in space-y-6">
             <div>
-                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">Factuur Genereren</h2>
-                <p className="text-sm text-muted-foreground">Download of verstuur je factuur</p>
+                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">
+                    Factuur Genereren
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                    Download of verstuur je factuur
+                </p>
             </div>
 
             {/* Summary Card */}
@@ -103,7 +121,9 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
                             <FileText className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                            <h3 className="font-semibold text-foreground">Factuur {data.invoiceNumber || "Nieuw"}</h3>
+                            <h3 className="font-semibold text-foreground">
+                                Factuur {data.invoiceNumber || "Nieuw"}
+                            </h3>
                             <p className="text-sm text-muted-foreground">
                                 {data.products.length} product
                                 {data.products.length !== 1 ? "en" : ""}
@@ -111,27 +131,43 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
                         </div>
                     </div>
                     <div className="border-t border-border pt-2 text-left sm:ml-auto sm:border-t-0 sm:pt-0 sm:text-right">
-                        <p className="text-2xl font-bold text-primary">{formatCurrency(total)}</p>
-                        <p className="text-xs text-muted-foreground">incl. BTW</p>
+                        <p className="text-2xl font-bold text-primary">
+                            {formatCurrency(total)}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                            incl. BTW
+                        </p>
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
                     <div className="rounded-lg bg-card/50 p-3">
-                        <p className="mb-1 text-xs uppercase text-muted-foreground">Van</p>
-                        <p className="font-medium text-foreground">{data.company.name || "Jouw bedrijf"}</p>
+                        <p className="mb-1 text-xs uppercase text-muted-foreground">
+                            Van
+                        </p>
+                        <p className="font-medium text-foreground">
+                            {data.company.name || "Jouw bedrijf"}
+                        </p>
                     </div>
                     <div className="rounded-lg bg-card/50 p-3">
-                        <p className="mb-1 text-xs uppercase text-muted-foreground">Aan</p>
-                        <p className="font-medium text-foreground">{data.client.name || "Klant"}</p>
+                        <p className="mb-1 text-xs uppercase text-muted-foreground">
+                            Aan
+                        </p>
+                        <p className="font-medium text-foreground">
+                            {data.client.name || "Klant"}
+                        </p>
                     </div>
                 </div>
             </div>
 
             {/* Download Option */}
             <div className="rounded-xl border border-border bg-card p-6">
-                <h3 className="montserrat-main mb-3 font-semibold text-foreground">Download als PDF</h3>
-                <p className="mb-4 text-sm text-muted-foreground">Download de factuur om te printen of op te slaan</p>
+                <h3 className="montserrat-main mb-3 font-semibold text-foreground">
+                    Download als PDF
+                </h3>
+                <p className="mb-4 text-sm text-muted-foreground">
+                    Download de factuur om te printen of op te slaan
+                </p>
                 <Button
                     onClick={handleDownload}
                     disabled={isDownloading || downloadComplete || isSubmitting}
@@ -156,8 +192,12 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
 
             {/* Email Option */}
             <div className="rounded-xl border border-border bg-card p-6">
-                <h3 className="montserrat-main mb-3 font-semibold text-foreground">Verstuur per e-mail</h3>
-                <p className="mb-4 text-sm text-muted-foreground">Stuur de factuur direct naar jezelf of je klant</p>
+                <h3 className="montserrat-main mb-3 font-semibold text-foreground">
+                    Verstuur per e-mail
+                </h3>
+                <p className="mb-4 text-sm text-muted-foreground">
+                    Stuur de factuur direct naar jezelf of je klant
+                </p>
                 <div className="space-y-3">
                     <div className="space-y-2">
                         <Label htmlFor="sendEmail">E-mailadres</Label>

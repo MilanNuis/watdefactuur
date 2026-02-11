@@ -78,7 +78,7 @@ export default function InvoiceBuilder() {
             case 3:
                 return <ProductenFormulier invoiceData={data} setData={setData} />;
             case 4:
-                return <GenereerStap data={data} isSubmitting={processing} />;
+                return <GenereerStap data={data} isSubmitting={processing} downloadRoute="invoice-builder.download" />;
             default:
                 return null;
         }

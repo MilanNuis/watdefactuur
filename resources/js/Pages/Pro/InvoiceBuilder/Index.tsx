@@ -33,7 +33,9 @@ export default function ProInvoiceBuilder({
     const initialInvoiceData: InvoiceData = {
         invoiceNumber: nextInvoiceNumber,
         invoiceDate: new Date().toISOString().split("T")[0],
-        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+            .toISOString()
+            .split("T")[0],
         company: {
             name: settings.name,
             address: settings.address,
@@ -61,7 +63,8 @@ export default function ProInvoiceBuilder({
         notes: "Betaling binnen 30 dagen na factuurdatum.",
     };
     const [currentStep, setCurrentStep] = useState(1);
-    const { data, setData, post, processing } = useForm<InvoiceData>(initialInvoiceData);
+    const { data, setData, post, processing } =
+        useForm<InvoiceData>(initialInvoiceData);
     const [Preview, setPreview] = useState<string | null>(null);
 
     const nextStep = () => {
@@ -96,7 +99,13 @@ export default function ProInvoiceBuilder({
                     />
                 );
             case 3:
-                return <ProductenFormulier invoiceData={data} setData={setData} products={products} />;
+                return (
+                    <ProductenFormulier
+                        invoiceData={data}
+                        setData={setData}
+                        products={products}
+                    />
+                );
             case 4:
                 return <GenereerStap data={data} isSubmitting={processing} />;
             default:
@@ -165,7 +174,10 @@ export default function ProInvoiceBuilder({
                             <div className="relative">
                                 <div className="-mx-4 overflow-x-auto rounded-xl px-4 sm:mx-0 sm:px-0 lg:overflow-visible">
                                     <div className="w-auto origin-top-left transition-transform duration-300 md:flex md:flex-col lg:min-w-0">
-                                        <Factuurvoorbeeld data={data} Preview={Preview} />
+                                        <Factuurvoorbeeld
+                                            data={data}
+                                            Preview={Preview}
+                                        />
                                     </div>
                                 </div>
                                 {/* Gradient overlay to show it's scrollable/scaled */}
