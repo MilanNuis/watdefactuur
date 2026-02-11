@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <title>Factuur</title>
     <style>
         * {
@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: "Montserrat",sans-serif;
+            /* font-family: "Montserrat", sans-serif; */
             color: #111827;
             font-size: 12px;
         }
