@@ -57,22 +57,17 @@ export default function IncomeTax() {
         return calculateIncomeTax(Math.max(0, income - ded));
     }, [brutoIncome, aftrekKosten]);
 
-    const belastbaarInkomen = Math.max(
-        0,
-        (parseFloat(brutoIncome) || 0) - (parseFloat(aftrekKosten) || 0),
-    );
+    const belastbaarInkomen = Math.max(0, (parseFloat(brutoIncome) || 0) - (parseFloat(aftrekKosten) || 0));
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <Card>
                 <CardHeader>
                     <CardTitle className="text-lg">Gegevens invoeren</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="bruto-income">
-                            Bruto jaarinkomen (€)
-                        </Label>
+                        <Label htmlFor="bruto-income">Bruto jaarinkomen (€)</Label>
                         <Input
                             id="bruto-income"
                             placeholder="bv. 45000"
@@ -93,24 +88,19 @@ export default function IncomeTax() {
                             min="0"
                         />
                         <p className="text-xs text-muted-foreground">
-                            Zelfstandigenaftrek, startersaftrek,
-                            MKB-winstvrijstelling, etc.
+                            Zelfstandigenaftrek, startersaftrek, MKB-winstvrijstelling, etc.
                         </p>
                     </div>
                 </CardContent>
             </Card>
             <Card>
                 <CardHeader>
-                    <CardTitle className="text-lg">
-                        Resultaat {currentYear}
-                    </CardTitle>
+                    <CardTitle className="text-lg">Resultaat {currentYear}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-3">
-                        <div className="flex justify-between py-2 border-b">
-                            <span className="text-muted-foreground">
-                                Belastbaar inkomen
-                            </span>
+                        <div className="flex justify-between border-b py-2">
+                            <span className="text-muted-foreground">Belastbaar inkomen</span>
                             <span className="font-medium">
                                 €
                                 {belastbaarInkomen.toLocaleString("nl-NL", {
@@ -121,13 +111,8 @@ export default function IncomeTax() {
                         </div>
 
                         {taxResult.breakdown.map((b, i) => (
-                            <div
-                                key={i}
-                                className="flex justify-between py-1 text-sm"
-                            >
-                                <span className="text-muted-foreground">
-                                    {b.bracket}
-                                </span>
+                            <div key={i} className="flex justify-between py-1 text-sm">
+                                <span className="text-muted-foreground">{b.bracket}</span>
                                 <span>
                                     €
                                     {b.amount.toLocaleString("nl-NL", {
@@ -138,17 +123,12 @@ export default function IncomeTax() {
                             </div>
                         ))}
 
-                        <div className="flex justify-between py-1 text-sm border-t">
-                            <span className="text-muted-foreground">
-                                Heffingskortingen
-                            </span>
+                        <div className="flex justify-between border-t py-1 text-sm">
+                            <span className="text-muted-foreground">Heffingskortingen</span>
                             <span className="text-primary">
                                 -€
                                 {Math.min(
-                                    taxResult.breakdown.reduce(
-                                        (s, b) => s + b.amount,
-                                        0,
-                                    ),
+                                    taxResult.breakdown.reduce((s, b) => s + b.amount, 0),
                                     GENERAL_TAX_CREDIT + LABOR_TAX_CREDIT,
                                 ).toLocaleString("nl-NL", {
                                     minimumFractionDigits: 2,
@@ -157,7 +137,7 @@ export default function IncomeTax() {
                             </span>
                         </div>
 
-                        <div className="flex justify-between py-2 border-t text-lg font-bold">
+                        <div className="flex justify-between border-t py-2 text-lg font-bold">
                             <span>Te betalen</span>
                             <span>
                                 €
@@ -169,17 +149,14 @@ export default function IncomeTax() {
                         </div>
 
                         <div className="flex justify-between text-sm">
-                            <span className="text-muted-foreground">
-                                Effectief tarief
-                            </span>
+                            <span className="text-muted-foreground">Effectief tarief</span>
                             <span>{taxResult.effectiveRate.toFixed(1)}%</span>
                         </div>
                     </div>
 
-                    <p className="text-xs text-muted-foreground mt-4">
-                        * Indicatieve berekening op basis van belastingtarieven{" "}
-                        {currentYear}. Raadpleeg een belastingadviseur voor
-                        exacte berekeningen.
+                    <p className="mt-4 text-xs text-muted-foreground">
+                        * Indicatieve berekening op basis van belastingtarieven {currentYear}. Raadpleeg een
+                        belastingadviseur voor exacte berekeningen.
                     </p>
                 </CardContent>
             </Card>

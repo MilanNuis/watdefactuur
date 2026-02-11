@@ -20,7 +20,7 @@ export default function index() {
 
     return (
         <ProLayout>
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
                 <Header title="Klanten" description="Beheer hier je klanten" />
                 <CreateCustomerDialog />
             </div>
@@ -35,15 +35,9 @@ export default function index() {
                 <TableBody>
                     {customers.data.map((customer: Customer) => (
                         <TableRow key={customer.id}>
-                            <TableCell className="font-medium">
-                                {customer.first_name}
-                            </TableCell>
-                            <TableCell className="font-medium">
-                                {customer.last_name}
-                            </TableCell>
-                            <TableCell className="font-medium">
-                                {customer.email}
-                            </TableCell>
+                            <TableCell className="font-medium">{customer.first_name}</TableCell>
+                            <TableCell className="font-medium">{customer.last_name}</TableCell>
+                            <TableCell className="font-medium">{customer.email}</TableCell>
                             <TableCell>
                                 <EditCustomerDialog customer={customer} />
                             </TableCell>

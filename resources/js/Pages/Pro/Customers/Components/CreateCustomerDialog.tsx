@@ -43,14 +43,11 @@ export default function CreateCustomerDialog() {
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Button
-                        variant={"home"}
-                        className="bg-[--main-purple] text-white"
-                    >
+                    <Button variant={"home"} className="bg-[--main-green] text-white">
                         Nieuwe klant
                     </Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-2xl w-full">
+                <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
                         <DialogTitle>Nieuwe klant</DialogTitle>
                     </DialogHeader>
@@ -60,9 +57,7 @@ export default function CreateCustomerDialog() {
                                 <Label>Voornaam</Label>
                                 <Input
                                     value={data.first_name}
-                                    onChange={(e) =>
-                                        setData("first_name", e.target.value)
-                                    }
+                                    onChange={(e) => setData("first_name", e.target.value)}
                                     placeholder="Voornaam"
                                 />
                                 <InputError message={errors.first_name} />
@@ -72,9 +67,7 @@ export default function CreateCustomerDialog() {
                                 <Label>Achternaam</Label>
                                 <Input
                                     value={data.last_name}
-                                    onChange={(e) =>
-                                        setData("last_name", e.target.value)
-                                    }
+                                    onChange={(e) => setData("last_name", e.target.value)}
                                     placeholder="Achternaam"
                                 />
                                 <InputError message={errors.last_name} />
@@ -85,9 +78,7 @@ export default function CreateCustomerDialog() {
                             <Input
                                 type="email"
                                 value={data.email}
-                                onChange={(e) =>
-                                    setData("email", e.target.value)
-                                }
+                                onChange={(e) => setData("email", e.target.value)}
                                 placeholder="klant@gmail.com"
                             />
                             <InputError message={errors.email} />
@@ -97,9 +88,7 @@ export default function CreateCustomerDialog() {
                             <Input
                                 type="tel"
                                 value={data.phone}
-                                onChange={(e) =>
-                                    setData("phone", e.target.value)
-                                }
+                                onChange={(e) => setData("phone", e.target.value)}
                                 placeholder="06-12345678"
                             />
                             <InputError message={errors.phone} />
@@ -109,9 +98,7 @@ export default function CreateCustomerDialog() {
                                 <Label htmlFor="postalCode">Postcode</Label>
                                 <Input
                                     value={data.postalCode}
-                                    onChange={(e) =>
-                                        setData("postalCode", e.target.value)
-                                    }
+                                    onChange={(e) => setData("postalCode", e.target.value)}
                                     placeholder="1234 AB"
                                 />
                                 <InputError message={errors.postalCode} />
@@ -120,9 +107,7 @@ export default function CreateCustomerDialog() {
                                 <Label htmlFor="houseNumber">Huisnummer</Label>
                                 <Input
                                     value={data.houseNumber}
-                                    onChange={(e) =>
-                                        setData("houseNumber", e.target.value)
-                                    }
+                                    onChange={(e) => setData("houseNumber", e.target.value)}
                                     placeholder="12"
                                 />
                                 <InputError message={errors.houseNumber} />
@@ -132,9 +117,7 @@ export default function CreateCustomerDialog() {
                             <Label htmlFor="street">Straat</Label>
                             <Input
                                 value={data.street}
-                                onChange={(e) =>
-                                    setData("street", e.target.value)
-                                }
+                                onChange={(e) => setData("street", e.target.value)}
                                 placeholder="Straatnaam"
                             />
                             <InputError message={errors.street} />
@@ -143,9 +126,7 @@ export default function CreateCustomerDialog() {
                             <Label htmlFor="city">Stad</Label>
                             <Input
                                 value={data.city}
-                                onChange={(e) =>
-                                    setData("city", e.target.value)
-                                }
+                                onChange={(e) => setData("city", e.target.value)}
                                 placeholder="Stad"
                             />
                             <InputError message={errors.city} />
@@ -154,9 +135,7 @@ export default function CreateCustomerDialog() {
                             <Label htmlFor="country">Land</Label>
                             <Input
                                 value={data.country}
-                                onChange={(e) =>
-                                    setData("country", e.target.value)
-                                }
+                                onChange={(e) => setData("country", e.target.value)}
                                 placeholder="Land"
                             />
                             <InputError message={errors.country} />
@@ -169,7 +148,8 @@ export default function CreateCustomerDialog() {
                         <Button
                             onClick={handleSubmit}
                             type="submit"
-                            variant={"secondary"}
+                            variant={"home"}
+                            className="bg-[--main-green] text-white"
                         >
                             Aanmaken
                         </Button>

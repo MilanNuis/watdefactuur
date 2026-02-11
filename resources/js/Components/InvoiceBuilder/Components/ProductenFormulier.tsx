@@ -5,20 +5,11 @@ import { Plus, Trash2, Search } from "lucide-react";
 import { Textarea } from "../../ui/Textarea";
 import { Button } from "@/Components/ui/button";
 import { InvoiceData, Product } from "../types/InvoiceTypes";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/Components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
 
 interface Props {
     invoiceData: InvoiceData;
-    setData: (
-        key: keyof InvoiceData,
-        value: InvoiceData[keyof InvoiceData],
-    ) => void;
+    setData: (key: keyof InvoiceData, value: InvoiceData[keyof InvoiceData]) => void;
     products?: Product[];
 }
 
@@ -33,11 +24,7 @@ const createEmptyProduct = (): Product => ({
     btw: 21,
 });
 
-export default function ProductenFormulier({
-    invoiceData,
-    setData,
-    products,
-}: Props) {
+export default function ProductenFormulier({ invoiceData, setData, products }: Props) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const addProduct = () => {
@@ -45,9 +32,7 @@ export default function ProductenFormulier({
     };
 
     const addExistingProduct = (productId: string) => {
-        const product = products?.find(
-            (p: any) => p.id.toString() === productId,
-        ) as any;
+        const product = products?.find((p: any) => p.id.toString() === productId) as any;
         if (product) {
             setData("products", [
                 ...invoiceData.products,
@@ -57,13 +42,7 @@ export default function ProductenFormulier({
                             ? crypto.randomUUID()
                             : `${Date.now()}-${Math.random()}`,
                     description: product.name || product.description,
-                    unitPrice: parseFloat(
-                        (
-                            product.price_without_btw ||
-                            product.unitPrice ||
-                            0
-                        ).toString(),
-                    ),
+                    unitPrice: parseFloat((product.price_without_btw || product.unitPrice || 0).toString()),
                     btw: parseFloat((product.btw || 0).toString()),
                     quantity: 1,
                 },
@@ -73,17 +52,13 @@ export default function ProductenFormulier({
 
     const filteredProducts =
         products?.filter((p: any) =>
-            (p.name || p.description || "")
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase()),
+            (p.name || p.description || "").toLowerCase().includes(searchTerm.toLowerCase()),
         ) || [];
 
     const updateProduct = (id: string, updates: Partial<Product>) => {
         setData(
             "products",
-            invoiceData.products.map((product) =>
-                product.id === id ? { ...product, ...updates } : product,
-            ),
+            invoiceData.products.map((product) => (product.id === id ? { ...product, ...updates } : product)),
         );
     };
 
@@ -95,25 +70,19 @@ export default function ProductenFormulier({
     };
 
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="animate-fade-in space-y-6">
             <div>
-                <h2 className="text-xl font-semibold text-foreground mb-1 montserrat-main">
-                    Factuurgegevens
-                </h2>
-                <p className="text-sm text-muted-foreground montserrat-main">
-                    Voeg producten of diensten toe
-                </p>
+                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">Factuurgegevens</h2>
+                <p className="montserrat-main text-sm text-muted-foreground">Voeg producten of diensten toe</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="space-y-2">
                     <Label htmlFor="invoiceNumber">Factuurnummer</Label>
                     <Input
                         id="invoiceNumber"
                         value={invoiceData.invoiceNumber}
-                        onChange={(e) =>
-                            setData("invoiceNumber", e.target.value)
-                        }
+                        onChange={(e) => setData("invoiceNumber", e.target.value)}
                         placeholder="2024-001"
                     />
                 </div>
@@ -151,59 +120,45 @@ export default function ProductenFormulier({
                                     setSearchTerm("");
                                 }}
                             >
-                                <SelectTrigger className="w-[200px] h-9">
+                                <SelectTrigger className="h-9 w-[200px]">
                                     <SelectValue placeholder="Kies een product" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <div className="p-2 relative">
-                                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                                    <div className="relative p-2">
+                                        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                                         <Input
                                             placeholder="Zoeken..."
                                             value={searchTerm}
-                                            onChange={(e) =>
-                                                setSearchTerm(e.target.value)
-                                            }
+                                            onChange={(e) => setSearchTerm(e.target.value)}
                                             onKeyDown={(e) => {
                                                 e.stopPropagation();
                                             }}
-                                            className="pl-9 h-8 text-xs"
+                                            className="h-8 pl-9 text-xs"
                                         />
                                     </div>
                                     {filteredProducts.length === 0 ? (
-                                        <div className="p-2 text-xs text-center text-muted-foreground">
+                                        <div className="p-2 text-center text-xs text-muted-foreground">
                                             Geen producten gevonden
                                         </div>
                                     ) : (
                                         filteredProducts.map((p) => (
-                                            <SelectItem
-                                                key={p.id}
-                                                value={p.id.toString()}
-                                            >
-                                                {(p as any).name ||
-                                                    p.description}{" "}
-                                                (€
-                                                {(p as any).price_without_btw ||
-                                                    p.unitPrice}
-                                                )
+                                            <SelectItem key={p.id} value={p.id.toString()}>
+                                                {(p as any).name || p.description} (€
+                                                {(p as any).price_without_btw || p.unitPrice})
                                             </SelectItem>
                                         ))
                                     )}
                                 </SelectContent>
                             </Select>
                         )}
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={addProduct}
-                        >
-                            <Plus className="w-4 h-4 mr-1" />
+                        <Button type="button" variant="outline" size="sm" onClick={addProduct}>
+                            <Plus className="mr-1 h-4 w-4" />
                             Toevoegen
                         </Button>
                     </div>
                 </div>
                 {invoiceData.products.length === 0 ? (
-                    <div className="p-4 text-sm bg-card rounded-lg border border-border text-muted-foreground ">
+                    <div className="rounded-lg border border-border bg-card p-4 text-sm text-muted-foreground">
                         Nog geen producten toegevoegd.
                     </div>
                 ) : (
@@ -211,12 +166,10 @@ export default function ProductenFormulier({
                         {invoiceData.products.map((product) => (
                             <div
                                 key={product.id}
-                                className="grid grid-cols-12 gap-2 items-end p-3 bg-card rounded-lg border border-border animate-slide-in"
+                                className="animate-slide-in grid grid-cols-12 items-end gap-2 rounded-lg border border-border bg-card p-3"
                             >
-                                <div className="col-span-12 md:col-span-4 space-y-1 flex flex-col">
-                                    <Label className="text-xs text-muted-foreground">
-                                        Omschrijving
-                                    </Label>
+                                <div className="col-span-12 flex flex-col space-y-1 md:col-span-4">
+                                    <Label className="text-xs text-muted-foreground">Omschrijving</Label>
                                     <Input
                                         value={product.description}
                                         onChange={(e) =>
@@ -227,31 +180,21 @@ export default function ProductenFormulier({
                                         placeholder="Product of dienst"
                                     />
                                 </div>
-                                <div className="col-span-4 md:col-span-2 space-y-1 flex flex-col">
-                                    <Label className="text-xs text-muted-foreground">
-                                        Aantal
-                                    </Label>
+                                <div className="col-span-4 flex flex-col space-y-1 md:col-span-2">
+                                    <Label className="text-xs text-muted-foreground">Aantal</Label>
                                     <Input
                                         type="number"
                                         min="1"
                                         value={product.quantity}
                                         onChange={(e) =>
                                             updateProduct(product.id, {
-                                                quantity: Math.max(
-                                                    1,
-                                                    parseInt(
-                                                        e.target.value,
-                                                        10,
-                                                    ) || 1,
-                                                ),
+                                                quantity: Math.max(1, parseInt(e.target.value, 10) || 1),
                                             })
                                         }
                                     />
                                 </div>
-                                <div className="col-span-4 md:col-span-3 space-y-1 flex flex-col">
-                                    <Label className="text-xs text-muted-foreground">
-                                        Prijs (€)
-                                    </Label>
+                                <div className="col-span-4 flex flex-col space-y-1 md:col-span-3">
+                                    <Label className="text-xs text-muted-foreground">Prijs (€)</Label>
                                     <Input
                                         type="number"
                                         min="0"
@@ -259,18 +202,13 @@ export default function ProductenFormulier({
                                         value={product.unitPrice}
                                         onChange={(e) =>
                                             updateProduct(product.id, {
-                                                unitPrice:
-                                                    parseFloat(
-                                                        e.target.value,
-                                                    ) || 0,
+                                                unitPrice: parseFloat(e.target.value) || 0,
                                             })
                                         }
                                     />
                                 </div>
-                                <div className="col-span-2 md:col-span-2 space-y-1 flex flex-col">
-                                    <Label className="text-xs text-muted-foreground">
-                                        BTW
-                                    </Label>
+                                <div className="col-span-2 flex flex-col space-y-1 md:col-span-2">
+                                    <Label className="text-xs text-muted-foreground">BTW</Label>
                                     <Select
                                         value={product.btw.toString()}
                                         onValueChange={(value) =>
@@ -283,29 +221,21 @@ export default function ProductenFormulier({
                                             <SelectValue placeholder="BTW" />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="0">
-                                                0%
-                                            </SelectItem>
-                                            <SelectItem value="9">
-                                                9%
-                                            </SelectItem>
-                                            <SelectItem value="21">
-                                                21%
-                                            </SelectItem>
+                                            <SelectItem value="0">0%</SelectItem>
+                                            <SelectItem value="9">9%</SelectItem>
+                                            <SelectItem value="21">21%</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
-                                <div className="col-span-2 md:col-span-1 flex items-end justify-end md:justify-end md:items-center">
+                                <div className="col-span-2 flex items-end justify-end md:col-span-1 md:items-center md:justify-end">
                                     <Button
                                         type="button"
                                         variant="ghost"
                                         size="icon"
-                                        className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                                        onClick={() =>
-                                            removeProduct(product.id)
-                                        }
+                                        className="text-destructive hover:bg-destructive/10 hover:text-destructive"
+                                        onClick={() => removeProduct(product.id)}
                                     >
-                                        <Trash2 className="w-4 h-4" />
+                                        <Trash2 className="h-4 w-4" />
                                     </Button>
                                 </div>
                             </div>

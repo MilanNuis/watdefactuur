@@ -1,14 +1,4 @@
-import {
-    LayoutDashboard,
-    Users,
-    Package,
-    FileText,
-    Settings,
-    LogIn,
-    LogOut,
-    User,
-    Percent,
-} from "lucide-react";
+import { LayoutDashboard, Users, Package, FileText, Settings, LogIn, LogOut, User, Percent } from "lucide-react";
 
 import {
     Sidebar,
@@ -75,9 +65,7 @@ export function AppSidebar() {
         if (item.routeName) {
             return route().current(item.routeName);
         }
-        return (
-            currentPath === item.url || currentPath.startsWith(item.url + "/")
-        );
+        return currentPath === item.url || currentPath.startsWith(item.url + "/");
     };
 
     const isAuthenticated = usePage().props.auth.user;
@@ -107,14 +95,8 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {mainItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton
-                                        asChild
-                                        isActive={isActive(item)}
-                                    >
-                                        <a
-                                            href={item.url}
-                                            className="flex items-center gap-3"
-                                        >
+                                    <SidebarMenuButton asChild isActive={isActive(item)}>
+                                        <a href={item.url} className="flex items-center gap-3">
                                             <item.icon className="h-4 w-4" />
                                             <span>{item.title}</span>
                                         </a>
@@ -132,14 +114,8 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {adminItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton
-                                        asChild
-                                        isActive={isActive(item)}
-                                    >
-                                        <a
-                                            href={item.url}
-                                            className="flex items-center gap-3"
-                                        >
+                                    <SidebarMenuButton asChild isActive={isActive(item)}>
+                                        <a href={item.url} className="flex items-center gap-3">
                                             <item.icon className="h-4 w-4" />
                                             <span>{item.title}</span>
                                         </a>
@@ -156,14 +132,8 @@ export function AppSidebar() {
                         <SidebarMenu>
                             {settingsItems.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton
-                                        asChild
-                                        isActive={isActive(item)}
-                                    >
-                                        <a
-                                            href={item.url}
-                                            className="flex items-center gap-3"
-                                        >
+                                    <SidebarMenuButton asChild isActive={isActive(item)}>
+                                        <a href={item.url} className="flex items-center gap-3">
                                             <item.icon className="h-4 w-4" />
                                             <span>{item.title}</span>
                                         </a>
@@ -180,16 +150,8 @@ export function AppSidebar() {
                 <SidebarMenu>
                     {/* Account */}
                     <SidebarMenuItem>
-                        <SidebarMenuButton
-                            asChild
-                            isActive={route().current(
-                                "pro.dashboard.account.index",
-                            )}
-                        >
-                            <Link
-                                href={route("pro.dashboard.account.index")}
-                                className="flex items-center gap-3"
-                            >
+                        <SidebarMenuButton asChild isActive={route().current("pro.dashboard.account.index")}>
+                            <Link href={route("pro.dashboard.account.index")} className="flex items-center gap-3">
                                 <User className="h-4 w-4" />
                                 <span>Account</span>
                             </Link>
@@ -210,10 +172,7 @@ export function AppSidebar() {
                                     <span>Uitloggen</span>
                                 </Link>
                             ) : (
-                                <Link
-                                    href={route("login")}
-                                    className="flex items-center gap-3"
-                                >
+                                <Link href={route("login")} className="flex items-center gap-3">
                                     <LogIn className="h-4 w-4" />
                                     <span>Inloggen</span>
                                 </Link>

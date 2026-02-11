@@ -22,16 +22,12 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     const handleDownload = async () => {
         setIsDownloading(true);
         try {
-            const response = await axios.post(
-                route("pro.invoice-builder.download"),
-                data,
-                {
-                    responseType: "blob",
-                    headers: {
-                        Accept: "application/pdf",
-                    },
+            const response = await axios.post(route("pro.invoice-builder.download"), data, {
+                responseType: "blob",
+                headers: {
+                    Accept: "application/pdf",
                 },
-            );
+            });
             const blob = new Blob([response.data], { type: "application/pdf" });
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement("a");
@@ -45,8 +41,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
             setDownloadComplete(true);
             toast({
                 title: "Factuur gegenereerd!",
-                description:
-                    "Je factuur is klaar om te printen of op te slaan als PDF.",
+                description: "Je factuur is klaar om te printen of op te slaan als PDF.",
             });
         } catch {
             toast({
@@ -63,8 +58,7 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         if (!email) {
             toast({
                 title: "E-mailadres vereist",
-                description:
-                    "Vul een e-mailadres in om de factuur te versturen.",
+                description: "Vul een e-mailadres in om de factuur te versturen.",
                 variant: "destructive",
             });
             return;
@@ -83,14 +77,8 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
         });
     };
 
-    const subtotal = data.products.reduce(
-        (sum, p) => sum + p.quantity * p.unitPrice,
-        0,
-    );
-    const btw = data.products.reduce(
-        (sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100),
-        0,
-    );
+    const subtotal = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice, 0);
+    const btw = data.products.reduce((sum, p) => sum + p.quantity * p.unitPrice * (p.btw / 100), 0);
     const total = subtotal + btw;
 
     const formatCurrency = (amount: number) => {
@@ -101,71 +89,49 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
     };
 
     return (
-        <div className="space-y-6 animate-fade-in">
+        <div className="animate-fade-in space-y-6">
             <div>
-                <h2 className="text-xl font-semibold text-foreground mb-1 montserrat-main">
-                    Factuur Genereren
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                    Download of verstuur je factuur
-                </p>
+                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">Factuur Genereren</h2>
+                <p className="text-sm text-muted-foreground">Download of verstuur je factuur</p>
             </div>
 
             {/* Summary Card */}
-            <div className="bg-accent/50 rounded-xl p-4 md:p-6">
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
+            <div className="rounded-xl bg-accent/50 p-4 md:p-6">
+                <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                            <FileText className="w-5 h-5 text-primary" />
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/20">
+                            <FileText className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                            <h3 className="font-semibold text-foreground">
-                                Factuur {data.invoiceNumber || "Nieuw"}
-                            </h3>
+                            <h3 className="font-semibold text-foreground">Factuur {data.invoiceNumber || "Nieuw"}</h3>
                             <p className="text-sm text-muted-foreground">
                                 {data.products.length} product
                                 {data.products.length !== 1 ? "en" : ""}
                             </p>
                         </div>
                     </div>
-                    <div className="sm:ml-auto text-left sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-border">
-                        <p className="text-2xl font-bold text-primary">
-                            {formatCurrency(total)}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                            incl. BTW
-                        </p>
+                    <div className="border-t border-border pt-2 text-left sm:ml-auto sm:border-t-0 sm:pt-0 sm:text-right">
+                        <p className="text-2xl font-bold text-primary">{formatCurrency(total)}</p>
+                        <p className="text-xs text-muted-foreground">incl. BTW</p>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                    <div className="p-3 bg-card/50 rounded-lg">
-                        <p className="text-xs text-muted-foreground uppercase mb-1">
-                            Van
-                        </p>
-                        <p className="font-medium text-foreground">
-                            {data.company.name || "Jouw bedrijf"}
-                        </p>
+                <div className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
+                    <div className="rounded-lg bg-card/50 p-3">
+                        <p className="mb-1 text-xs uppercase text-muted-foreground">Van</p>
+                        <p className="font-medium text-foreground">{data.company.name || "Jouw bedrijf"}</p>
                     </div>
-                    <div className="p-3 bg-card/50 rounded-lg">
-                        <p className="text-xs text-muted-foreground uppercase mb-1">
-                            Aan
-                        </p>
-                        <p className="font-medium text-foreground">
-                            {data.client.name || "Klant"}
-                        </p>
+                    <div className="rounded-lg bg-card/50 p-3">
+                        <p className="mb-1 text-xs uppercase text-muted-foreground">Aan</p>
+                        <p className="font-medium text-foreground">{data.client.name || "Klant"}</p>
                     </div>
                 </div>
             </div>
 
             {/* Download Option */}
-            <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-3 montserrat-main">
-                    Download als PDF
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                    Download de factuur om te printen of op te slaan
-                </p>
+            <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="montserrat-main mb-3 font-semibold text-foreground">Download als PDF</h3>
+                <p className="mb-4 text-sm text-muted-foreground">Download de factuur om te printen of op te slaan</p>
                 <Button
                     onClick={handleDownload}
                     disabled={isDownloading || downloadComplete || isSubmitting}
@@ -174,14 +140,14 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
                 >
                     {downloadComplete ? (
                         <>
-                            <Check className="w-4 h-4 mr-2" />
+                            <Check className="mr-2 h-4 w-4" />
                             Gedownload
                         </>
                     ) : isDownloading ? (
                         "Voorbereiden..."
                     ) : (
                         <>
-                            <Download className="w-4 h-4 mr-2" />
+                            <Download className="mr-2 h-4 w-4" />
                             Download Factuur
                         </>
                     )}
@@ -189,13 +155,9 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
             </div>
 
             {/* Email Option */}
-            <div className="bg-card rounded-xl p-6 border border-border">
-                <h3 className="font-semibold text-foreground mb-3 montserrat-main">
-                    Verstuur per e-mail
-                </h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                    Stuur de factuur direct naar jezelf of je klant
-                </p>
+            <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="montserrat-main mb-3 font-semibold text-foreground">Verstuur per e-mail</h3>
+                <p className="mb-4 text-sm text-muted-foreground">Stuur de factuur direct naar jezelf of je klant</p>
                 <div className="space-y-3">
                     <div className="space-y-2">
                         <Label htmlFor="sendEmail">E-mailadres</Label>
@@ -215,14 +177,14 @@ export default function GenereerStap({ data, isSubmitting }: Props) {
                     >
                         {emailSent ? (
                             <>
-                                <Check className="w-4 h-4 mr-2" />
+                                <Check className="mr-2 h-4 w-4" />
                                 Verzonden
                             </>
                         ) : isSending ? (
                             "Verzenden..."
                         ) : (
                             <>
-                                <Mail className="w-4 h-4 mr-2" />
+                                <Mail className="mr-2 h-4 w-4" />
                                 Verstuur Factuur
                             </>
                         )}

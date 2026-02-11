@@ -2,21 +2,8 @@ import Header from "@/Components/Pro/Header";
 import Adminlayout from "@/Layouts/AdminLayout";
 import { usePage, useForm, router } from "@inertiajs/react";
 import { useState } from "react";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/Components/ui/table";
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogFooter,
-} from "@/Components/ui/dialog";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/Components/ui/dialog";
 import { Badge } from "@/Components/ui/Badge";
 import { Button } from "@/Components/ui/button";
 import { Input } from "@/Components/ui/input";
@@ -124,21 +111,15 @@ export default function Index() {
 
     return (
         <Adminlayout>
-            <div className="flex justify-between items-center mb-6">
-                <Header
-                    title="Gebruikers"
-                    description="Beheer hier je gebruikers"
-                />
-                <Button
-                    onClick={() => setIsCreateModalOpen(true)}
-                    className="gap-2"
-                >
-                    <Plus className="w-4 h-4" />
+            <div className="mb-6 flex items-center justify-between">
+                <Header title="Gebruikers" description="Beheer hier je gebruikers" />
+                <Button onClick={() => setIsCreateModalOpen(true)} className="gap-2">
+                    <Plus className="h-4 w-4" />
                     Gebruiker toevoegen
                 </Button>
             </div>
 
-            <div className="bg-card rounded-xl border border-border overflow-hidden">
+            <div className="overflow-hidden rounded-xl border border-border bg-card">
                 <Table>
                     <TableHeader>
                         <TableRow>
@@ -152,38 +133,29 @@ export default function Index() {
                     <TableBody>
                         {users.data.length === 0 ? (
                             <TableRow>
-                                <TableCell
-                                    colSpan={5}
-                                    className="text-center py-8 text-muted-foreground"
-                                >
+                                <TableCell colSpan={5} className="py-8 text-center text-muted-foreground">
                                     Geen gebruikers gevonden.
                                 </TableCell>
                             </TableRow>
                         ) : (
                             users.data.map((user) => (
                                 <TableRow key={user.id}>
-                                    <TableCell className="font-medium">
-                                        {user.name}
-                                    </TableCell>
+                                    <TableCell className="font-medium">{user.name}</TableCell>
                                     <TableCell>{user.email}</TableCell>
                                     <TableCell>
                                         <div className="flex items-center gap-2">
                                             {user.is_pro ? (
-                                                <Badge className="bg-green-100 text-green-800 border-green-200">
+                                                <Badge className="border-green-200 bg-green-100 text-green-800">
                                                     Pro
                                                 </Badge>
                                             ) : (
-                                                <Badge variant="outline">
-                                                    Gratis
-                                                </Badge>
+                                                <Badge variant="outline">Gratis</Badge>
                                             )}
                                         </div>
                                     </TableCell>
                                     <TableCell>
                                         {/* @ts-ignore - created_at exists on model */}
-                                        {new Date(
-                                            user.created_at,
-                                        ).toLocaleDateString("nl-NL")}
+                                        {new Date(user.created_at).toLocaleDateString("nl-NL")}
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex justify-end gap-2">
@@ -191,26 +163,16 @@ export default function Index() {
                                                 variant="ghost"
                                                 size="icon"
                                                 onClick={() => togglePro(user)}
-                                                title={
-                                                    user.is_pro
-                                                        ? "Maak Gratis"
-                                                        : "Maak Pro"
-                                                }
+                                                title={user.is_pro ? "Maak Gratis" : "Maak Pro"}
                                             >
                                                 {user.is_pro ? (
-                                                    <ShieldAlert className="w-4 h-4 text-orange-500" />
+                                                    <ShieldAlert className="h-4 w-4 text-orange-500" />
                                                 ) : (
-                                                    <ShieldCheck className="w-4 h-4 text-green-500" />
+                                                    <ShieldCheck className="h-4 w-4 text-green-500" />
                                                 )}
                                             </Button>
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
-                                                onClick={() =>
-                                                    openEditModal(user)
-                                                }
-                                            >
-                                                <Edit className="w-4 h-4" />
+                                            <Button variant="ghost" size="icon" onClick={() => openEditModal(user)}>
+                                                <Edit className="h-4 w-4" />
                                             </Button>
                                             <Button
                                                 variant="ghost"
@@ -220,38 +182,24 @@ export default function Index() {
                                                     setIsDeleteDialogOpen(true);
                                                 }}
                                             >
-                                                <Trash2 className="w-4 h-4 text-destructive" />
+                                                <Trash2 className="h-4 w-4 text-destructive" />
                                             </Button>
                                             <AlertDialog
-                                                open={
-                                                    isDeleteDialogOpen &&
-                                                    selectedUser?.id === user.id
-                                                }
-                                                onOpenChange={
-                                                    setIsDeleteDialogOpen
-                                                }
+                                                open={isDeleteDialogOpen && selectedUser?.id === user.id}
+                                                onOpenChange={setIsDeleteDialogOpen}
                                             >
                                                 <AlertDialogContent>
                                                     <AlertDialogHeader>
-                                                        <AlertDialogTitle>
-                                                            Gebruiker
-                                                            verwijderen
-                                                        </AlertDialogTitle>
+                                                        <AlertDialogTitle>Gebruiker verwijderen</AlertDialogTitle>
                                                         <AlertDialogDescription>
-                                                            Weet je zeker dat je
-                                                            deze gebruiker wilt
-                                                            verwijderen?
+                                                            Weet je zeker dat je deze gebruiker wilt verwijderen?
                                                         </AlertDialogDescription>
                                                     </AlertDialogHeader>
                                                     <AlertDialogFooter>
-                                                        <AlertDialogCancel>
-                                                            Annuleren
-                                                        </AlertDialogCancel>
+                                                        <AlertDialogCancel>Annuleren</AlertDialogCancel>
                                                         <AlertDialogAction
                                                             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                                                            onClick={() =>
-                                                                deleteUser(user)
-                                                            }
+                                                            onClick={() => deleteUser(user)}
                                                         >
                                                             Verwijderen
                                                         </AlertDialogAction>
@@ -272,10 +220,7 @@ export default function Index() {
             </div>
 
             {/* Create User Modal */}
-            <Dialog
-                open={isCreateModalOpen}
-                onOpenChange={setIsCreateModalOpen}
-            >
+            <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
                 <DialogContent>
                     <DialogHeader>
                         <DialogTitle>Nieuwe gebruiker toevoegen</DialogTitle>
@@ -286,15 +231,11 @@ export default function Index() {
                             <Input
                                 id="name"
                                 value={createForm.data.name}
-                                onChange={(e) =>
-                                    createForm.setData("name", e.target.value)
-                                }
+                                onChange={(e) => createForm.setData("name", e.target.value)}
                                 required
                             />
                             {createForm.errors.name && (
-                                <p className="text-sm text-destructive">
-                                    {createForm.errors.name}
-                                </p>
+                                <p className="text-sm text-destructive">{createForm.errors.name}</p>
                             )}
                         </div>
                         <div className="space-y-2">
@@ -303,15 +244,11 @@ export default function Index() {
                                 id="email"
                                 type="email"
                                 value={createForm.data.email}
-                                onChange={(e) =>
-                                    createForm.setData("email", e.target.value)
-                                }
+                                onChange={(e) => createForm.setData("email", e.target.value)}
                                 required
                             />
                             {createForm.errors.email && (
-                                <p className="text-sm text-destructive">
-                                    {createForm.errors.email}
-                                </p>
+                                <p className="text-sm text-destructive">{createForm.errors.email}</p>
                             )}
                         </div>
                         <div className="space-y-2">
@@ -320,52 +257,34 @@ export default function Index() {
                                 id="password"
                                 type="password"
                                 value={createForm.data.password}
-                                onChange={(e) =>
-                                    createForm.setData(
-                                        "password",
-                                        e.target.value,
-                                    )
-                                }
+                                onChange={(e) => createForm.setData("password", e.target.value)}
                                 required
                             />
                             {createForm.errors.password && (
-                                <p className="text-sm text-destructive">
-                                    {createForm.errors.password}
-                                </p>
+                                <p className="text-sm text-destructive">{createForm.errors.password}</p>
                             )}
                         </div>
-                        <div className="flex items-center space-x-2 gap-2">
+                        <div className="flex items-center gap-2 space-x-2">
                             <Checkbox
                                 id="is_pro"
                                 checked={createForm.data.is_pro}
-                                onCheckedChange={(checked) =>
-                                    createForm.setData("is_pro", !!checked)
-                                }
+                                onCheckedChange={(checked) => createForm.setData("is_pro", !!checked)}
                             />
                             <Label htmlFor="is_pro">Geef Pro status</Label>
                         </div>
-                        <div className="flex items-center space-x-2 gap-2">
+                        <div className="flex items-center gap-2 space-x-2">
                             <Checkbox
                                 id="is_admin"
                                 checked={createForm.data.is_admin}
-                                onCheckedChange={(checked) =>
-                                    createForm.setData("is_admin", !!checked)
-                                }
+                                onCheckedChange={(checked) => createForm.setData("is_admin", !!checked)}
                             />
                             <Label htmlFor="is_admin">Geef Admin status</Label>
                         </div>
                         <DialogFooter>
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => setIsCreateModalOpen(false)}
-                            >
+                            <Button type="button" variant="outline" onClick={() => setIsCreateModalOpen(false)}>
                                 Annuleren
                             </Button>
-                            <Button
-                                type="submit"
-                                disabled={createForm.processing}
-                            >
+                            <Button type="submit" disabled={createForm.processing}>
                                 Gebruiker aanmaken
                             </Button>
                         </DialogFooter>
@@ -385,16 +304,10 @@ export default function Index() {
                             <Input
                                 id="edit-name"
                                 value={editForm.data.name}
-                                onChange={(e) =>
-                                    editForm.setData("name", e.target.value)
-                                }
+                                onChange={(e) => editForm.setData("name", e.target.value)}
                                 required
                             />
-                            {editForm.errors.name && (
-                                <p className="text-sm text-destructive">
-                                    {editForm.errors.name}
-                                </p>
-                            )}
+                            {editForm.errors.name && <p className="text-sm text-destructive">{editForm.errors.name}</p>}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="edit-email">Email</Label>
@@ -402,67 +315,46 @@ export default function Index() {
                                 id="edit-email"
                                 type="email"
                                 value={editForm.data.email}
-                                onChange={(e) =>
-                                    editForm.setData("email", e.target.value)
-                                }
+                                onChange={(e) => editForm.setData("email", e.target.value)}
                                 required
                             />
                             {editForm.errors.email && (
-                                <p className="text-sm text-destructive">
-                                    {editForm.errors.email}
-                                </p>
+                                <p className="text-sm text-destructive">{editForm.errors.email}</p>
                             )}
                         </div>
                         <div className="space-y-2">
-                            <Label htmlFor="edit-password">
-                                Wachtwoord (leeg laten om niet te wijzigen)
-                            </Label>
+                            <Label htmlFor="edit-password">Wachtwoord (leeg laten om niet te wijzigen)</Label>
                             <Input
                                 id="edit-password"
                                 type="password"
                                 value={editForm.data.password}
-                                onChange={(e) =>
-                                    editForm.setData("password", e.target.value)
-                                }
+                                onChange={(e) => editForm.setData("password", e.target.value)}
                             />
                             {editForm.errors.password && (
-                                <p className="text-sm text-destructive">
-                                    {editForm.errors.password}
-                                </p>
+                                <p className="text-sm text-destructive">{editForm.errors.password}</p>
                             )}
                         </div>
-                        <div className="flex items-center space-x-2 gap-2">
+                        <div className="flex items-center gap-2 space-x-2">
                             <Checkbox
                                 id="edit-is_pro"
                                 checked={editForm.data.is_pro}
-                                onCheckedChange={(checked) =>
-                                    editForm.setData("is_pro", !!checked)
-                                }
+                                onCheckedChange={(checked) => editForm.setData("is_pro", !!checked)}
                             />
                             <Label htmlFor="edit-is_pro">Pro status</Label>
                         </div>
-                        <div className="flex items-center space-x-2 gap-2">
+                        <div className="flex items-center gap-2 space-x-2">
                             <Checkbox
                                 id="edit-is_admin"
                                 checked={editForm.data.is_admin}
-                                onCheckedChange={(checked) =>
-                                    editForm.setData("is_admin", !!checked)
-                                }
+                                onCheckedChange={(checked) => editForm.setData("is_admin", !!checked)}
                             />
                             <Label htmlFor="edit-is_admin">Admin status</Label>
                         </div>
                         <DialogFooter>
-                            <Button
-                                type="button"
-                                variant="outline"
-                                onClick={() => setIsEditModalOpen(false)}
-                            >
+                            <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)}>
                                 Annuleren
                             </Button>
-                            <Button
-                                type="submit"
-                                disabled={editForm.processing}
-                            >
+                            <Button type="submit" disabled={editForm.processing}>
                                 Wijzigingen opslaan
                             </Button>
                         </DialogFooter>

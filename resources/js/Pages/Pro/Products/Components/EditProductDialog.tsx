@@ -17,8 +17,7 @@ import { Product } from "../types";
 import { Button } from "@/Components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/Components/ui/select";
 
-export default function EditProductDialog({ product} : {product: Product}) {
-
+export default function EditProductDialog({ product }: { product: Product }) {
     const [open, setOpen] = useState(false);
 
     const { data, setData, errors, patch, reset } = useForm({
@@ -30,27 +29,26 @@ export default function EditProductDialog({ product} : {product: Product}) {
     });
 
     useEffect(() => {
-        setData("price_with_btw", data.price_without_btw + (data.price_without_btw * data.btw / 100));
+        setData("price_with_btw", data.price_without_btw + (data.price_without_btw * data.btw) / 100);
     }, [data.price_without_btw, data.btw]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        patch(route("pro.dashboard.products.update", {product: product}), {
+        patch(route("pro.dashboard.products.update", { product: product }), {
             onSuccess: () => {
                 setOpen(false);
-                reset()
+                reset();
             },
         });
     };
-    
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                   <Eye className="hover:cursor-pointer" />
+                    <Eye className="hover:cursor-pointer" />
                 </DialogTrigger>
-                <DialogContent className="max-w-2xl w-full">
+                <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
                         <DialogTitle>Bewerk product</DialogTitle>
                     </DialogHeader>
@@ -60,9 +58,7 @@ export default function EditProductDialog({ product} : {product: Product}) {
                                 <Label>Naam</Label>
                                 <Input
                                     value={data.name}
-                                    onChange={(e) =>
-                                        setData("name", e.target.value)
-                                    }
+                                    onChange={(e) => setData("name", e.target.value)}
                                     placeholder="Naam"
                                 />
                                 <InputError message={errors.name} />
@@ -72,9 +68,7 @@ export default function EditProductDialog({ product} : {product: Product}) {
                                 <Label>Omschrijving</Label>
                                 <Input
                                     value={data.description}
-                                    onChange={(e) =>
-                                        setData("description", e.target.value)
-                                    }
+                                    onChange={(e) => setData("description", e.target.value)}
                                     placeholder="Omschrijving"
                                 />
                                 <InputError message={errors.description} />
@@ -85,9 +79,7 @@ export default function EditProductDialog({ product} : {product: Product}) {
                             <Input
                                 type="number"
                                 value={data.price_without_btw}
-                                onChange={(e) =>
-                                    setData("price_without_btw", Number(e.target.value))
-                                }
+                                onChange={(e) => setData("price_without_btw", Number(e.target.value))}
                                 placeholder="Prijs zonder BTW"
                             />
                             <InputError message={errors.price_without_btw} />
@@ -96,9 +88,7 @@ export default function EditProductDialog({ product} : {product: Product}) {
                             <Label htmlFor="btw">BTW</Label>
                             <Select
                                 value={String(parseInt(product.btw.toString()))}
-                                onValueChange={(value) =>
-                                    setData("btw", Number(value))
-                                }
+                                onValueChange={(value) => setData("btw", Number(value))}
                             >
                                 <SelectTrigger>
                                     <SelectValue placeholder="BTW" />
@@ -115,10 +105,8 @@ export default function EditProductDialog({ product} : {product: Product}) {
                             <Input
                                 disabled
                                 type="number"
-                                value={data.price_without_btw + (data.price_without_btw * data.btw / 100)}
-                                onChange={(e) =>
-                                    setData("price_with_btw", Number(e.target.value))
-                                }
+                                value={data.price_without_btw + (data.price_without_btw * data.btw) / 100}
+                                onChange={(e) => setData("price_with_btw", Number(e.target.value))}
                                 placeholder="Prijs met BTW"
                             />
                             <InputError message={errors.price_with_btw} />
@@ -128,11 +116,7 @@ export default function EditProductDialog({ product} : {product: Product}) {
                         <DialogClose asChild>
                             <Button variant={"outline"}>Annuleren</Button>
                         </DialogClose>
-                        <Button
-                            onClick={handleSubmit}
-                            type="submit"
-                            variant={"secondary"}
-                        >
+                        <Button onClick={handleSubmit} type="submit" variant={"secondary"}>
                             Opslaan
                         </Button>
                     </DialogFooter>

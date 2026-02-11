@@ -18,17 +18,25 @@ const steps = [
     { id: 3, title: "Producten" },
     { id: 4, title: "Genereer" },
 ];
-export default function ProInvoiceBuilder({ settings, products, customers, nextInvoiceNumber }: { settings: Settings, products: Product[], customers: Customer[], nextInvoiceNumber: string }) {
+export default function ProInvoiceBuilder({
+    settings,
+    products,
+    customers,
+    nextInvoiceNumber,
+}: {
+    settings: Settings;
+    products: Product[];
+    customers: Customer[];
+    nextInvoiceNumber: string;
+}) {
     console.log(settings);
     const initialInvoiceData: InvoiceData = {
         invoiceNumber: nextInvoiceNumber,
         invoiceDate: new Date().toISOString().split("T")[0],
-        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
-            .toISOString()
-            .split("T")[0],
+        dueDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
         company: {
             name: settings.name,
-            address: settings.address,    
+            address: settings.address,
             postalCode: settings.postal_code,
             city: settings.city,
             email: settings.email,
@@ -53,8 +61,7 @@ export default function ProInvoiceBuilder({ settings, products, customers, nextI
         notes: "Betaling binnen 30 dagen na factuurdatum.",
     };
     const [currentStep, setCurrentStep] = useState(1);
-    const { data, setData, post, processing } =
-        useForm<InvoiceData>(initialInvoiceData);
+    const { data, setData, post, processing } = useForm<InvoiceData>(initialInvoiceData);
     const [Preview, setPreview] = useState<string | null>(null);
 
     const nextStep = () => {
@@ -89,9 +96,7 @@ export default function ProInvoiceBuilder({ settings, products, customers, nextI
                     />
                 );
             case 3:
-                return (
-                    <ProductenFormulier invoiceData={data} setData={setData} products={products} />
-                );
+                return <ProductenFormulier invoiceData={data} setData={setData} products={products} />;
             case 4:
                 return <GenereerStap data={data} isSubmitting={processing} />;
             default:
@@ -100,9 +105,9 @@ export default function ProInvoiceBuilder({ settings, products, customers, nextI
     };
 
     return (
-        <div className="min-h-screen bg-background max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto min-h-screen max-w-7xl bg-background px-4 sm:px-6 lg:px-8">
             {/* Header */}
-            <header className="bg-card border-b border-border sticky top-0 z-10">
+            <header className="sticky top-0 z-10 border-b border-border bg-card">
                 <div className="container py-4">
                     <div className="flex items-center gap-3">
                         <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
@@ -110,39 +115,39 @@ export default function ProInvoiceBuilder({ settings, products, customers, nextI
                 </div>
             </header>
 
-            <div className="hidden lg:block pt-8">
-                <div className="max-w-2xl mx-auto lg:max-w-none">
+            <div className="hidden pt-8 lg:block">
+                <div className="mx-auto max-w-2xl lg:max-w-none">
                     <StepIndicator steps={steps} currentStep={currentStep} />
                 </div>
             </div>
 
             <main className="py-8 pb-32 lg:pb-8">
                 {/* Main Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                     {/* Form Section */}
                     <div className="order-2 lg:order-1">
-                        <div className="bg-card rounded-xl invoice-shadow p-4 md:p-8">
+                        <div className="invoice-shadow rounded-xl bg-card p-4 md:p-8">
                             {renderStepContent()}
 
                             {/* Navigation Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-4 justify-between mt-8 pt-6 border-t border-border">
+                            <div className="mt-8 flex flex-col justify-between gap-4 border-t border-border pt-6 sm:flex-row">
                                 <Button
                                     variant="outline"
                                     onClick={prevStep}
                                     disabled={currentStep === 1}
-                                    className="w-full sm:w-auto order-2 sm:order-1 font-bold"
+                                    className="order-2 w-full font-bold sm:order-1 sm:w-auto"
                                 >
-                                    <ArrowLeft className="w-4 h-4 mr-2" />
+                                    <ArrowLeft className="mr-2 h-4 w-4" />
                                     Vorige
                                 </Button>
                                 {currentStep < steps.length && (
                                     <Button
                                         onClick={nextStep}
-                                        className="w-full sm:w-auto order-1 sm:order-2 bg-[--main-green] text-white font-bold"
+                                        className="order-1 w-full bg-[--main-green] font-bold text-white sm:order-2 sm:w-auto"
                                         variant="home"
                                     >
                                         Volgende
-                                        <ArrowRight className="w-4 h-4 ml-2" />
+                                        <ArrowRight className="ml-2 h-4 w-4" />
                                     </Button>
                                 )}
                             </div>
@@ -152,22 +157,19 @@ export default function ProInvoiceBuilder({ settings, products, customers, nextI
                     {/* Preview Section */}
                     <div className="order-1 lg:order-2">
                         <div className="lg:sticky lg:top-24">
-                            <div className="flex items-center justify-between mb-4">
-                                <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                            <div className="mb-4 flex items-center justify-between">
+                                <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
                                     Live Preview
                                 </h2>
                             </div>
                             <div className="relative">
-                                <div className="overflow-x-auto lg:overflow-visible -mx-4 px-4 sm:mx-0 sm:px-0 rounded-xl">
-                                    <div className="w-auto lg:min-w-0 md:flex md:flex-col origin-top-left transition-transform duration-300">
-                                        <Factuurvoorbeeld
-                                            data={data}
-                                            Preview={Preview}
-                                        />
+                                <div className="-mx-4 overflow-x-auto rounded-xl px-4 sm:mx-0 sm:px-0 lg:overflow-visible">
+                                    <div className="w-auto origin-top-left transition-transform duration-300 md:flex md:flex-col lg:min-w-0">
+                                        <Factuurvoorbeeld data={data} Preview={Preview} />
                                     </div>
                                 </div>
                                 {/* Gradient overlay to show it's scrollable/scaled */}
-                                <div className="absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background/50 to-transparent pointer-events-none lg:hidden" />
+                                <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background/50 to-transparent lg:hidden" />
                             </div>
                         </div>
                     </div>
@@ -175,8 +177,8 @@ export default function ProInvoiceBuilder({ settings, products, customers, nextI
             </main>
 
             {/* Footer Step Indicator */}
-            <footer className="fixed bottom-0 left-0 right-0 bg-card border-t border-border p-4 z-20 lg:hidden">
-                <div className="max-w-2xl mx-auto">
+            <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-border bg-card p-4 lg:hidden">
+                <div className="mx-auto max-w-2xl">
                     <StepIndicator steps={steps} currentStep={currentStep} />
                 </div>
             </footer>

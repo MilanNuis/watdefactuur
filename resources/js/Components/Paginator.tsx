@@ -20,11 +20,7 @@ const Paginator: React.FC<PaginationProps> = ({ data }) => {
                             <PaginationPrevious
                                 key={index}
                                 href={link.url ?? undefined}
-                                className={
-                                    link.active
-                                        ? "!font-bold text-primary"
-                                        : " !font-light"
-                                }
+                                className={link.active ? "!font-bold text-primary" : "!font-light"}
                             >
                                 {link.label}
                             </PaginationPrevious>
@@ -34,12 +30,8 @@ const Paginator: React.FC<PaginationProps> = ({ data }) => {
                             <PaginationNext
                                 key={index}
                                 href={link.url ?? undefined}
-                                className={
-                                    link.active
-                                        ? "!font-bold text-primary"
-                                        : " !font-light"
-                                    }
-                                        >
+                                className={link.active ? "!font-bold text-primary" : "!font-light"}
+                            >
                                 {link.label}
                             </PaginationNext>
                         )
@@ -47,15 +39,11 @@ const Paginator: React.FC<PaginationProps> = ({ data }) => {
                         <PaginationLink
                             key={index}
                             href={link.url ?? undefined}
-                            className={
-                                link.active
-                                    ? "!font-bold text-primary text-lg"
-                                    : " !font-light"
-                            }
+                            className={link.active ? "text-lg !font-bold text-primary" : "!font-light"}
                         >
                             {link.label}
                         </PaginationLink>
-                    )
+                    ),
                 )}
             </PaginationContent>
         </Pagination>
