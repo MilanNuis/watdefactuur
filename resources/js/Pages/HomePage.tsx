@@ -188,7 +188,6 @@ export default function HomePage() {
 
                             <div className="flex animate-[fade-in-up_0.8s_ease-out_0.4s_forwards] flex-col justify-center gap-4 opacity-0 sm:flex-row">
                                 <Link href={route("invoice-builder.index")}>
-                                    {" "}
                                     <Button
                                         size="lg"
                                         className="w-full bg-[--main-green] px-10 py-7 text-base font-semibold text-white sm:w-auto"
