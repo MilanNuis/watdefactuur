@@ -21,6 +21,7 @@ class MollieController extends Controller
             }
 
             $payment = Mollie::api()->payments->get($paymentId);
+            Log::info('Payment', ['payment' => $payment]);
 
             $userId = null;
             if (isset($payment->metadata) && isset($payment->metadata->user_id)) {
