@@ -11,7 +11,11 @@ interface Props {
     customers?: Customer[];
 }
 
-export default function KlantInfoformulier({ client, onChange, customers }: Props) {
+export default function KlantInfoformulier({
+    client,
+    onChange,
+    customers,
+}: Props) {
     const [searchTerm, setSearchTerm] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -42,7 +46,9 @@ export default function KlantInfoformulier({ client, onChange, customers }: Prop
 
     const filteredCustomers =
         customers?.filter((c) =>
-            `${c.first_name} ${c.last_name} ${c.email}`.toLowerCase().includes(searchTerm.toLowerCase()),
+            `${c.first_name} ${c.last_name} ${c.email}`
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()),
         ) || [];
 
     // Close dropdown when clicking outside
@@ -73,7 +79,9 @@ export default function KlantInfoformulier({ client, onChange, customers }: Prop
             searchInputRef.current?.blur();
         } else if (e.key === "ArrowDown") {
             e.preventDefault();
-            setHighlightedIndex((prev) => (prev < filteredCustomers.length - 1 ? prev + 1 : prev));
+            setHighlightedIndex((prev) =>
+                prev < filteredCustomers.length - 1 ? prev + 1 : prev,
+            );
             setIsDropdownOpen(true);
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
@@ -111,8 +119,12 @@ export default function KlantInfoformulier({ client, onChange, customers }: Prop
     return (
         <div className="animate-fade-in space-y-6">
             <div>
-                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">Klantgegevens</h2>
-                <p className="montserrat-main text-sm text-muted-foreground">Vul de gegevens van je klant in</p>
+                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">
+                    Klantgegevens
+                </h2>
+                <p className="montserrat-main text-sm text-muted-foreground">
+                    Vul de gegevens van je klant in
+                </p>
             </div>
 
             {/* Customer Search - Only show for Pro users with customers */}
@@ -153,24 +165,35 @@ export default function KlantInfoformulier({ client, onChange, customers }: Prop
                                 </div>
                             ) : (
                                 <div className="py-1">
-                                    {filteredCustomers.map((customer, index) => (
-                                        <button
-                                            key={customer.id}
-                                            type="button"
-                                            onClick={() => handleSelectCustomer(customer)}
-                                            onMouseEnter={() => setHighlightedIndex(index)}
-                                            className={`w-full px-3 py-2 text-left text-sm transition-colors ${
-                                                highlightedIndex === index
-                                                    ? "bg-accent text-accent-foreground"
-                                                    : "hover:bg-accent/50"
-                                            }`}
-                                        >
-                                            <div className="font-medium">
-                                                {customer.first_name} {customer.last_name}
-                                            </div>
-                                            <div className="text-xs text-muted-foreground">{customer.email}</div>
-                                        </button>
-                                    ))}
+                                    {filteredCustomers.map(
+                                        (customer, index) => (
+                                            <button
+                                                key={customer.id}
+                                                type="button"
+                                                onClick={() =>
+                                                    handleSelectCustomer(
+                                                        customer,
+                                                    )
+                                                }
+                                                onMouseEnter={() =>
+                                                    setHighlightedIndex(index)
+                                                }
+                                                className={`w-full px-3 py-2 text-left text-sm transition-colors ${
+                                                    highlightedIndex === index
+                                                        ? "bg-accent text-accent-foreground"
+                                                        : "hover:bg-accent/50"
+                                                }`}
+                                            >
+                                                <div className="font-medium">
+                                                    {customer.first_name}{" "}
+                                                    {customer.last_name}
+                                                </div>
+                                                <div className="text-xs text-muted-foreground">
+                                                    {customer.email}
+                                                </div>
+                                            </button>
+                                        ),
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -216,7 +239,9 @@ export default function KlantInfoformulier({ client, onChange, customers }: Prop
                     <Input
                         id="clientAddress"
                         value={client.address}
-                        onChange={(e) => handleChange("address", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("address", e.target.value)
+                        }
                         placeholder="Straatnaam 456"
                     />
                 </div>
@@ -226,7 +251,9 @@ export default function KlantInfoformulier({ client, onChange, customers }: Prop
                     <Input
                         id="clientPostalCode"
                         value={client.postalCode}
-                        onChange={(e) => handleChange("postalCode", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("postalCode", e.target.value)
+                        }
                         placeholder="5678 CD"
                     />
                 </div>

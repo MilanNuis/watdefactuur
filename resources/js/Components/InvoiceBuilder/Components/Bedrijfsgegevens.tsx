@@ -11,7 +11,12 @@ interface Props {
     onChange: (value: CompanyInfo) => void;
 }
 
-export default function Bedrijfsgegevens({ Preview, setPreview, company, onChange }: Props) {
+export default function Bedrijfsgegevens({
+    Preview,
+    setPreview,
+    company,
+    onChange,
+}: Props) {
     const handleChange = (field: keyof CompanyInfo, value: string) => {
         onChange({ ...company, [field]: value });
     };
@@ -19,7 +24,9 @@ export default function Bedrijfsgegevens({ Preview, setPreview, company, onChang
     return (
         <div className="animate-fade-in space-y-6">
             <div className="">
-                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">Jouw Bedrijfsgegevens</h2>
+                <h2 className="montserrat-main mb-1 text-xl font-semibold text-foreground">
+                    Jouw Bedrijfsgegevens
+                </h2>
 
                 <p className="montserrat-main text-sm text-muted-foreground">
                     Vul je bedrijfsgegevens in voor op de factuur
@@ -58,7 +65,9 @@ export default function Bedrijfsgegevens({ Preview, setPreview, company, onChang
                     <Input
                         id="companyAddress"
                         value={company.address}
-                        onChange={(e) => handleChange("address", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("address", e.target.value)
+                        }
                         placeholder="Straatnaam 123"
                     />
                 </div>
@@ -67,6 +76,7 @@ export default function Bedrijfsgegevens({ Preview, setPreview, company, onChang
                     <Label htmlFor="companyPhone">Telefoonnummer</Label>
                     <Input
                         id="companyPhone"
+                        type="tel"
                         value={company.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         placeholder="+31 6 12345678"
@@ -78,7 +88,9 @@ export default function Bedrijfsgegevens({ Preview, setPreview, company, onChang
                     <Input
                         id="companyPostalCode"
                         value={company.postalCode}
-                        onChange={(e) => handleChange("postalCode", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("postalCode", e.target.value)
+                        }
                         placeholder="1234 AB"
                     />
                 </div>
@@ -98,7 +110,9 @@ export default function Bedrijfsgegevens({ Preview, setPreview, company, onChang
                     <Input
                         id="kvkNumber"
                         value={company.kvkNumber}
-                        onChange={(e) => handleChange("kvkNumber", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("kvkNumber", e.target.value)
+                        }
                         placeholder="12345678"
                     />
                 </div>
@@ -108,7 +122,9 @@ export default function Bedrijfsgegevens({ Preview, setPreview, company, onChang
                     <Input
                         id="btwNumber"
                         value={company.btwNumber}
-                        onChange={(e) => handleChange("btwNumber", e.target.value)}
+                        onChange={(e) =>
+                            handleChange("btwNumber", e.target.value)
+                        }
                         placeholder="NL123456789B01"
                     />
                 </div>
