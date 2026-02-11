@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Mollie\Api\Http\Data\Money;
+use Mollie\Api\Http\Requests\CreateSubscriptionRequest;
 use Mollie\Laravel\Facades\Mollie;
 
 class MollieController extends Controller
@@ -68,17 +70,21 @@ class MollieController extends Controller
             }
 
             // 4. Create the payment linked to the customer
-            $payment = Mollie::api()->customerPayments->createForId($user->mollie_customer_id, [
-                'amount' => [
-                    'currency' => 'EUR',
-                    'value' => '10.00',
-                ],
-                'description' => "WatDeFactuur Pro",
-                'redirectUrl' => route('home'),
-                'webhookUrl' => route('mollie.webhook'),
-                'metadata' => ['user_id' => $user->id],
-                'sequenceType' => \Mollie\Api\Types\SequenceType::FIRST,
-            ]);
+
+            $mollie = new \Mollie\Api\MollieApiClient();
+            $mollie->setApiKey(config('mollie.api_key'));
+
+            $payment = $mollie->send(
+                new CreateSubscriptionRequest(
+                    customerId: $user->mollie_customer_id,
+                    amount: new Money(currency: "EUR", value: "10.00"),
+                    interval: "1 month",
+                    description: "WatDeFactuur Pro",
+                    times: 1,
+                    startDate: now()->toDateString(),
+                    webhookUrl: route('mollie.webhook'),
+                )
+            );
 
             return Inertia::location($payment->getCheckoutUrl());
         } catch (\Exception $e) {
