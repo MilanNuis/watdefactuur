@@ -74,6 +74,7 @@ class MollieController extends Controller
             $mollie = new \Mollie\Api\MollieApiClient();
             $mollie->setApiKey(config('mollie.api_key'));
 
+            dd($user);
             $payment = $mollie->send(
                 new CreateSubscriptionRequest(
                     customerId: $user->mollie_customer_id,
