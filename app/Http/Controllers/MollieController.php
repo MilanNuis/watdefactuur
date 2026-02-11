@@ -52,17 +52,42 @@ class MollieController extends Controller
 
     public function startCheckout(Request $request)
     {
-        $payment = Mollie::api()->payments->create([
-            'amount' => [
-                'currency' => 'EUR',
-                'value' => '10.00',
-            ],
-            'description' => "WatDeFactuur Pro",
-            'redirectUrl' => route('home'),
-            'webhookUrl' => route('mollie.webhook'),
-            'metadata' => ['user_id' => Auth::id()],
-        ]);
+        /** @var User $user */
+        $user = Auth::user();
 
-        return Inertia::location($payment->getCheckoutUrl());
+        try {
+            if (!$user->mollie_customer_id) {
+                $customer = Mollie::api()->customers->create([
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ]);
+
+                // 3. Save the customer ID to the user
+                $user->mollie_customer_id = $customer->id;
+                $user->save();
+            }
+
+            // 4. Create the payment linked to the customer
+            $payment = Mollie::api()->customerPayments->createForId($user->mollie_customer_id, [
+                'amount' => [
+                    'currency' => 'EUR',
+                    'value' => '10.00',
+                ],
+                'description' => "WatDeFactuur Pro",
+                'redirectUrl' => route('home'),
+                'webhookUrl' => route('mollie.webhook'),
+                'metadata' => ['user_id' => $user->id],
+                'sequenceType' => \Mollie\Api\Types\SequenceType::FIRST,
+            ]);
+
+            return Inertia::location($payment->getCheckoutUrl());
+        } catch (\Exception $e) {
+            Log::error('Error starting checkout', [
+                'user_id' => $user->id,
+                'message' => $e->getMessage(),
+            ]);
+
+            return back()->with('error', 'Er is iets misgegaan bij het starten van de betaling. Probeer het later opnieuw.');
+        }
     }
 }
