@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
+use Mollie\Api\Http\Requests\CancelSubscriptionRequest;
 use Mollie\Laravel\Facades\Mollie;
 
 class AccountController extends Controller
@@ -59,9 +60,13 @@ class AccountController extends Controller
      * Cancel the pro subscription.
      */
     public function cancelSubscription(Request $request): RedirectResponse
-    {   
-        // Cancel subscription with mollie
-        Mollie::api()->subscriptions->delete(Auth::user()->mollie_subscription_id);
+    {
+        Mollie::api()->send(
+            new CancelSubscriptionRequest(
+                customerId: Auth::user()->mollie_customer_id,
+                subscriptionId: Auth::user()->mollie_subscription_id
+            )
+        );
 
         $user = $request->user();
         $user->is_pro = false;
