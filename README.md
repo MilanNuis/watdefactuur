@@ -10,9 +10,9 @@
 8. Open een tweede terminal en start de frontend met `npm run dev`
 
 ## Normal startup
+
 1. Start de Laravel server met `php artisan serve`
 2. Open een tweede terminal en start de frontend met `npm run dev`
-
 
 ## voorbeeld
 

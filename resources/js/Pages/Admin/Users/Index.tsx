@@ -113,7 +113,11 @@ export default function Index() {
         <Adminlayout>
             <div className="mb-6 flex items-center justify-between">
                 <Header title="Gebruikers" description="Beheer hier je gebruikers" />
-                <Button onClick={() => setIsCreateModalOpen(true)} className="gap-2">
+                <Button
+                    onClick={() => setIsCreateModalOpen(true)}
+                    className="gap-2 bg-[--main-green] text-white"
+                    variant={"home"}
+                >
                     <Plus className="h-4 w-4" />
                     Gebruiker toevoegen
                 </Button>
@@ -145,7 +149,10 @@ export default function Index() {
                                     <TableCell>
                                         <div className="flex items-center gap-2">
                                             {user.is_pro ? (
-                                                <Badge className="border-green-200 bg-green-100 text-green-800">
+                                                <Badge
+                                                    className="border-green-200 bg-green-100 text-green-800"
+                                                    variant={"home"}
+                                                >
                                                     Pro
                                                 </Badge>
                                             ) : (
