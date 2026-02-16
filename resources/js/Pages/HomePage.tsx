@@ -330,7 +330,7 @@ export default function HomePage() {
                                         <Link href={route("invoice-builder.index")}>
                                             <Button
                                                 variant="home"
-                                                className="w-full bg-[--main-green] py-7 text-base font-semibold text-white"
+                                                className="mt-[8rem] w-full bg-[--main-green] py-7 text-base font-semibold text-white"
                                             >
                                                 Gratis Beginnen
                                                 <ChevronRight className="ml-2 h-5 w-5" />
