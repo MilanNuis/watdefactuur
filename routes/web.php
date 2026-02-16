@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->group(function () {
     Route::post('/webhook', 'handleWebhook')->name('webhook')->withoutMiddleware(['web']);
-    Route::post('/start-checkout', 'startCheckout')->name('start-checkout')->middleware('auth');
+    Route::post('/start-checkout', 'startCheckout')->name('start-checkout')->middleware(['auth', 'verified']);
 });
 
 Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBuilderController::class)->group(function () {
@@ -30,7 +30,7 @@ Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBu
     Route::post('/download', 'download')->name('download');
 });
 
-Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->group(function () {
+Route::prefix('pro')->name('pro.')->middleware(['auth', 'verified', 'checkIfUserIsPro'])->group(function () {
 
     Route::prefix('invoice-builder')->name('invoice-builder.')->controller(ProInvoiceBuilderController::class)->group(function () {
         Route::get(null, 'index')->name('index');
@@ -74,7 +74,7 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'checkIfUserIsPro'])->gr
         });
     });
 });
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'checkIfIsAdmin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'checkIfIsAdmin', 'verified'])->group(function () {
     Route::prefix('dashboard')->name('dashboard.')->controller(AdminDashboardController::class)->group(function () {
         Route::get(null, 'index')->name('index');
     });
