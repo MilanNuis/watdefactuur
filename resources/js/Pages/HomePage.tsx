@@ -448,9 +448,10 @@ export default function HomePage() {
                                     <img src="/logos/LogoGreen.svg" alt="Watdefactuur" height={300} width={300} />
                                 </div>
                             </div>
-                            <p className="text-sm text-[--main-purple] text-gray-600 dark:text-gray-400">
-                                © {new Date().getFullYear()} FactuurMaker. Alle rechten voorbehouden.
-                            </p>
+                            <div className="flex flex-col items-center gap-2 text-sm text-[--main-purple] text-gray-600 dark:text-gray-400">
+                                <p>© {new Date().getFullYear()} WatDeFactuur. Alle rechten voorbehouden.</p>
+                                <p>KvK: 12345678&nbsp;|&nbsp;BTW: NL123456789B01</p>
+                            </div>
                         </div>
                     </div>
                 </footer>
