@@ -415,7 +415,7 @@ export default function HomePage() {
                                     <Button
                                         size="lg"
                                         variant="home"
-                                        className="w-full whitespace-normal bg-white px-4 py-9 text-sm font-bold text-green-700 sm:px-6 sm:text-base md:py-6"
+                                        className="w-full whitespace-normal bg-white px-4 py-5 text-sm font-bold text-green-700 sm:px-6 sm:text-base md:py-6"
                                     >
                                         <div className="flex min-w-0 items-center justify-center gap-2 sm:gap-3 md:gap-4">
                                             <div className="h-4 w-4 sm:h-5 sm:w-5 md:flex-shrink-0">
