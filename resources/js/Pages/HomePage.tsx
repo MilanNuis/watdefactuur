@@ -84,7 +84,9 @@ export default function HomePage() {
                         <div className="flex items-center justify-between">
                             <div className="group flex cursor-pointer items-center gap-3">
                                 <div className="flex items-center justify-center rounded-xl">
-                                    <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                                    <Link href={route("home")}>
+                                        <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                                    </Link>
                                 </div>
                             </div>
 

@@ -8,7 +8,8 @@ import { Button } from "@/Components/ui/button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, Link } from "@inertiajs/react";
+
 const initialInvoiceData: InvoiceData = {
     invoiceNumber: `${new Date().getFullYear()}-001`,
     invoiceDate: new Date().toISOString().split("T")[0],
@@ -103,7 +104,9 @@ export default function InvoiceBuilder() {
             <header className="sticky top-0 z-10 border-b border-border bg-card">
                 <div className="container py-4">
                     <div className="flex items-center gap-3">
-                        <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                        <Link href={route("home")}>
+                            <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                        </Link>
                     </div>
                 </div>
             </header>
