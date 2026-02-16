@@ -17,7 +17,7 @@ class CheckIfUserIsPro
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::user()->isPro()) {
-            return redirect()->route('pro.dashboard.index')->with('error', "Je bent nog niet pro!");
+            return redirect()->route('home')->with('error', "Je bent nog niet pro!");
         } else {
             return $next($request);
         }

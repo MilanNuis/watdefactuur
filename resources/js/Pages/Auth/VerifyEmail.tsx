@@ -1,5 +1,5 @@
-import PrimaryButton from "@/Components/PrimaryButton";
-import GuestLayout from "@/Layouts/GuestLayout";
+import { Button } from "@/Components/ui/button";
+import AuthenticationLayout from "@/Layouts/AuthenticationLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
 
@@ -13,34 +13,43 @@ export default function VerifyEmail({ status }: { status?: string }) {
     };
 
     return (
-        <GuestLayout>
-            <Head title="Email Verification" />
+        <AuthenticationLayout>
+            <Head title="E-mail verifiëren" />
 
             <div className="mb-4 text-sm text-gray-600">
-                Thanks for signing up! Before getting started, could you verify your email address by clicking on the
-                link we just emailed to you? If you didn't receive the email, we will gladly send you another.
+                Bedankt voor het aanmelden! Voordat je aan de slag kunt, verifieer je e-mailadres door op de link te
+                klikken die we je zojuist hebben gemaild. Heb je de e-mail niet ontvangen? Dan sturen we je graag een
+                nieuwe.
             </div>
 
             {status === "verification-link-sent" && (
-                <div className="mb-4 text-sm font-medium text-green-600">
-                    A new verification link has been sent to the email address you provided during registration.
+                <div className="mb-4 text-sm font-medium text-[--main-green]">
+                    Er is een nieuwe verificatielink verzonden naar het e-mailadres dat je bij de registratie hebt
+                    opgegeven.
                 </div>
             )}
 
             <form onSubmit={submit}>
                 <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton disabled={processing}>Resend Verification Email</PrimaryButton>
+                    <Button
+                        variant="home"
+                        type="submit"
+                        className="bg-[--main-green] text-white hover:bg-[--main-green]/90"
+                        disabled={processing}
+                    >
+                        Verificatie-e-mail opnieuw versturen
+                    </Button>
 
                     <Link
                         href={route("logout")}
                         method="post"
                         as="button"
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2"
                     >
-                        Log Out
+                        Uitloggen
                     </Link>
                 </div>
             </form>
-        </GuestLayout>
+        </AuthenticationLayout>
     );
 }
