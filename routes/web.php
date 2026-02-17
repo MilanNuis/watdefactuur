@@ -28,6 +28,7 @@ Route::prefix('mollie')->name('mollie.')->controller(MollieController::class)->g
 Route::prefix('invoice-builder')->name('invoice-builder.')->controller(InvoiceBuilderController::class)->group(function () {
     Route::get(null, 'index')->name('index');
     Route::post('/download', 'download')->name('download');
+    Route::post('/email', 'email')->name('email');
 });
 
 Route::prefix('pro')->name('pro.')->middleware(['auth', 'verified', 'checkIfUserIsPro'])->group(function () {
@@ -35,6 +36,7 @@ Route::prefix('pro')->name('pro.')->middleware(['auth', 'verified', 'checkIfUser
     Route::prefix('invoice-builder')->name('invoice-builder.')->controller(ProInvoiceBuilderController::class)->group(function () {
         Route::get(null, 'index')->name('index');
         Route::post('/download', 'download')->name('download');
+        Route::post('/email', 'email')->name('email');
     });
 
     Route::prefix('dashboard')->name('dashboard.')->controller(DashboardController::class)->group(function () {
