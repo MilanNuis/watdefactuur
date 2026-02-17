@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
+use Mollie\Api\Http\Data\Money;
+use Mollie\Api\Http\Requests\CreateSubscriptionRequest;
 use Mollie\Laravel\Facades\Mollie;
 
 class MollieController extends Controller
@@ -22,25 +24,49 @@ class MollieController extends Controller
 
             $payment = Mollie::api()->payments->get($paymentId);
 
-            $userId = null;
-            if (isset($payment->metadata) && isset($payment->metadata->user_id)) {
-                $userId = $payment->metadata->user_id;
-            }
-
             if ($payment->isPaid()) {
+                $userId = $payment->metadata?->user_id ?? null;
+                $subscriptionId = $payment->subscriptionId ?? null;
+
+                // Eerste betaling: maak subscription aan en sla subscription ID op
                 if ($userId) {
                     $user = User::find($userId);
                     if ($user) {
-                        $user->is_pro = true;
-                        $user->mollie_subscription_id = $payment->id;
                         $user->mollie_customer_id = $payment->customerId;
+                        $user->is_pro = true;
+
+                        if (!$user->mollie_subscription_id) {
+                            $subscription = Mollie::api()->send(
+                                new CreateSubscriptionRequest(
+                                    customerId: $user->mollie_customer_id,
+                                    amount: new Money('EUR', '10.00'),
+                                    interval: '1 month',
+                                    description: 'WatDeFactuur Pro',
+                                    webhookUrl: route('mollie.webhook'),
+                                    metadata: ['user_id' => $user->id]
+                                )
+                            );
+                            $user->mollie_subscription_id = $subscription->id;
+                        }
                         $user->save();
                     }
+                    return response('Payment processed: user is now pro', 200);
                 }
-                return response('Payment processed: user is now pro', 200);
-            } else {
-                return response('Betaling niet voltooid.', 200);
+
+                // Terugkerende subscription betaling: vind user en behoud pro status
+                if ($subscriptionId) {
+                    $user = User::where('mollie_customer_id', $payment->customerId)
+                        ->where('mollie_subscription_id', $subscriptionId)
+                        ->first();
+                    if ($user) {
+                        $user->is_pro = true;
+                        $user->save();
+                    }
+                    return response('Subscription payment processed', 200);
+                }
             }
+
+            return response('Betaling niet voltooid.', 200);
         } catch (\Exception $e) {
             Log::error('Error in webhook', [
                 'message' => $e->getMessage(),
