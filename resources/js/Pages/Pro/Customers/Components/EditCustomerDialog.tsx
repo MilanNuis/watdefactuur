@@ -45,11 +45,11 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Eye className="hover:cursor-pointer" />
+                    <Eye className="hover:cursor-pointer text-[--main-purple]" />
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>Bewerk klant</DialogTitle>
+                        <DialogTitle className="text-[--main-purple]">Bewerk klant</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                         <div className="flex gap-2">
@@ -145,7 +145,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                         <DialogClose asChild>
                             <Button variant={"outline"}>Annuleren</Button>
                         </DialogClose>
-                        <Button onClick={handleSubmit} type="submit" variant={"secondary"}>
+                        <Button onClick={handleSubmit} type="submit" variant={"home"} className="bg-[--main-purple] text-white">
                             Opslaan
                         </Button>
                     </DialogFooter>

@@ -142,7 +142,7 @@ export default function Index() {
                         <Button
                             size="lg"
                             variant="home"
-                            className="bg-[--main-green] text-white"
+                            className="border-2 border-[--main-purple] bg-[--main-purple] text-white"
                         >
                             Nieuwe factuur
                         </Button>
@@ -175,7 +175,7 @@ export default function Index() {
                     <Button
                         size="lg"
                         variant="home"
-                        className="bg-[--main-green] text-white"
+                        className="bg-[--main-purple] text-white"
                     >
                         Nieuwe factuur
                     </Button>
@@ -201,12 +201,12 @@ export default function Index() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Factuurnummer</TableHead>
-                            <TableHead>Klant</TableHead>
-                            <TableHead>Datum</TableHead>
-                            <TableHead>Totaal</TableHead>
-                            <TableHead>Status</TableHead>
-                            <TableHead className="text-right">Acties</TableHead>
+                            <TableHead className="text-[--main-purple] font-bold">Factuurnummer</TableHead>
+                            <TableHead className="text-[--main-purple] font-bold">Klant</TableHead>
+                            <TableHead className="text-[--main-purple] font-bold">Datum</TableHead>
+                            <TableHead className="text-[--main-purple] font-bold">Totaal</TableHead>
+                            <TableHead className="text-[--main-purple] font-bold">Status</TableHead>
+                            <TableHead className="text-right text-[--main-purple] font-bold">Acties</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>

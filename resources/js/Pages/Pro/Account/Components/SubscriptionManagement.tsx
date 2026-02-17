@@ -12,7 +12,7 @@ export default function SubscriptionManagement({ user }: { user: User }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="montserrat-main">Subscription Beheer</CardTitle>
+                <CardTitle className="montserrat-main text-[--main-purple]">Mijn Abonnement</CardTitle>
                 <CardDescription>Beheer je huidige subscription en bekijk je status.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -51,7 +51,7 @@ export default function SubscriptionManagement({ user }: { user: User }) {
             <CardFooter className="mt-4 flex justify-between border-t p-6">
                 {!user.is_pro ? (
                     <Link href={route("mollie.start-checkout")} method="post" as="button" className="w-full sm:w-auto">
-                        <Button className="w-full bg-[--main-green] text-white hover:bg-[#74ee8c]/90">
+                        <Button className="w-full border-2 border-[--main-purple] bg-[--main-purple] text-white hover:bg-[#9333ea]/90">
                             Upgrade naar Pro
                         </Button>
                     </Link>
@@ -72,7 +72,7 @@ export default function SubscriptionManagement({ user }: { user: User }) {
 
                         {/* Dialog for confirmation */}
                         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                            <DialogContent>
+                            <DialogContent className="">
                                 <DialogHeader>
                                     <DialogTitle>Subscription Opzeggen</DialogTitle>
                                     <DialogDescription>

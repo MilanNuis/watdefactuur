@@ -64,11 +64,13 @@ export default function index() {
 
             <Table>
                 <TableHeader>
-                    <TableHead>Naam</TableHead>
-                    <TableHead>Prijs zonder BTW</TableHead>
-                    <TableHead>BTW</TableHead>
-                    <TableHead>Prijs met BTW</TableHead>
-                    <TableHead>Acties</TableHead>
+                    <TableRow>
+                        <TableHead className="text-[--main-purple] font-bold">Naam</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Prijs zonder BTW</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">BTW</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Prijs met BTW</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Acties</TableHead>
+                    </TableRow>
                 </TableHeader>
                 <TableBody>
                     {products.data.map((product: Product) => (

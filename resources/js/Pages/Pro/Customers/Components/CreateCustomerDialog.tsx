@@ -43,13 +43,13 @@ export default function CreateCustomerDialog() {
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Button variant={"home"} className="bg-[--main-green] text-white">
+                    <Button variant={"home"} className="bg-[--main-purple] text-white">
                         Nieuwe klant
                     </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>Nieuwe klant</DialogTitle>
+                        <DialogTitle className="text-[--main-purple]">Nieuwe klant</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                         <div className="flex gap-2">
@@ -149,7 +149,7 @@ export default function CreateCustomerDialog() {
                             onClick={handleSubmit}
                             type="submit"
                             variant={"home"}
-                            className="bg-[--main-green] text-white"
+                            className="bg-[--main-purple] text-white"
                         >
                             Aanmaken
                         </Button>

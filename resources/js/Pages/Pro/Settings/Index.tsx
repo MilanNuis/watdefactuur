@@ -27,15 +27,10 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
     };
     return (
         <ProLayout>
-            <Header
-                title="Instellingen"
-                description="Beheer hier je instellingen"
-            />
+            <Header title="Instellingen" description="Beheer hier je instellingen" />
             <Card className="my-4">
                 <CardHeader>
-                    <CardTitle className="montserrat-main">
-                        Algemene Instellingen
-                    </CardTitle>
+                    <CardTitle className="montserrat-main text-[--main-purple]">Algemene Instellingen</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -44,79 +39,48 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                             <Input
                                 id="name"
                                 value={data.name}
-                                onChange={(e) =>
-                                    setData("name", e.target.value)
-                                }
+                                onChange={(e) => setData("name", e.target.value)}
+                                className="focus:border-[--main-purple]"
                             />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="email">E-mailadres</Label>
-                            <Input
-                                id="email"
-                                value={data.email}
-                                onChange={(e) =>
-                                    setData("email", e.target.value)
-                                }
-                            />
+                            <Input id="email" value={data.email} onChange={(e) => setData("email", e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="phone">Telefoonnummer</Label>
-                            <Input
-                                id="phone"
-                                value={data.phone}
-                                onChange={(e) =>
-                                    setData("phone", e.target.value)
-                                }
-                            />
+                            <Input id="phone" value={data.phone} onChange={(e) => setData("phone", e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="address">Adres</Label>
                             <Input
                                 id="address"
                                 value={data.address}
-                                onChange={(e) =>
-                                    setData("address", e.target.value)
-                                }
+                                onChange={(e) => setData("address", e.target.value)}
                             />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="city">Plaats</Label>
-                            <Input
-                                id="city"
-                                value={data.city}
-                                onChange={(e) =>
-                                    setData("city", e.target.value)
-                                }
-                            />
+                            <Input id="city" value={data.city} onChange={(e) => setData("city", e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="postal_code">Postcode</Label>
                             <Input
                                 id="postal_code"
                                 value={data.postal_code}
-                                onChange={(e) =>
-                                    setData("postal_code", e.target.value)
-                                }
+                                onChange={(e) => setData("postal_code", e.target.value)}
                             />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="iban">IBAN</Label>
-                            <Input
-                                id="iban"
-                                value={data.iban}
-                                onChange={(e) =>
-                                    setData("iban", e.target.value)
-                                }
-                            />
+                            <Input id="iban" value={data.iban} onChange={(e) => setData("iban", e.target.value)} />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="kvk_number">KVK-nummer</Label>
                             <Input
                                 id="kvk_number"
                                 value={data.kvk_number}
-                                onChange={(e) =>
-                                    setData("kvk_number", e.target.value)
-                                }
+                                onChange={(e) => setData("kvk_number", e.target.value)}
                             />
                         </div>
                         <div className="space-y-2">
@@ -124,9 +88,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                             <Input
                                 id="btw_number"
                                 value={data.btw_number}
-                                onChange={(e) =>
-                                    setData("btw_number", e.target.value)
-                                }
+                                onChange={(e) => setData("btw_number", e.target.value)}
                             />
                         </div>
                     </div>
@@ -135,22 +97,16 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
 
             <Card className="my-4">
                 <CardHeader>
-                    <CardTitle className="montserrat-main">
-                        Factuur Instellingen
-                    </CardTitle>
+                    <CardTitle className="montserrat-main text-[--main-purple]">Factuur Instellingen</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div className="space-y-2">
-                            <Label htmlFor="invoice_prefix">
-                                Factuur Prefix
-                            </Label>
+                            <Label htmlFor="invoice_prefix">Factuur Prefix</Label>
                             <Input
                                 id="invoice_prefix"
                                 value={data.invoice_prefix}
-                                onChange={(e) =>
-                                    setData("invoice_prefix", e.target.value)
-                                }
+                                onChange={(e) => setData("invoice_prefix", e.target.value)}
                             />
                         </div>
                     </div>
@@ -161,7 +117,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                 <Button
                     variant={"home"}
                     type="button"
-                    className="bg-[--main-green] text-white shadow"
+                    className="bg-[--main-purple] text-white shadow"
                     onClick={handleSubmit}
                 >
                     Opslaan

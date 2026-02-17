@@ -39,7 +39,7 @@ export default function UpdatePasswordForm() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="montserrat-main">Wachtwoord Wijzigen</CardTitle>
+                <CardTitle className="montserrat-main text-[--main-purple]">Wachtwoord</CardTitle>
                 <CardDescription>
                     Zorg ervoor dat je account een lang, willekeurig wachtwoord gebruikt om veilig te blijven.
                 </CardDescription>
@@ -87,7 +87,7 @@ export default function UpdatePasswordForm() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Button disabled={processing} className="bg-[--main-green] text-white" variant={"home"}>
+                        <Button disabled={processing} className="border-2 border-[--main-purple] bg-[--main-purple] text-white" variant={"home"}>
                             {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                             Opslaan
                         </Button>

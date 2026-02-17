@@ -59,10 +59,12 @@ export default function index() {
 
             <Table>
                 <TableHeader>
-                    <TableHead>Voornaam</TableHead>
-                    <TableHead>Achternaam</TableHead>
-                    <TableHead>Email</TableHead>
-                    <TableHead>Acties</TableHead>
+                    <TableRow>
+                        <TableHead className="text-[--main-purple] font-bold">Voornaam</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Achternaam</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Email</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Acties</TableHead>
+                    </TableRow>
                 </TableHeader>
                 <TableBody>
                     {customers.data.map((customer: Customer) => (

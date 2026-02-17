@@ -85,7 +85,7 @@ export function AppSidebar() {
                         <span className="text-lg font-semibold tracking-tight">
                             WatDeFactuur
                         </span> */}
-                        <img src="/logos/LogoGreen.svg" alt="" />
+                        <img src="/logos/ProLogo.svg" alt="" />
                     </div>
                 </SidebarHeader>
 
