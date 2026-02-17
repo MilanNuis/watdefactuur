@@ -10,7 +10,7 @@ import AuthenticationLayout from "@/Layouts/AuthenticationLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
-
+import { ArrowLeft } from "lucide-react";
 export default function Login({ status, canResetPassword }: { status?: string; canResetPassword: boolean }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
@@ -85,6 +85,11 @@ export default function Login({ status, canResetPassword }: { status?: string; c
                             Wachtwoord vergeten?
                         </Link>
                     )}
+                    <Link href={route("home")}>
+                        <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
+                            <ArrowLeft />
+                        </Button>
+                    </Link>
 
                     <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
                         Log in

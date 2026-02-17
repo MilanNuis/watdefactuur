@@ -9,6 +9,7 @@ import AuthenticationLayout from "@/Layouts/AuthenticationLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
+import { ArrowLeft } from "lucide-react";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -104,6 +105,12 @@ export default function Register() {
                         className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                         Ik heb al een account
+                    </Link>
+
+                    <Link href={route("home")}>
+                        <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
+                            <ArrowLeft />
+                        </Button>
                     </Link>
 
                     <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
