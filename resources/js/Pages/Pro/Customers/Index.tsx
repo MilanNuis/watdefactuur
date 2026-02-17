@@ -3,7 +3,14 @@ import Customer from "./types";
 import { usePage } from "@inertiajs/react";
 import Paginator from "@/Components/Paginator";
 import Header from "@/Components/Pro/Header";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/Components/ui/table";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/Components/ui/table";
 import CreateCustomerDialog from "./Components/CreateCustomerDialog";
 import EditCustomerDialog from "./Components/EditCustomerDialog";
 
@@ -17,6 +24,31 @@ export default function index() {
     }
 
     const { customers } = usePage().props as unknown as customersProps;
+
+    if (customers.data.length === 0) {
+        return (
+            <ProLayout>
+                <div className="flex flex-row justify-between align-middle">
+                    <Header
+                        title="Klanten"
+                        description="Beheer hier je klanten"
+                    />
+                    <CreateCustomerDialog />
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 py-12">
+                    <img
+                        src="/logos/EmptyImage.png"
+                        alt="Empty state"
+                        className="w-1/4"
+                    />
+                    <p className="text-center text-muted-foreground">
+                        Geen klanten gevonden. Maak je eerste klant om te
+                        beginnen.
+                    </p>
+                </div>
+            </ProLayout>
+        );
+    }
 
     return (
         <ProLayout>
@@ -35,9 +67,15 @@ export default function index() {
                 <TableBody>
                     {customers.data.map((customer: Customer) => (
                         <TableRow key={customer.id}>
-                            <TableCell className="font-medium">{customer.first_name}</TableCell>
-                            <TableCell className="font-medium">{customer.last_name}</TableCell>
-                            <TableCell className="font-medium">{customer.email}</TableCell>
+                            <TableCell className="font-medium">
+                                {customer.first_name}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {customer.last_name}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {customer.email}
+                            </TableCell>
                             <TableCell>
                                 <EditCustomerDialog customer={customer} />
                             </TableCell>
