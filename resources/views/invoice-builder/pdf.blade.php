@@ -9,10 +9,10 @@
     <style>
         * {
             box-sizing: border-box;
+            font-family: "Montserrat", sans-serif;
         }
 
         body {
-            font-family: "Montserrat", sans-serif;
             color: #111827;
             font-size: 12px;
         }
@@ -150,7 +150,7 @@
 
         <div class="section">
             <div class="muted" style="text-transform: uppercase; letter-spacing: .05em;">Factuur aan</div>
-            <div style="font-weight: 600;">{{ data_get($invoice, 'client.name', 'Klantnaam') }}</div>
+            <div >{{ data_get($invoice, 'client.name', 'Klantnaam') }}</div>
             @if(data_get($invoice, 'client.address'))
             <div class="muted">{{ data_get($invoice, 'client.address') }}</div>
             @endif
@@ -205,7 +205,7 @@
                 <span>€ {{ number_format($btwTotal, 2, ',', '.') }}</span>
             </div>
             <div class="totals-row">
-                <span style="font-weight:600;">Totaal</span>
+                <span >Totaal</span>
                 <span class="total">€ {{ number_format($total, 2, ',', '.') }}</span>
             </div>
         </div>
