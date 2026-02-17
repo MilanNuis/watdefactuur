@@ -1,11 +1,11 @@
 @php
 $color = match ($level ?? 'info') {
-'success', 'error' => $level,
-default => 'primary',
+    'success', 'error' => $level,
+    default => 'primary',
 };
 $logoBaseUrl = app()->environment('local')
-? rtrim(url('/'), '/')
-: rtrim(config('app.url'), '/');
+    ? rtrim(url('/'), '/')
+    : rtrim(config('app.url'), '/');
 @endphp
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
@@ -15,9 +15,7 @@ $logoBaseUrl = app()->environment('local')
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>{{ config('app.name') }}</title>
     <style>
-        {
-            ! ! file_get_contents(resource_path('views/vendor/mail/html/themes/default.css')) ! !
-        }
+        {!! file_get_contents(resource_path('views/vendor/mail/html/themes/default.css')) !!}
     </style>
 </head>
 
