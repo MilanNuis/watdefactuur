@@ -11,12 +11,15 @@ interface Props {
     isSubmitting: boolean;
     /** Route name for PDF download - use "invoice-builder.download" for free, "pro.invoice-builder.download" for Pro */
     downloadRoute?: string;
+    /** Route name for Email - use "invoice-builder.email" for free, "pro.invoice-builder.email" for Pro */
+    emailRoute?: string;
 }
 
 export default function GenereerStap({
     data,
     isSubmitting,
     downloadRoute = "pro.invoice-builder.download",
+    emailRoute = "pro.invoice-builder.email",
 }: Props) {
     const [email, setEmail] = useState(data.company.email);
     const [isDownloading, setIsDownloading] = useState(false);
@@ -74,15 +77,29 @@ export default function GenereerStap({
 
         setIsSending(true);
 
-        // Simulate email sending
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        try {
+            await axios.post(route(emailRoute), {
+                email,
+                ...data,
+            });
 
-        setIsSending(false);
-        setEmailSent(true);
-        toast({
-            title: "E-mail verzonden!",
-            description: `De factuur is verstuurd naar ${email}`,
-        });
+            setEmailSent(true);
+            toast({
+                title: "E-mail verzonden!",
+                description: `De factuur is verstuurd naar ${email}`,
+            });
+        } catch (error: any) {
+            const errorMessage =
+                error.response?.data?.message ||
+                "Er ging iets mis bij het versturen van de e-mail.";
+            toast({
+                title: "Verzenden mislukt",
+                description: errorMessage,
+                variant: "destructive",
+            });
+        } finally {
+            setIsSending(false);
+        }
     };
 
     const subtotal = data.products.reduce(
