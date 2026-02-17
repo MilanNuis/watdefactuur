@@ -16,6 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
 
+        $middleware->validateCsrfTokens(except: [
+            'mollie/webhook',
+        ]);
+
         $middleware->alias([
             'checkIfUserIsPro' => \App\Http\Middleware\CheckIfUserIsPro::class,
             'checkIfIsAdmin' => \App\Http\Middleware\CheckIfIsAdmin::class,

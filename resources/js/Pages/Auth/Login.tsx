@@ -86,12 +86,12 @@ export default function Login({ status, canResetPassword }: { status?: string; c
                         </Link>
                     )}
                     <Link href={route("home")}>
-                        <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
+                        <Button type="button" variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
                             <ArrowLeft />
                         </Button>
                     </Link>
 
-                    <Button variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
+                    <Button type="submit" variant={"home"} className="ms-4 bg-[--main-green] text-white" disabled={processing}>
                         Log in
                     </Button>
                 </div>
