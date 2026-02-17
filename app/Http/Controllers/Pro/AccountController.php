@@ -8,6 +8,7 @@ use App\Http\Requests\Pro\Account\UpdatePasswordRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -61,15 +62,26 @@ class AccountController extends Controller
      */
     public function cancelSubscription(Request $request): RedirectResponse
     {
-        Mollie::api()->send(
-            new CancelSubscriptionRequest(
-                customerId: Auth::user()->mollie_customer_id,
-                subscriptionId: Auth::user()->mollie_subscription_id
-            )
-        );
-
         $user = $request->user();
+
+        if ($user->mollie_customer_id && $user->mollie_subscription_id) {
+            try {
+                Mollie::api()->send(
+                    new CancelSubscriptionRequest(
+                        customerId: $user->mollie_customer_id,
+                        subscriptionId: $user->mollie_subscription_id
+                    )
+                );
+            } catch (\Exception $e) {
+                Log::warning('Mollie subscription cancel failed (subscription may already be cancelled)', [
+                    'user_id' => $user->id,
+                    'message' => $e->getMessage(),
+                ]);
+            }
+        }
+
         $user->is_pro = false;
+        $user->mollie_subscription_id = null;
         $user->save();
 
         return back()->with('success', 'Subscription succesvol opgezegd.');
