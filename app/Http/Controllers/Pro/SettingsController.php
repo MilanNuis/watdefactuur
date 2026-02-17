@@ -25,5 +25,4 @@ class SettingsController extends Controller
 
         return redirect()->route('pro.dashboard.settings.index')->with('success', "Instellingen succesvol bijgewerkt!");
     }
-
 }

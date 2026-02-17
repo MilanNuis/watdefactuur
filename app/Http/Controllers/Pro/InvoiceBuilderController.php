@@ -15,6 +15,12 @@ class InvoiceBuilderController extends Controller
     public function index()
     {
         $settings = Auth::user()->settings;
+
+        if (!$settings) {
+            return redirect()->route('pro.dashboard.settings.index')
+                ->with('error', 'Vul eerst je bedrijfsgegevens in voordat je een factuur maakt.');
+        }
+
         $products = Auth::user()->products;
         $customers = Auth::user()->customers;
 
