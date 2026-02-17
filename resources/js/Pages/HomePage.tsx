@@ -22,6 +22,9 @@ import { useState } from "react";
 export default function HomePage() {
     const user = usePage().props.auth.user;
     console.log(user);
+
+    const isPro = user?.is_pro;
+
     const features = [
         {
             icon: FileText,
@@ -93,11 +96,27 @@ export default function HomePage() {
                             {/* Desktop navigatie */}
                             <div className="hidden items-center gap-3 sm:flex">
                                 {user ? (
-                                    <Link href={route("pro.dashboard.index")}>
-                                        <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
-                                            Dashboard
-                                        </Button>
-                                    </Link>
+                                    isPro ? (
+                                        <Link href={route("pro.dashboard.index")}>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="text-gray-600 hover:text-gray-900"
+                                            >
+                                                Dashboard
+                                            </Button>
+                                        </Link>
+                                    ) : (
+                                        <Link href={route("mollie.start-checkout")} method="post">
+                                            <Button
+                                                size="sm"
+                                                variant={"home"}
+                                                className="bg-[--main-purple] text-white"
+                                            >
+                                                GO PRO
+                                            </Button>
+                                        </Link>
+                                    )
                                 ) : (
                                     <Link href={route("login")}>
                                         <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
@@ -134,23 +153,63 @@ export default function HomePage() {
                         {/* Mobile menu */}
                         {isMenuOpen && (
                             <div className="mt-4 space-y-3 border-t border-border pb-4 pt-4 sm:hidden">
-                                <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    className="w-full text-gray-600 hover:text-gray-900"
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    Inloggen
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    className="w-full bg-[--main-green] text-white"
-                                    variant="home"
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    <Sparkles className="mr-2 h-4 w-4" />
-                                    Registreren
-                                </Button>
+                                {user ? (
+                                    isPro ? (
+                                        <Link href={route("pro.dashboard.index")}>
+                                            <Button
+                                                variant="ghost"
+                                                size="sm"
+                                                className="w-full text-gray-600 hover:text-gray-900"
+                                                onClick={() => setIsMenuOpen(false)}
+                                            >
+                                                Dashboard
+                                            </Button>
+                                        </Link>
+                                    ) : (
+                                        <Link href={route("mollie.start-checkout")} method="post">
+                                            <Button
+                                                size="sm"
+                                                className="w-full bg-[--main-purple] text-white"
+                                                variant={"home"}
+                                                onClick={() => setIsMenuOpen(false)}
+                                            >
+                                                GO PRO
+                                            </Button>
+                                        </Link>
+                                    )
+                                ) : (
+                                    <>
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="w-full text-gray-600 hover:text-gray-900"
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            Inloggen
+                                        </Button>
+                                        <Button
+                                            size="sm"
+                                            className="w-full bg-[--main-green] text-white"
+                                            variant="home"
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            <Sparkles className="mr-2 h-4 w-4" />
+                                            Registreren
+                                        </Button>
+                                    </>
+                                )}
+                                {user && (
+                                    <Link href={route("logout")} method="post" as="button">
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="w-full text-gray-600 hover:text-gray-900"
+                                            onClick={() => setIsMenuOpen(false)}
+                                        >
+                                            Uitloggen
+                                        </Button>
+                                    </Link>
+                                )}
                             </div>
                         )}
                     </div>
