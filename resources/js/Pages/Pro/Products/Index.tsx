@@ -62,6 +62,38 @@ export default function index() {
                 <CreateProductDialog />
             </div>
 
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="text-[--main-purple] font-bold">Naam</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Prijs zonder BTW</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">BTW</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Prijs met BTW</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Acties</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {products.data.map((product: Product) => (
+                        <TableRow key={product.id}>
+                            <TableCell className="font-medium">
+                                {product.name}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {product.price_without_btw}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {product.btw}%
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {Number(product.price_without_btw) +
+                                    (Number(product.price_without_btw) *
+                                        Number(product.btw)) /
+                                        100}
+                            </TableCell>
+
+                            <TableCell>
+                                <EditProductDialog product={product} />
+                            </TableCell>
             <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card">
                 <Table>
                     <TableHeader>

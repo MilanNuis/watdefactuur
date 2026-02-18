@@ -44,13 +44,13 @@ export default function CreateProductDialog() {
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Button variant={"home"} className="bg-[--main-green] text-white">
+                    <Button variant={"home"} className="bg-[--main-purple] text-white">
                         Nieuw product
                     </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>Nieuw product</DialogTitle>
+                        <DialogTitle className="text-[--main-purple]">Nieuw product</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                         <div className="flex gap-2">
@@ -60,6 +60,7 @@ export default function CreateProductDialog() {
                                     value={data.name}
                                     onChange={(e) => setData("name", e.target.value)}
                                     placeholder="Naam"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.name} />
                             </div>
@@ -70,6 +71,7 @@ export default function CreateProductDialog() {
                                     value={data.description}
                                     onChange={(e) => setData("description", e.target.value)}
                                     placeholder="Omschrijving"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.description} />
                             </div>
@@ -81,6 +83,7 @@ export default function CreateProductDialog() {
                                 value={data.price_without_btw}
                                 onChange={(e) => setData("price_without_btw", Number(e.target.value))}
                                 placeholder="Prijs zonder BTW"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.price_without_btw} />
                         </div>
@@ -105,6 +108,7 @@ export default function CreateProductDialog() {
                                 onChange={(e) => setData("price_with_btw", Number(e.target.value))}
                                 placeholder="Prijs met BTW"
                                 value={data.price_without_btw + (data.price_without_btw * data.btw) / 100}
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.price_with_btw} />
                         </div>
@@ -117,7 +121,7 @@ export default function CreateProductDialog() {
                             onClick={handleSubmit}
                             type="submit"
                             variant={"home"}
-                            className="bg-[--main-green] text-white"
+                            className="bg-[--main-purple] text-white"
                         >
                             Aanmaken
                         </Button>

@@ -57,6 +57,30 @@ export default function index() {
                 <CreateCustomerDialog />
             </div>
 
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="text-[--main-purple] font-bold">Voornaam</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Achternaam</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Email</TableHead>
+                        <TableHead className="text-[--main-purple] font-bold">Acties</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {customers.data.map((customer: Customer) => (
+                        <TableRow key={customer.id}>
+                            <TableCell className="font-medium">
+                                {customer.first_name}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {customer.last_name}
+                            </TableCell>
+                            <TableCell className="font-medium">
+                                {customer.email}
+                            </TableCell>
+                            <TableCell>
+                                <EditCustomerDialog customer={customer} />
+                            </TableCell>
             <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card">
                 <Table>
                     <TableHeader>

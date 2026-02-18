@@ -26,10 +26,10 @@ export default function Index() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Klanten</CardTitle>
-                        <Users className="h-4 w-4 text-primary" />
+                        <Users className="h-4 w-4 text-[--main-purple]" />
                     </CardHeader>
                     <CardContent>
-                        <NumberTicker value={customerCount} className="text-2xl font-bold" />
+                        <NumberTicker value={customerCount} className="text-2xl font-bold text-[--main-purple]" />
                         <p className="text-xs text-muted-foreground">Totaal aantal klanten</p>
                     </CardContent>
                 </Card>
@@ -37,10 +37,10 @@ export default function Index() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Producten</CardTitle>
-                        <Package className="h-4 w-4 text-primary" />
+                        <Package className="h-4 w-4 text-[--main-purple]" />
                     </CardHeader>
                     <CardContent>
-                        <NumberTicker value={productCount} className="text-2xl font-bold" />
+                        <NumberTicker value={productCount} className="text-2xl font-bold text-[--main-purple]" />
                         <p className="text-xs text-muted-foreground">Actieve producten</p>
                     </CardContent>
                 </Card>
@@ -48,10 +48,10 @@ export default function Index() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Facturen</CardTitle>
-                        <FileText className="h-4 w-4 text-primary" />
+                        <FileText className="h-4 w-4 text-[--main-purple]" />
                     </CardHeader>
                     <CardContent>
-                        <NumberTicker value={invoiceCount} className="text-2xl font-bold" />
+                        <NumberTicker value={invoiceCount} className="text-2xl font-bold text-[--main-purple]" />
                         <p className="text-xs text-muted-foreground">Totaal aantal facturen</p>
                     </CardContent>
                 </Card>
@@ -59,10 +59,10 @@ export default function Index() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-muted-foreground">Omzet</CardTitle>
-                        <TrendingUp className="h-4 w-4 text-primary" />
+                        <TrendingUp className="h-4 w-4 text-[--main-purple]" />
                     </CardHeader>
                     <CardContent>
-                        <NumberTicker value={totalRevenue} decimalPlaces={2} className="text-2xl font-bold" />
+                        <NumberTicker value={totalRevenue} decimalPlaces={2} className="text-2xl font-bold text-[--main-purple]" />
                         <p className="text-xs text-muted-foreground">Totaal omzet</p>
                     </CardContent>
                 </Card>
@@ -71,7 +71,7 @@ export default function Index() {
             <div className="mt-4 flex gap-4">
                 <Card className="flex-1">
                     <CardHeader>
-                        <CardTitle className="montserrat-main">Recente Facturen</CardTitle>
+                        <CardTitle className="montserrat-main text-[--main-purple]">Recente Facturen</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">
@@ -102,7 +102,7 @@ export default function Index() {
                 </Card>
                 <Card className="flex-1">
                     <CardHeader>
-                        <CardTitle className="montserrat-main">Recente Klanten</CardTitle>
+                        <CardTitle className="montserrat-main text-[--main-purple]">Recente Klanten</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-4">

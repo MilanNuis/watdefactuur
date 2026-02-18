@@ -46,11 +46,11 @@ export default function EditProductDialog({ product }: { product: Product }) {
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Eye className="hover:cursor-pointer" />
+                    <Eye className="text-[--main-purple] hover:cursor-pointer" />
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>Bewerk product</DialogTitle>
+                        <DialogTitle className="text-[--main-purple]">Bewerk product</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-4">
                         <div className="flex gap-2">
@@ -60,6 +60,7 @@ export default function EditProductDialog({ product }: { product: Product }) {
                                     value={data.name}
                                     onChange={(e) => setData("name", e.target.value)}
                                     placeholder="Naam"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.name} />
                             </div>
@@ -70,6 +71,7 @@ export default function EditProductDialog({ product }: { product: Product }) {
                                     value={data.description}
                                     onChange={(e) => setData("description", e.target.value)}
                                     placeholder="Omschrijving"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.description} />
                             </div>
@@ -81,6 +83,7 @@ export default function EditProductDialog({ product }: { product: Product }) {
                                 value={data.price_without_btw}
                                 onChange={(e) => setData("price_without_btw", Number(e.target.value))}
                                 placeholder="Prijs zonder BTW"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.price_without_btw} />
                         </div>
@@ -108,6 +111,7 @@ export default function EditProductDialog({ product }: { product: Product }) {
                                 value={data.price_without_btw + (data.price_without_btw * data.btw) / 100}
                                 onChange={(e) => setData("price_with_btw", Number(e.target.value))}
                                 placeholder="Prijs met BTW"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.price_with_btw} />
                         </div>
@@ -116,7 +120,12 @@ export default function EditProductDialog({ product }: { product: Product }) {
                         <DialogClose asChild>
                             <Button variant={"outline"}>Annuleren</Button>
                         </DialogClose>
-                        <Button onClick={handleSubmit} type="submit" variant={"secondary"}>
+                        <Button
+                            onClick={handleSubmit}
+                            type="submit"
+                            variant={"home"}
+                            className="bg-[--main-purple] text-white"
+                        >
                             Opslaan
                         </Button>
                     </DialogFooter>
