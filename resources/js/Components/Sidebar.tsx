@@ -85,7 +85,9 @@ export function AppSidebar() {
                         <span className="text-lg font-semibold tracking-tight">
                             WatDeFactuur
                         </span> */}
-                        <img src="/logos/ProLogo.svg" alt="" />
+                        <Link href={route("home")}>
+                            <img src="/logos/ProLogo.svg" alt="" />
+                        </Link>
                     </div>
                 </SidebarHeader>
 
