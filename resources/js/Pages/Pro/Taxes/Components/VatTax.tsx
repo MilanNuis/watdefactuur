@@ -89,6 +89,7 @@ export default function VatTax({ invoices }: VatTaxProps) {
                             value={manualRevenue}
                             onChange={(e) => setManualRevenue(e.target.value)}
                             min="0"
+                            className="focus:border-[--main-purple]"
                         />
                         <p className="text-xs text-muted-foreground">Omzet die niet in je facturen staat</p>
                     </div>
@@ -102,6 +103,7 @@ export default function VatTax({ invoices }: VatTaxProps) {
                             value={manualExpenses}
                             onChange={(e) => setManualExpenses(e.target.value)}
                             min="0"
+                            className="focus:border-[--main-purple]"
                         />
                     </div>
                 </CardContent>

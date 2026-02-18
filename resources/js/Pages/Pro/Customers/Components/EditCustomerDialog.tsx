@@ -45,7 +45,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
         <Dialog open={open} onOpenChange={setOpen}>
             <form>
                 <DialogTrigger asChild>
-                    <Eye className="hover:cursor-pointer text-[--main-purple]" />
+                    <Eye className="text-[--main-purple] hover:cursor-pointer" />
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-2xl">
                     <DialogHeader>
@@ -59,6 +59,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                     value={data.first_name}
                                     onChange={(e) => setData("first_name", e.target.value)}
                                     placeholder="Voornaam"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.first_name} />
                             </div>
@@ -69,6 +70,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                     value={data.last_name}
                                     onChange={(e) => setData("last_name", e.target.value)}
                                     placeholder="Achternaam"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.last_name} />
                             </div>
@@ -80,6 +82,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                 value={data.email}
                                 onChange={(e) => setData("email", e.target.value)}
                                 placeholder="klant@gmail.com"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.email} />
                         </div>
@@ -90,6 +93,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                 value={data.phone}
                                 onChange={(e) => setData("phone", e.target.value)}
                                 placeholder="06-12345678"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.phone} />
                         </div>
@@ -100,6 +104,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                     value={data.postalCode}
                                     onChange={(e) => setData("postalCode", e.target.value)}
                                     placeholder="1234 AB"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.postalCode} />
                             </div>
@@ -109,6 +114,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                     value={data.houseNumber}
                                     onChange={(e) => setData("houseNumber", e.target.value)}
                                     placeholder="12"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.houseNumber} />
                             </div>
@@ -119,6 +125,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                 value={data.street}
                                 onChange={(e) => setData("street", e.target.value)}
                                 placeholder="Straatnaam"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.street} />
                         </div>
@@ -128,6 +135,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                 value={data.city}
                                 onChange={(e) => setData("city", e.target.value)}
                                 placeholder="Stad"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.city} />
                         </div>
@@ -137,6 +145,7 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                                 value={data.country}
                                 onChange={(e) => setData("country", e.target.value)}
                                 placeholder="Land"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.country} />
                         </div>
@@ -145,7 +154,12 @@ export default function EditCustomerDialog({ customer }: { customer: Customer })
                         <DialogClose asChild>
                             <Button variant={"outline"}>Annuleren</Button>
                         </DialogClose>
-                        <Button onClick={handleSubmit} type="submit" variant={"home"} className="bg-[--main-purple] text-white">
+                        <Button
+                            onClick={handleSubmit}
+                            type="submit"
+                            variant={"home"}
+                            className="bg-[--main-purple] text-white"
+                        >
                             Opslaan
                         </Button>
                     </DialogFooter>

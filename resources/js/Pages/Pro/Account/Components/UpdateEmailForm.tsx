@@ -34,12 +34,17 @@ export default function UpdateEmailForm({ user }: { user: User }) {
                             onChange={(e) => setData("email", e.target.value)}
                             required
                             autoComplete="email"
+                            className="focus:border-[--main-purple]"
                         />
                         {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Button disabled={processing} className="border-2 border-[--main-purple] bg-[--main-purple] text-white" variant={"home"}>
+                        <Button
+                            disabled={processing}
+                            className="border-2 border-[--main-purple] bg-[--main-purple] text-white"
+                            variant={"home"}
+                        >
                             {processing && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                             Opslaan
                         </Button>

@@ -60,6 +60,7 @@ export default function CreateProductDialog() {
                                     value={data.name}
                                     onChange={(e) => setData("name", e.target.value)}
                                     placeholder="Naam"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.name} />
                             </div>
@@ -70,6 +71,7 @@ export default function CreateProductDialog() {
                                     value={data.description}
                                     onChange={(e) => setData("description", e.target.value)}
                                     placeholder="Omschrijving"
+                                    className="focus:border-[--main-purple]"
                                 />
                                 <InputError message={errors.description} />
                             </div>
@@ -81,6 +83,7 @@ export default function CreateProductDialog() {
                                 value={data.price_without_btw}
                                 onChange={(e) => setData("price_without_btw", Number(e.target.value))}
                                 placeholder="Prijs zonder BTW"
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.price_without_btw} />
                         </div>
@@ -105,6 +108,7 @@ export default function CreateProductDialog() {
                                 onChange={(e) => setData("price_with_btw", Number(e.target.value))}
                                 placeholder="Prijs met BTW"
                                 value={data.price_without_btw + (data.price_without_btw * data.btw) / 100}
+                                className="focus:border-[--main-purple]"
                             />
                             <InputError message={errors.price_with_btw} />
                         </div>

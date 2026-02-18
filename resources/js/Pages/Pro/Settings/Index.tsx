@@ -45,11 +45,21 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="email">E-mailadres</Label>
-                            <Input id="email" value={data.email} onChange={(e) => setData("email", e.target.value)} />
+                            <Input
+                                id="email"
+                                value={data.email}
+                                onChange={(e) => setData("email", e.target.value)}
+                                className="focus:border-[--main-purple]"
+                            />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="phone">Telefoonnummer</Label>
-                            <Input id="phone" value={data.phone} onChange={(e) => setData("phone", e.target.value)} />
+                            <Input
+                                id="phone"
+                                value={data.phone}
+                                onChange={(e) => setData("phone", e.target.value)}
+                                className="focus:border-[--main-purple]"
+                            />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="address">Adres</Label>
@@ -57,11 +67,17 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                                 id="address"
                                 value={data.address}
                                 onChange={(e) => setData("address", e.target.value)}
+                                className="focus:border-[--main-purple]"
                             />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="city">Plaats</Label>
-                            <Input id="city" value={data.city} onChange={(e) => setData("city", e.target.value)} />
+                            <Input
+                                id="city"
+                                value={data.city}
+                                onChange={(e) => setData("city", e.target.value)}
+                                className="focus:border-[--main-purple]"
+                            />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="postal_code">Postcode</Label>
@@ -69,11 +85,17 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                                 id="postal_code"
                                 value={data.postal_code}
                                 onChange={(e) => setData("postal_code", e.target.value)}
+                                className="focus:border-[--main-purple]"
                             />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="iban">IBAN</Label>
-                            <Input id="iban" value={data.iban} onChange={(e) => setData("iban", e.target.value)} />
+                            <Input
+                                id="iban"
+                                value={data.iban}
+                                onChange={(e) => setData("iban", e.target.value)}
+                                className="focus:border-[--main-purple]"
+                            />
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="kvk_number">KVK-nummer</Label>
@@ -81,6 +103,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                                 id="kvk_number"
                                 value={data.kvk_number}
                                 onChange={(e) => setData("kvk_number", e.target.value)}
+                                className="focus:border-[--main-purple]"
                             />
                         </div>
                         <div className="space-y-2">
@@ -89,6 +112,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                                 id="btw_number"
                                 value={data.btw_number}
                                 onChange={(e) => setData("btw_number", e.target.value)}
+                                className="focus:border-[--main-purple]"
                             />
                         </div>
                     </div>
@@ -107,6 +131,7 @@ export default function SettingsIndex({ settings }: { settings: Settings }) {
                                 id="invoice_prefix"
                                 value={data.invoice_prefix}
                                 onChange={(e) => setData("invoice_prefix", e.target.value)}
+                                className="focus:border-[--main-purple]"
                             />
                         </div>
                     </div>

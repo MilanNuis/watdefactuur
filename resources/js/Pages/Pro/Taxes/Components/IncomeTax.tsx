@@ -75,6 +75,7 @@ export default function IncomeTax() {
                             value={brutoIncome}
                             onChange={(e) => setBrutoIncome(e.target.value)}
                             min="0"
+                            className="focus:border-[--main-purple]"
                         />
                     </div>
                     <div className="space-y-2">
@@ -86,6 +87,7 @@ export default function IncomeTax() {
                             value={aftrekKosten}
                             onChange={(e) => setAftrekKosten(e.target.value)}
                             min="0"
+                            className="focus:border-[--main-purple]"
                         />
                         <p className="text-xs text-muted-foreground">
                             Zelfstandigenaftrek, startersaftrek, MKB-winstvrijstelling, etc.
