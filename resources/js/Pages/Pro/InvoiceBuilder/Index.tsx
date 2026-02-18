@@ -8,7 +8,7 @@ import { Button } from "@/Components/ui/button";
 import ProductenFormulier from "@/Components/InvoiceBuilder/Components/ProductenFormulier";
 import GenereerStap from "@/Components/InvoiceBuilder/Components/GenereerStap";
 import Factuurvoorbeeld from "@/Components/InvoiceBuilder/Components/Factuurvoorbeeld";
-import { useForm } from "@inertiajs/react";
+import { Link, useForm } from "@inertiajs/react";
 import { Settings } from "../Settings/types";
 import { Product } from "@/Components/InvoiceBuilder/types/InvoiceTypes";
 import Customer from "../Customers/types";
@@ -119,7 +119,12 @@ export default function ProInvoiceBuilder({
             <header className="sticky top-0 z-10 border-b border-border bg-card">
                 <div className="container py-4">
                     <div className="flex items-center gap-3">
-                        <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                        <Link href={route("pro.dashboard.index")}>
+                            <img
+                                src="/logos/LogoGreen.svg"
+                                alt="Watdefactuur"
+                            />
+                        </Link>
                     </div>
                 </div>
             </header>
