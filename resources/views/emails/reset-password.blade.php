@@ -25,9 +25,9 @@ $logoBaseUrl = app()->environment('local')
             <td align="center">
                 <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                     <tr>
-                        <td class="header">
+                        <td class="header" align="center">
                             <a href="{{ config('app.url') }}" style="display: inline-block;">
-                                <img src="{{ $logoBaseUrl }}/logos/LogoGreen.svg" class="logo" alt="{{ config('app.name') }}" width="180" height="180" style="width: 180px; height: 180px; max-width: 180px;">
+                                <img src="{{ $logoBaseUrl }}/logos/LogoGreen.svg" class="logo" alt="{{ config('app.name') }}" width="180" height="180" style="width: 180px; height: 180px; max-width: 180px; display: block; margin: 0 auto;">
                             </a>
                         </td>
                     </tr>
@@ -49,7 +49,7 @@ $logoBaseUrl = app()->environment('local')
                                                     <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                                                         <tr>
                                                             <td align="center">
-                                                                <a href="{{ $actionUrl }}" class="button button-{{ $color }}" target="_blank" rel="noopener">{{ $actionText }}</a>
+                                                                <a href="{{ $actionUrl }}" class="button button-{{ $color }}" target="_blank" rel="noopener" style="background-color: #16a34a; border-bottom: 8px solid #16a34a; border-left: 18px solid #16a34a; border-right: 18px solid #16a34a; border-top: 8px solid #16a34a; color: #ffffff; display: inline-block; text-decoration: none; border-radius: 4px;">{{ $actionText }}</a>
                                                             </td>
                                                         </tr>
                                                     </table>
