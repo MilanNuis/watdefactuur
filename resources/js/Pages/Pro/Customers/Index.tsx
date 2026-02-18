@@ -81,10 +81,36 @@ export default function index() {
                             <TableCell>
                                 <EditCustomerDialog customer={customer} />
                             </TableCell>
+            <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Voornaam</TableHead>
+                            <TableHead>Achternaam</TableHead>
+                            <TableHead>Email</TableHead>
+                            <TableHead className="text-right">Acties</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {customers.data.map((customer: Customer) => (
+                            <TableRow key={customer.id}>
+                                <TableCell className="font-medium">
+                                    {customer.first_name}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {customer.last_name}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {customer.email}
+                                </TableCell>
+                                <TableCell className="text-right">
+                                    <EditCustomerDialog customer={customer} />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
 
             <Paginator data={customers} />
         </ProLayout>

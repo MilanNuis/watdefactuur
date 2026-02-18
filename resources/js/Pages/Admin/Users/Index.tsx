@@ -123,7 +123,7 @@ export default function Index() {
                 </Button>
             </div>
 
-            <div className="overflow-hidden rounded-xl border border-border bg-card">
+            <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card">
                 <Table>
                     <TableHeader>
                         <TableRow>

@@ -94,10 +94,44 @@ export default function index() {
                             <TableCell>
                                 <EditProductDialog product={product} />
                             </TableCell>
+            <div className="mt-8 overflow-hidden rounded-xl border border-border bg-card">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Naam</TableHead>
+                            <TableHead>Prijs zonder BTW</TableHead>
+                            <TableHead>BTW</TableHead>
+                            <TableHead>Prijs met BTW</TableHead>
+                            <TableHead className="text-right">Acties</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {products.data.map((product: Product) => (
+                            <TableRow key={product.id}>
+                                <TableCell className="font-medium">
+                                    {product.name}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {product.price_without_btw}
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {product.btw}%
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    {Number(product.price_without_btw) +
+                                        (Number(product.price_without_btw) *
+                                            Number(product.btw)) /
+                                            100}
+                                </TableCell>
+
+                                <TableCell className="text-right">
+                                    <EditProductDialog product={product} />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
 
             <Paginator data={products} />
         </ProLayout>
