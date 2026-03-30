@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/Components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/Components/ui/card";
 import { Badge } from "@/Components/ui/Badge";
 import {
     FileText,
@@ -29,17 +35,20 @@ export default function HomePage() {
         {
             icon: FileText,
             title: "Professionele Facturen",
-            description: "Maak binnen minuten mooie, professionele facturen met je eigen logo en branding.",
+            description:
+                "Maak binnen minuten mooie, professionele facturen met je eigen logo en branding.",
         },
         {
             icon: Clock,
             title: "Bespaar Tijd",
-            description: "Automatisch berekenen van totalen, BTW en meer. Geen handmatig werk meer.",
+            description:
+                "Automatisch berekenen van totalen, BTW en meer. Geen handmatig werk meer.",
         },
         {
             icon: Shield,
             title: "Veilig & Betrouwbaar",
-            description: "Al je gegevens worden veilig opgeslagen en zijn altijd beschikbaar.",
+            description:
+                "Al je gegevens worden veilig opgeslagen en zijn altijd beschikbaar.",
         },
     ];
 
@@ -88,7 +97,10 @@ export default function HomePage() {
                             <div className="group flex cursor-pointer items-center gap-3">
                                 <div className="flex items-center justify-center rounded-xl">
                                     <Link href={route("home")}>
-                                        <img src="/logos/LogoGreen.svg" alt="Watdefactuur" />
+                                        <img
+                                            src="/logos/LogoGreen.svg"
+                                            alt="Watdefactuur"
+                                        />
                                     </Link>
                                 </div>
                             </div>
@@ -97,7 +109,9 @@ export default function HomePage() {
                             <div className="hidden items-center gap-3 sm:flex">
                                 {user ? (
                                     isPro ? (
-                                        <Link href={route("pro.dashboard.index")}>
+                                        <Link
+                                            href={route("pro.dashboard.index")}
+                                        >
                                             <Button
                                                 variant="ghost"
                                                 size="sm"
@@ -107,7 +121,12 @@ export default function HomePage() {
                                             </Button>
                                         </Link>
                                     ) : (
-                                        <Link href={route("mollie.start-checkout")} method="post">
+                                        <Link
+                                            href={route(
+                                                "mollie.start-checkout",
+                                            )}
+                                            method="post"
+                                        >
                                             <Button
                                                 size="sm"
                                                 variant={"home"}
@@ -119,20 +138,36 @@ export default function HomePage() {
                                     )
                                 ) : (
                                     <Link href={route("login")}>
-                                        <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-gray-600 hover:text-gray-900"
+                                        >
                                             Inloggen
                                         </Button>
                                     </Link>
                                 )}
                                 {user ? (
-                                    <Link href={route("logout")} method="post" as="button">
-                                        <Button variant="ghost" size="sm" className="text-gray-600 hover:text-gray-900">
+                                    <Link
+                                        href={route("logout")}
+                                        method="post"
+                                        as="button"
+                                    >
+                                        <Button
+                                            variant="ghost"
+                                            size="sm"
+                                            className="text-gray-600 hover:text-gray-900"
+                                        >
                                             Uitloggen
                                         </Button>
                                     </Link>
                                 ) : (
                                     <Link href={route("register")}>
-                                        <Button size="sm" className="bg-[--main-green] text-white" variant="home">
+                                        <Button
+                                            size="sm"
+                                            className="bg-[--main-green] text-white"
+                                            variant="home"
+                                        >
                                             <Sparkles className="mr-2 h-4 w-4" />
                                             Registreren
                                         </Button>
@@ -146,7 +181,11 @@ export default function HomePage() {
                                 className="p-2 text-gray-600 transition-colors hover:text-gray-900 sm:hidden"
                                 aria-label="Toggle menu"
                             >
-                                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                                {isMenuOpen ? (
+                                    <X className="h-6 w-6" />
+                                ) : (
+                                    <Menu className="h-6 w-6" />
+                                )}
                             </button>
                         </div>
 
@@ -155,23 +194,34 @@ export default function HomePage() {
                             <div className="mt-4 space-y-3 border-t border-border pb-4 pt-4 sm:hidden">
                                 {user ? (
                                     isPro ? (
-                                        <Link href={route("pro.dashboard.index")}>
+                                        <Link
+                                            href={route("pro.dashboard.index")}
+                                        >
                                             <Button
                                                 variant="ghost"
                                                 size="sm"
                                                 className="w-full text-gray-600 hover:text-gray-900"
-                                                onClick={() => setIsMenuOpen(false)}
+                                                onClick={() =>
+                                                    setIsMenuOpen(false)
+                                                }
                                             >
                                                 Dashboard
                                             </Button>
                                         </Link>
                                     ) : (
-                                        <Link href={route("mollie.start-checkout")} method="post">
+                                        <Link
+                                            href={route(
+                                                "mollie.start-checkout",
+                                            )}
+                                            method="post"
+                                        >
                                             <Button
                                                 size="sm"
                                                 className="w-full bg-[--main-purple] text-white"
                                                 variant={"home"}
-                                                onClick={() => setIsMenuOpen(false)}
+                                                onClick={() =>
+                                                    setIsMenuOpen(false)
+                                                }
                                             >
                                                 GO PRO
                                             </Button>
@@ -199,7 +249,11 @@ export default function HomePage() {
                                     </>
                                 )}
                                 {user && (
-                                    <Link href={route("logout")} method="post" as="button">
+                                    <Link
+                                        href={route("logout")}
+                                        method="post"
+                                        as="button"
+                                    >
                                         <Button
                                             variant="ghost"
                                             size="sm"
@@ -238,9 +292,17 @@ export default function HomePage() {
                             </h1>
 
                             <p className="mx-auto mb-12 max-w-2xl animate-[fade-in-up_0.8s_ease-out_0.3s_forwards] text-lg leading-relaxed text-gray-600 opacity-0 md:text-xl">
-                                De eenvoudigste manier om facturen te maken, versturen en beheren. Perfect voor
-                                <span className="font-semibold text-gray-900 dark:text-gray-50"> freelancers</span>
-                                <span className="font-semibold text-gray-900 dark:text-gray-50"> ZZP'ers</span> en{" "}
+                                De eenvoudigste manier om facturen te maken,
+                                versturen en beheren. Perfect voor
+                                <span className="font-semibold text-gray-900 dark:text-gray-50">
+                                    {" "}
+                                    freelancers
+                                </span>
+                                <span className="font-semibold text-gray-900 dark:text-gray-50">
+                                    {" "}
+                                    ZZP'ers
+                                </span>{" "}
+                                en{" "}
                                 <span className="font-semibold text-gray-900 dark:text-gray-50">
                                     kleine ondernemers
                                 </span>
@@ -284,7 +346,9 @@ export default function HomePage() {
                                                 {stat.value}
                                             </span>
                                         </div>
-                                        <span className="text-sm text-gray-600">{stat.label}</span>
+                                        <span className="text-sm text-gray-600">
+                                            {stat.label}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -296,7 +360,10 @@ export default function HomePage() {
                 <section className="relative py-24 md:py-32">
                     <div className="container mx-auto">
                         <div className="mb-20 text-center">
-                            <Badge variant="outline" className="mb-6 border-green-600/30 bg-green-600/5 text-green-700">
+                            <Badge
+                                variant="outline"
+                                className="mb-6 border-green-600/30 bg-green-600/5 text-green-700"
+                            >
                                 <Sparkles className="mr-1 h-3 w-3" />
                                 Features
                             </Badge>
@@ -304,13 +371,17 @@ export default function HomePage() {
                                 Waarom WatDeFactuur?
                             </h2>
                             <p className="mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-400">
-                                Alles wat je nodig hebt om professioneel te factureren, zonder de complexiteit.
+                                Alles wat je nodig hebt om professioneel te
+                                factureren, zonder de complexiteit.
                             </p>
                         </div>
 
                         <div className="grid gap-8 md:grid-cols-3 lg:gap-10">
                             {features.map((feature, index) => (
-                                <Card key={index} className="relative bg-white/60">
+                                <Card
+                                    key={index}
+                                    className="relative bg-white/60"
+                                >
                                     <CardHeader className="relative pb-4">
                                         <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-600/10">
                                             <feature.icon className="h-8 w-8 text-[--main-green]" />
@@ -347,7 +418,8 @@ export default function HomePage() {
                                 Eenvoudige Prijzen
                             </h2>
                             <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                                Begin gratis of upgrade naar Premium voor alle functionaliteiten.
+                                Begin gratis of upgrade naar Premium voor alle
+                                functionaliteiten.
                             </p>
                         </div>
 
@@ -359,8 +431,12 @@ export default function HomePage() {
                                         Gratis
                                     </CardTitle>
                                     <div className="mt-6">
-                                        <span className="montserrat-main text-6xl font-bold text-gray-900">€0</span>
-                                        <span className="ml-2 text-gray-600">/maand</span>
+                                        <span className="montserrat-main text-6xl font-bold text-gray-900">
+                                            €0
+                                        </span>
+                                        <span className="ml-2 text-gray-600">
+                                            /maand
+                                        </span>
                                     </div>
                                     <CardDescription className="mt-4 text-base text-gray-600">
                                         Perfect om te beginnen
@@ -372,23 +448,33 @@ export default function HomePage() {
                                             <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-600/10">
                                                 <CheckCircle className="h-4 w-4 text-[--main-green]" />
                                             </div>
-                                            <span className="text-gray-900">5 facturen per maand</span>
+                                            <span className="text-gray-900">
+                                                5 facturen per maand
+                                            </span>
                                         </li>
                                         <li className="flex items-center gap-4">
                                             <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-600/10">
                                                 <CheckCircle className="h-4 w-4 text-[--main-green]" />
                                             </div>
-                                            <span className="text-gray-900">Basis templates</span>
+                                            <span className="text-gray-900">
+                                                Basis templates
+                                            </span>
                                         </li>
                                         <li className="flex items-center gap-4">
                                             <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-green-600/10">
                                                 <CheckCircle className="h-4 w-4 text-[--main-green]" />
                                             </div>
-                                            <span className="text-gray-900">PDF export</span>
+                                            <span className="text-gray-900">
+                                                PDF export
+                                            </span>
                                         </li>
                                     </ul>
                                     <div className="block pt-4">
-                                        <Link href={route("invoice-builder.index")}>
+                                        <Link
+                                            href={route(
+                                                "invoice-builder.index",
+                                            )}
+                                        >
                                             <Button
                                                 variant="home"
                                                 className="mt-[8rem] w-full bg-[--main-green] py-7 text-base font-semibold text-white"
@@ -418,13 +504,17 @@ export default function HomePage() {
                                 <CardHeader className="pb-8 pt-12 text-center">
                                     <CardTitle className="montserrat-main flex items-center justify-center gap-3 text-2xl font-bold">
                                         <Crown className="h-7 w-7 text-[--main-purple]" />
-                                        <span className="bg-clip-text text-transparent">Premium</span>
+                                        <span className="bg-clip-text text-transparent">
+                                            Premium
+                                        </span>
                                     </CardTitle>
                                     <div className="montserrat-main mt-6">
                                         <span className="montserrat-main text-6xl font-bold text-gray-900 dark:text-gray-50">
-                                            €10
+                                            €5
                                         </span>
-                                        <span className="ml-2 text-gray-600 dark:text-gray-400">/maand</span>
+                                        <span className="ml-2 text-gray-600 dark:text-gray-400">
+                                            /maand
+                                        </span>
                                     </div>
                                     <CardDescription className="mt-4 text-base text-gray-600 dark:text-gray-400">
                                         Alles wat je nodig hebt
@@ -432,17 +522,30 @@ export default function HomePage() {
                                 </CardHeader>
                                 <CardContent className="space-y-6 pb-10">
                                     <ul className="montserrat-main space-y-4">
-                                        {premiumFeatures.map((feature, index) => (
-                                            <li key={index} className="flex items-center gap-4">
-                                                <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[--main-purple]">
-                                                    <CheckCircle className="h-4 w-4 text-white" />
-                                                </div>
-                                                <span className="text-gray-900 dark:text-gray-50">{feature}</span>
-                                            </li>
-                                        ))}
+                                        {premiumFeatures.map(
+                                            (feature, index) => (
+                                                <li
+                                                    key={index}
+                                                    className="flex items-center gap-4"
+                                                >
+                                                    <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[--main-purple]">
+                                                        <CheckCircle className="h-4 w-4 text-white" />
+                                                    </div>
+                                                    <span className="text-gray-900 dark:text-gray-50">
+                                                        {feature}
+                                                    </span>
+                                                </li>
+                                            ),
+                                        )}
                                     </ul>
                                     <div className="block pt-4">
-                                        <Link href={route("mollie.start-checkout")} className="w-full" method="post">
+                                        <Link
+                                            href={route(
+                                                "mollie.start-checkout",
+                                            )}
+                                            className="w-full"
+                                            method="post"
+                                        >
                                             <Button
                                                 className="w-full bg-[--main-purple] py-7 text-base font-semibold text-white"
                                                 variant="home"
@@ -470,7 +573,8 @@ export default function HomePage() {
                                 </h2>
 
                                 <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-white md:text-xl">
-                                    Maak vandaag nog je eerste professionele factuur. Geen creditcard vereist.
+                                    Maak vandaag nog je eerste professionele
+                                    factuur. Geen creditcard vereist.
                                 </p>
                                 <Link href={route("invoice-builder.index")}>
                                     <Button
@@ -504,12 +608,23 @@ export default function HomePage() {
                         <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
                             <div className="flex items-center gap-4">
                                 <div>
-                                    <img src="/logos/LogoGreen.svg" alt="Watdefactuur" height={300} width={300} />
+                                    <img
+                                        src="/logos/LogoGreen.svg"
+                                        alt="Watdefactuur"
+                                        height={300}
+                                        width={300}
+                                    />
                                 </div>
                             </div>
                             <div className="flex flex-col items-center gap-2 text-sm text-[--main-purple] text-gray-600 dark:text-gray-400">
-                                <p>© {new Date().getFullYear()} WatDeFactuur. Alle rechten voorbehouden.</p>
-                                <p>KvK: 12345678&nbsp;|&nbsp;BTW: NL123456789B01</p>
+                                <p>
+                                    © {new Date().getFullYear()} WatDeFactuur.
+                                    Alle rechten voorbehouden.
+                                </p>
+                                <p>
+                                    KvK: 12345678&nbsp;|&nbsp;BTW:
+                                    NL123456789B01
+                                </p>
                             </div>
                         </div>
                     </div>

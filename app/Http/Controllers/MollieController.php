@@ -97,7 +97,7 @@ class MollieController extends Controller
             $payment = Mollie::api()->customerPayments->createForId($user->mollie_customer_id, [
                 'amount' => [
                     'currency' => 'EUR',
-                    'value' => '10.00',
+                    'value' => '5.00',
                 ],
                 'description' => "WatDeFactuur Pro",
                 'redirectUrl' => route('home'),
