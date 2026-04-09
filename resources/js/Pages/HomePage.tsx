@@ -623,7 +623,7 @@ export default function HomePage() {
                                 </p>
                                 <p>
                                     KvK: 77403894&nbsp;|&nbsp;BTW:
-                                    NL123456789B01
+                                    NL003189522B70
                                 </p>
                             </div>
                         </div>
