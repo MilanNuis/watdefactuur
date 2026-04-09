@@ -622,7 +622,7 @@ export default function HomePage() {
                                     Alle rechten voorbehouden.
                                 </p>
                                 <p>
-                                    KvK: 12345678&nbsp;|&nbsp;BTW:
+                                    KvK: 77403894&nbsp;|&nbsp;BTW:
                                     NL123456789B01
                                 </p>
                             </div>
