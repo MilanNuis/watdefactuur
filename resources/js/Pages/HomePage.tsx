@@ -625,6 +625,23 @@ export default function HomePage() {
                                     KvK: 77403894&nbsp;|&nbsp;BTW:
                                     NL003189522B70
                                 </p>
+                                <p className="flex flex-wrap items-center justify-center gap-2">
+                                    <a
+                                        href="/files/Algemene voorwaarden.pdf"
+                                        download
+                                        className="underline transition hover:text-[--main-purple]"
+                                    >
+                                        Algemene voorwaarden
+                                    </a>
+                                    <span>|</span>
+                                    <a
+                                        href="/files/Privacyverklaring.pdf"
+                                        download
+                                        className="underline transition hover:text-[--main-purple]"
+                                    >
+                                        Privacyverklaring
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </div>
